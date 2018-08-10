@@ -1,0 +1,391 @@
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+// import { withTracker } from 'meteor/react-meteor-data';
+import _ from 'lodash';
+
+import LinearSearch from './LinearSearch.js';
+import Viewer from './Viewer.js';
+
+image_prefix = "";
+
+// App component - represents the whole app
+export default class LinearSearchPage extends Component {
+
+  _allData = [];
+  _history = [];
+  _historyLog = [];
+  _dummyData = [];
+  _xPos = [];
+
+  _modelUrls = [];
+
+  // for sample data
+  constructor(props) {
+    super(props);
+    var domainX = [0,100];
+    var domainY = [0,100];
+
+    image_path = image_prefix + "/db_" + this.props.AppState.expId + "/";
+
+    this.initData();
+
+    this.state = {
+      data: this.getData({x:domainX, y:domainY}),
+      dummyData: this._dummyData,
+      domain: {x:domainX, y:domainY},
+      prevDomain: null,
+      history: this.getHistory(),
+    };
+
+    this.props.saveLog(this.getCurrentNode().imageId,
+        "initial node ("+this.getCurrentNode().historyId+")");
+
+    this.generateDB();
+
+  }
+
+  generateDB() {
+    // load 3d model urls
+    var _self = this;
+    var file = "/" + this.props.AppState.expId + "_modeldb.json";
+    this.loadJSON(file, function(json) {
+      _self._modelUrls = JSON.parse(json);
+      console.log(_self._modelUrls);
+
+      // _self.initData();
+      _self.loadDB();
+
+      var domainX = [0,100];
+      var domainY = [0,100];
+      _self.state = {
+        data: _self.getData({x:domainX, y:domainY}),
+        dummyData: _self._dummyData,
+        domain: {x:domainX, y:domainY},
+        prevDomain: null,
+        history: _self.getHistory(),
+      };
+
+      _self.props.saveLog(_self.getCurrentNode().imageId,
+          "initial node ("+_self.getCurrentNode().historyId+")");
+    });
+  }
+
+  loadModelUrls() {
+    // load 3d model urls
+    var _self = this;
+    var file = "/" + this.props.AppState.expId + "_modeldb.json";
+    this.loadJSON(file, function(json) {
+      _self._modelUrls = JSON.parse(json);
+      console.log(_self._modelUrls);
+
+      _self.initData();
+      _self.loadDB();
+    });
+  }
+
+  loadJSON(file, callback) {
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', file, true); // Replace 'my_data' with the path to your file
+    xobj.onreadystatechange = function () {
+          if (xobj.readyState == 4 && xobj.status == 200) {
+            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+            callback(xobj.responseText);
+          }
+    };
+    xobj.send(null);
+  }
+
+  findModelUrl(key) {
+    var found = null;
+    for (var i=0; i<this._modelUrls.length; i++) {
+      if (this._modelUrls[i].id == key) {
+        console.log(this._modelUrls[i].url);
+        return this._modelUrls[i].url;
+      }
+    }
+    return null;
+  }
+
+  initData() {
+    var initialModelUrl1 = null;
+    var initialModelUrl2 = null;
+    var initialModelUrl3 = null;
+    switch(this.props.AppState.expId) {
+      case 'exp1':
+        initialModelUrl1 = "https://create.bloomypro.com/embed/eyJpdiI6Ik54aXBkOUNWSEM0XC9VVDVDSndKalBnPT0iLCJ2YWx1ZSI6IkNGeEtDRU5PK0ZcL3ZOXC8zaDRCSHlNRHg0SDFXZ1RPS0h3eE5VSTZkRXZNb096d25ROGVnVUZmbVltT2ZpSVRMTFU1VTBKZlRGUWJ0XC9vNG9RUXpCaGxJakFPY3R3aHdXVVUxNVphaDFJXC9nSEM0OHJHYmQxaXhCXC9mRWZxbWtQZUkyYlkwcUdSTXI1T3pjVFNDMk8xSE1FRDJRU2hBNW1QQ0hySFZBc0NGaEFkcklWamk0R0lHQ0xFbkVGNTNVTWpOZmM2NUwzb2I0YVB1UXM0aXhTNmpOeVNWV2ZTRUVsdStUdHp0UHBGZTBWNE11R2JXYjFteFRvc29vRVlaY00raUVqTEpuaytqdDM4MTRCK3dkR3pDVHBHTXJpRktLK1VhXC9scjAzR0EyXC81VT0iLCJtYWMiOiJmYWYwMzAyMjNiNjE3ZWE3N2MwM2RjODZjOWU0NzA5NDI5YzY0MGMyYTMwOGRlZTk5YzE4OTQ0ZmIzZWNiY2U1In0=";
+        initialModelUrl2 = "https://create.bloomypro.com/embed/eyJpdiI6IjJmbVVBZEx6T0twN0V0dTFndTc1dnc9PSIsInZhbHVlIjoiVkxLckdlRTVZUU1NajhrRDBcL1BjSDQ4dExZMlBnc2x5bURRXC9mc3o5NWJNZkpCdTJLWGxaM0c4eVdRUHlKYzJHNDl1UGZQZmlya0Vydk9IOERyQm9BR1RmV0owazBRd0h0aWhnb21cL2k0OEZNakc3WHhmd3A5T3c4aEt5V3RiVzNhUGVaRUJMNlFXYVVEZmc1bm9TMkZiajBNN1M3TEFNTXU2NHBCZExzMmoydjZsN2krSkdMVk0rWEdBWWtjeUFLSDZ1dUhXQmp0XC9ZS1NzMndsbFNxbHR4Um4ydGN6U0tCWUZ0UGY2MmVoUU5FdzZpWlR0dnltNXlnNzVjVzVEVDFWc1J5SnpUNStnM040dWJKaXN4T1FJZDJ2UHBcL0tkUUF2UkdUTlc5NHlsRT0iLCJtYWMiOiJmYmNmYjVkMDM0NWUyMDlhMTIwYTRlYzQ2ZWMzYjYyNmE4NjcwNjhiZWM3NThlNTI2ZGJhNjUwYzI5YTFhOGNkIn0=";
+        initialModelUrl3 = "https://create.bloomypro.com/embed/eyJpdiI6IkVpdFR0K1pwemMrdlIzTk9uWDJrSEE9PSIsInZhbHVlIjoiZGhHeEZyMkZZVUVTbVFiMkJzZFwvT2FkcUNkRGtXSVBoVTJ3QVpybUpoVmJWTE92WkNKQ2Jxazc4aUx6VG9COXFvMFcwSHhZZFpmM2xkdjI2TjJjVDF6WmN3WGVWdnVJZDRvRzVneEg1SEwrcGgzXC9sbUtyc3hYc3JEZGV6bUlEWTlvaGxIN2xhRGFJVGpEZDdZV0pBb3hSS2t4Rk9QaGlWZ3dlXC9NYkg1YUxKV2dkRXRpdEw0RjNsaGxJWE5yb2NGWWdDSkJkeTNcL2pSczR5SUJwVmJVNHpvQU91dFRmRm9UdUlFTEd1MW1aK1dBTVdlSUh5d0gwMGJGRkUrUWs0VVFtTW5RbkZBcGo0UzRyQlloSUJsR0s0QWFDY1g0SzhEYkM3YzR3Tkg0azk4PSIsIm1hYyI6ImE2MTgxNGM2YTYzMjNmNDc1YWM4NjJkZGQ5OTI3NTFiMjU1OTcyZjM2OGI3YTc3NGZhZTM1YzM4ZGFmYmMzOTcifQ==";
+        break;
+      case 'exp2':
+        initialModelUrl1 = "";
+        initialModelUrl2 = "";
+        initialModelUrl3 = "";
+        break;
+      default:
+        initialModelUrl1 = "";
+        initialModelUrl2 = "";
+        initialModelUrl3 = "";
+    }
+
+    this._allData = [
+      {x: 50, y: 50, z: 60,
+        id: '1111',
+        focused: true, expanded: false, displayed: false,
+        imageId: 1111,
+        image: image_path + "1111.png",
+        modelUrl: initialModelUrl1,
+      },
+      {x: 70, y: 50, z: 50,
+        id: '1112',
+        focused: false, expanded: false, displayed: false,
+        imageId: 1112,
+        image: image_path + "1112.png",
+        modelUrl: initialModelUrl2,
+      },
+      {x: 90, y: 50, z: 50,
+        id: '1113',
+        focused: false, expanded: false, displayed: false,
+        imageId: 1113,
+        image: image_path + "1113.png",
+        modelUrl: initialModelUrl3,
+      },
+    ];
+
+    this._history = [
+      {x: 50, y: 50, z: 60,
+        id: '1111',
+        focused: true, expanded: false, displayed: false,
+        imageId: 1111,
+        image: image_path + "1111.png",
+        modelUrl: initialModelUrl1,
+        historyId: 'h1',
+      },
+    ];
+
+    this._dummyData = [
+        {x: 20, y: 10, z: 30,
+          id: 'left',
+          parentId: 'd0',
+          parentX: 50, parentY: 50,
+          numChildren: 0,
+          focused: false, expanded: false, displayed: false,
+          imageId: "_01",
+          image: image_path + "_01.jpeg",
+        },
+        {x: 80, y: 10, z: 30,
+          id: 'right',
+          parentId: 'd0',
+          parentX: 50, parentY: 50,
+          numChildren: 0,
+          focused: false, expanded: false, displayed: false,
+          imageId: "_02",
+          image: image_path + "_01.jpeg",
+        },
+      ];
+  }
+
+  loadDB() {
+    for (var i=3; i<81; i++)  this._xPos.push(50 + 20*i);
+    this._xPos = this.shuffle(this._xPos);
+
+    for (var i1=1; i1<4; i1++) {
+      for (var i2=1; i2<4; i2++) {
+        for (var i3=1; i3<4; i3++) {
+          for (var i4=1; i4<4; i4++) {
+            if (i1==1 && i2==1 && i3==1)  continue;
+            var id = i1.toString()+i2.toString()+i3.toString()+i4.toString();
+            var xIndex = (i1-1)*3*3*3 + (i2-1)*3*3 + (i3-1)*3 + (i4-1) - 3;
+            this._allData.push(
+              {x: this._xPos[xIndex], y: 50, z: 50,
+                id: id,
+                focused: false, expanded: false, displayed: true,
+                imageId: id,
+                image: image_path + id + ".png",
+                modelUrl: this.findModelUrl(id),
+              }
+            );
+          }
+        }
+      }
+    }
+  }
+
+  shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    return array;
+  }
+
+
+  getData(domain) {
+    return _.filter(this._allData, this.isInDomain.bind(null, domain));
+  }
+
+  isInDomain(domain, d) {
+    // return d.x >= domain.x[0]-d.z && d.x <= domain.x[1]+d.z;
+    return d.x >= domain.x[0] && d.x <= domain.x[1];
+    // return d.displayed == true;
+  }
+
+  getHistory() {
+    return this._history;
+  }
+
+  getCurrentNode() {
+    return this._history[this._history.length-1];
+    // return this._allData.filter( obj => obj.focused===true )[0];
+  }
+
+  handleNodeClick(domain, d) {
+    d.z = 60;
+    d.focused = true;
+
+    var lastHistoryId = this._history[this._history.length-1].historyId;
+
+    let tempNode = Object.assign({}, d);
+    tempNode.historyId = lastHistoryId + '1';
+    // console.log("d", d);
+    // console.log("tempNode", tempNode);
+
+    this._history.push(tempNode);
+    // this._history[this._history.length-1].id = lastId + '1';
+    // this._allData.filter( obj => obj.focused===true)[0].focused = false;
+
+    // save log
+    this.props.saveLog(tempNode.imageId, "click ("+tempNode.historyId+")");
+
+    this.shiftPane(d);
+  }
+
+  shiftPane(d) {
+    var newDomainX = [d.x-50, d.x+50];
+    var newDomainY = [0, 100];
+    this.setAppState({
+      data: this.getData({x:newDomainX, y:newDomainY}),
+      domain: _.assign({}, this.state.domain, {
+        x: newDomainX,
+        y: newDomainY,
+      }),
+      prevDomain: this.state.domain,
+      history: this.getHistory(),
+    });
+  }
+
+  handleDummyNodeClick(domain, d) {
+    // left and right limits
+    if (this.state.domain.x[0]<=0 && d.id==="left") return ;
+    if (this.state.domain.x[0]>=20*this._allData.length-50 && d.id==="right") return;
+
+    var dX = 40;
+    var newDomainX = domain.x;
+    var newDomainY = domain.y;
+
+    if (d.id==="left") {
+      newDomainX = [this.state.domain.x[0]-dX, this.state.domain.x[1]-dX];
+    }
+    else if (d.id==="right") {
+      newDomainX = [this.state.domain.x[0]+dX, this.state.domain.x[1]+dX];
+    }
+
+    // save log
+    this.props.saveLog("-", "navigate "+d.id);
+
+    this.setAppState({
+      data: this.getData({x:newDomainX, y:newDomainY}),
+      domain: _.assign({}, this.state.domain, {
+        x: newDomainX,
+        y: newDomainY,
+      }),
+      prevDomain: this.state.domain,
+      history: this.getHistory(),
+    });
+
+  }
+
+  handleHistoryClick (domain, d) {
+    // store history
+    this._historyLog.push(Object.assign({}, this._history));
+
+    // update history
+    for (var i=this._history.length-1; i>=0; i--) {
+      if (this._history[i].historyId == d.historyId) {
+        break;
+      }
+      this._history = this._history.slice(0,i);
+    }
+
+    // save log
+    this.props.saveLog(d.imageId, "history click ("+d.historyId+")");
+
+    this.shiftPane(d);
+  }
+
+  setAppState(partialState, callback) {
+    return this.setState(partialState, callback);
+  }
+
+  renderTaskDescription() {
+    var taskDescription = "";
+    switch(this.props.AppState.expId) {
+      case "trial":
+        taskDescription = "Task description: Find tightly-spaced red dotted squares";
+        break;
+      case "exp1":
+        taskDescription = "Task description: An old lady is looking for a flower bouquet for the birthday of her ...";
+        break;
+      case "exp2":
+        taskDescription = "";
+      default:
+        break;
+    }
+    return (taskDescription);
+  }
+
+  render() {
+    return (
+      <div className="containder">
+        <div className="description">
+          {this.renderTaskDescription()}
+        </div>
+        <div className="subContainer">
+          <LinearSearch
+            width={this.props.graphWidth}
+            height={this.props.height}
+            appState={this.state}
+            setAppState={this.setAppState.bind(this)}
+            handleNodeClick={this.handleNodeClick.bind(this)}
+            handleHistoryClick = {this.handleHistoryClick.bind(this)}
+            handleDummyNodeClick={this.handleDummyNodeClick.bind(this)}
+          />
+
+          <Viewer
+            width={this.props.viewerWidth}
+            height={this.props.height}
+            appState={this.state}
+            getCurrentNode={this.getCurrentNode.bind(this)}
+          />
+        </div>
+
+        <div className="description">
+          <button className="button" onClick={this.props.handleClickFinish.bind(this)}>
+            Finish
+          </button>
+          <button className="button" onClick={this.props.handleClickExit.bind(this)}>
+            Exit
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+}
