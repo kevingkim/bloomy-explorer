@@ -25,7 +25,7 @@ header {
 }
 
 h1 {
-  font-size: 25px;
+  font-size: 30px;
   fill: "#323639";
   margin: 0;
   margin-bottom: 5px;
@@ -37,6 +37,7 @@ ul {
   margin: 0;
   padding: 0;
   background: white;
+  font-size: 20px;
 }
 
 li {
@@ -59,6 +60,7 @@ li .text {
   padding: 15px;
   border-top: #7C7C7C solid 2px;
   /*border-bottom: #7C7C7C solid 2px;*/
+  font-size: 20px;
 }
 
 .button {

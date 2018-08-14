@@ -50,7 +50,6 @@ export default class LinearSearchPage extends Component {
     var file = "/" + this.props.AppState.expId + "_modeldb.json";
     this.loadJSON(file, function(json) {
       _self._modelUrls = JSON.parse(json);
-      console.log(_self._modelUrls);
 
       // _self.initData();
       _self.loadDB();
@@ -118,9 +117,9 @@ export default class LinearSearchPage extends Component {
         initialModelUrl3 = "https://create.bloomypro.com/embed/eyJpdiI6IkVpdFR0K1pwemMrdlIzTk9uWDJrSEE9PSIsInZhbHVlIjoiZGhHeEZyMkZZVUVTbVFiMkJzZFwvT2FkcUNkRGtXSVBoVTJ3QVpybUpoVmJWTE92WkNKQ2Jxazc4aUx6VG9COXFvMFcwSHhZZFpmM2xkdjI2TjJjVDF6WmN3WGVWdnVJZDRvRzVneEg1SEwrcGgzXC9sbUtyc3hYc3JEZGV6bUlEWTlvaGxIN2xhRGFJVGpEZDdZV0pBb3hSS2t4Rk9QaGlWZ3dlXC9NYkg1YUxKV2dkRXRpdEw0RjNsaGxJWE5yb2NGWWdDSkJkeTNcL2pSczR5SUJwVmJVNHpvQU91dFRmRm9UdUlFTEd1MW1aK1dBTVdlSUh5d0gwMGJGRkUrUWs0VVFtTW5RbkZBcGo0UzRyQlloSUJsR0s0QWFDY1g0SzhEYkM3YzR3Tkg0azk4PSIsIm1hYyI6ImE2MTgxNGM2YTYzMjNmNDc1YWM4NjJkZGQ5OTI3NTFiMjU1OTcyZjM2OGI3YTc3NGZhZTM1YzM4ZGFmYmMzOTcifQ==";
         break;
       case 'exp2':
-        initialModelUrl1 = "";
-        initialModelUrl2 = "";
-        initialModelUrl3 = "";
+        initialModelUrl1 = "https://create.bloomypro.com/embed/eyJpdiI6IldQMk4rdExud3dUMGpWckhrRFAzN2c9PSIsInZhbHVlIjoiZk5TVTdkZHd3MmtkWnZWV3BaSWdxekw3aEF4U3BYS0VrXC9samdKdU5hbkdqVmMweThmMEpIaXRFWnBSR0ZSRDZqVmM2azNCRm1ldXIrRGtJUU9jdHFSa0ZRTDMwMnM5clwvUzV6aTgzV3VCWmRGWm50aEd2b3dsazc5dFY5cmlQYjNQY3RoTjJBcXk2RVVrTVVRNnlrZlJhUys3SGRmWWZ0QzFRR2hKRGdqeFVtVjdwMXJRREVENHB4MmdpWE1YYTNYcXVuamFsSDI5ZlhuQ3licXBcL1BvNFBweTlxeFBiTk5HOUxXK2ljUzl5d09XNGlKMzBISjNVQkFoS0liTHNmbENzY1EwZnlSZnM5UU1FazZ5WDVnVjBLMEFzUEdZaWRIK0M2NW42QkNmYmM9IiwibWFjIjoiNzU0YTFhYmY5MTBmMGVkYzQ0MjE1NDM2NGNjMzBiYTA5MjI0OGI2NzdjY2Q0OWMxOTM1MzhmNDc3MGIxOTllOCJ9";
+        initialModelUrl2 = "https://create.bloomypro.com/embed/eyJpdiI6IkFHTGdiOGN2TWozREdyVExnMWZWN3c9PSIsInZhbHVlIjoiTU1FekRkckdFN3IrTWExcnVmcG9yam5qdlNXQzY0WVQ5WkZZemx5RjFGMTVBVlZVUFVpekhOb041U0NiUEMrXC8yTnBPOTM1R2xvVlJZa2VpZEt4RHMwN2F0TWFYdnBDSWVUYURLUVFXNnpWWEJGbHBrYjh2azN0a0htRFlYNXB2VHRCc0NrSXE3RnFQTWI4ZGM0RzBMdUlMb1V4MlhBcDVXU2lFQzRZdmhkb1wvaHR0WnNNYVBDZm5KVzhCOW1kMXR2bmd1d3ZtNFNkRStTOURid0syMDRqcXB6STdGeFliaHQ2WDFBa0N4V0xVemlmbFFIeGk3WXhZT0xDdFcwWVhyN2NobWNQT3lCYUZTNUlnT1IxM3ZhME9taFJFS2VyeURFUlBrK2Erc29pdz0iLCJtYWMiOiI2OWVmYWJlNTAzYTE0NWU4NDJiZTBlYjc0ODEyNDkyZDY2Yjk1ZjllODI3NmEwMTMyNWU0YmE3NjM2N2ZkOTg4In0=";
+        initialModelUrl3 = "https://create.bloomypro.com/embed/eyJpdiI6IkZ5UHpuVG5pajNyYm5hXC93dDBZOUd3PT0iLCJ2YWx1ZSI6Im8wb3A3TFwvMG1VQUVxN0ZzTFJyRzlDTldraHl2Zmp4QXQ5Y2ROMkZ1Q0kxUkVJa1lmTTZDVHByWGF5T2E0b1dKclFxekpGTU1ZcEVSWEFoZTVnVHJocytrY0dpdU0xUDg0dDl4S3MxZVI4WWlHXC8rRUIwRGZoYmJ3bUpTbUdacUJMdkYwQlNKZUxYWmJFZkNjY09WbW0zWDJKdkRrNmNkSnFPR0pDaWlCait6alNnS0N3SWgyWGQ2R0FWUll3NHpzZ2o3aW1RQ2E0SzlwRU92aE5HM2JvTHlPSVVQZTN0ekFvTTdOczg0TjZuN3BRcVBteXFwY2VmZkdaVmIyKzl1cHd6ZGxYUTZYcFJBZWFOK2JMaHI5OFBqaGdEYXZPOHVZVDBlSFZJSDZqTGc9IiwibWFjIjoiNjQ2ZWVjZTdiOWU2ODhlYTcyMTg5ZDFkNTRkYTAyNDY2NWIyZWI0NmQzZDljNzM1ODY0YzMzYTc4MWZhOWY4ZiJ9";
         break;
       default:
         initialModelUrl1 = "";
@@ -338,13 +337,13 @@ export default class LinearSearchPage extends Component {
     var taskDescription = "";
     switch(this.props.AppState.expId) {
       case "trial":
-        taskDescription = "Task description: Find tightly-spaced red dotted squares";
+        taskDescription = "Task description: Find red dotted squares that are tightly-spaced in linear formation";
         break;
       case "exp1":
-        taskDescription = "Task description: An old lady is looking for a flower bouquet for the birthday of her ...";
+        taskDescription = "Task description: Mrs. Heinrich, an 80-year-old regular customer, would like to buy a bouquet for her birthday party. The bouquet should stand on the dining table. The apartment is furnished in a romantic style. Her birthday is in summer.";
         break;
       case "exp2":
-        taskDescription = "";
+        taskDescription = "Task description: A young woman enters your shop, which you have not seen before. She is interested in a round hand-bound bridal bouquet. The wedding will take place at the end of May and the bride will wear white. She informs them that she likes natural flowers and the colour purple.";
       default:
         break;
     }

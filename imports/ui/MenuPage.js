@@ -44,6 +44,20 @@ class MenuPage extends Component {
       expId: "exp1",
     });
   }
+  handleClickExp2Graph(d) {
+    this.props.saveLog("0", "click exp2-graph");
+    this.props.setAppState({
+      page: "graph",
+      expId: "exp2",
+    });
+  }
+  handleClickExp2Linear(d) {
+    this.props.saveLog("0", "click exp2-linear");
+    this.props.setAppState({
+      page: "linear",
+      expId: "exp2",
+    });
+  }
 
   renderList() {
     return (
@@ -62,14 +76,27 @@ class MenuPage extends Component {
         </li>
 
         <li className="">
-          <span className="text">Exp1 - Expanding graph </span>
+          <span className="text">[Exp1] Birthday - Expanding graph </span>
           <button className="button" onClick={this.handleClickExp1Graph.bind(this)}>
             Start
           </button>
         </li>
         <li className="">
-          <span className="text">Exp1 - Linear search </span>
+          <span className="text">[Exp1] Birthday - Linear search </span>
           <button className="button" onClick={this.handleClickExp1Linear.bind(this)}>
+            Start
+          </button>
+        </li>
+
+        <li className="">
+          <span className="text">[Exp2] Wedding - Expanding graph </span>
+          <button className="button" onClick={this.handleClickExp2Graph.bind(this)}>
+            Start
+          </button>
+        </li>
+        <li className="">
+          <span className="text">[Exp2] Wedding - Linear search </span>
+          <button className="button" onClick={this.handleClickExp2Linear.bind(this)}>
             Start
           </button>
         </li>
