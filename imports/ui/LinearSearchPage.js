@@ -7,6 +7,7 @@ import LinearSearch from './LinearSearch.js';
 import Viewer from './Viewer.js';
 
 image_prefix = "";
+image_type = ".jpg";
 
 // App component - represents the whole app
 export default class LinearSearchPage extends Component {
@@ -132,21 +133,21 @@ export default class LinearSearchPage extends Component {
         id: '1111',
         focused: true, expanded: false, displayed: false,
         imageId: 1111,
-        image: image_path + "1111.png",
+        image: image_path + "1111" + image_type,
         modelUrl: initialModelUrl1,
       },
       {x: 70, y: 50, z: 50,
         id: '1112',
         focused: false, expanded: false, displayed: false,
         imageId: 1112,
-        image: image_path + "1112.png",
+        image: image_path + "1112"  + image_type,
         modelUrl: initialModelUrl2,
       },
       {x: 90, y: 50, z: 50,
         id: '1113',
         focused: false, expanded: false, displayed: false,
         imageId: 1113,
-        image: image_path + "1113.png",
+        image: image_path + "1113"  + image_type,
         modelUrl: initialModelUrl3,
       },
     ];
@@ -156,7 +157,7 @@ export default class LinearSearchPage extends Component {
         id: '1111',
         focused: true, expanded: false, displayed: false,
         imageId: 1111,
-        image: image_path + "1111.png",
+        image: image_path + "1111"  + image_type,
         modelUrl: initialModelUrl1,
         historyId: 'h1',
       },
@@ -200,7 +201,7 @@ export default class LinearSearchPage extends Component {
                 id: id,
                 focused: false, expanded: false, displayed: true,
                 imageId: id,
-                image: image_path + id + ".png",
+                image: image_path + id + image_type,
                 modelUrl: this.findModelUrl(id),
               }
             );

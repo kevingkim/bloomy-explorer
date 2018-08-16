@@ -10,7 +10,8 @@ import { UsageLogs } from '../api/usageLogs.js';
 
 image_prefix = "";
 image_path = image_prefix + "";
-image_type = ".png";
+// image_type = ".png";
+image_type = ".jpg";
 image_original = "";
 
 

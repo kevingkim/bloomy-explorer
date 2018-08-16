@@ -22,17 +22,6 @@ class InitPage extends Component {
       userId: input,
     });
 
-    // console.log(this.props.getAppState());
-
-    // UsageLogs.insert({
-    //   userId: this.props.getAppState.userId,
-    //   time: new Date(),
-    //   timeStamp: new Date().getTime(),
-    //   status: "0",
-    //   message: "user id set"
-    // }, (error, result) => { });
-    // console.log(UsageLogs.find().fetch());
-
   }
 
   render() {
