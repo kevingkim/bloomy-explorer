@@ -16,6 +16,7 @@ image_original = "";
 
 RADIUS_BIG1 = 135;
 RADIUS_SMALL1 = 75;
+dist = 28;
 
 // App component - represents the whole app
 export default class ExpGraphPage extends Component {
@@ -90,13 +91,17 @@ export default class ExpGraphPage extends Component {
     var initialModelUrl = null;
     switch(this.props.AppState.expId) {
       case 'exp1':
-        initialModelUrl = "https://create.bloomypro.com/embed/eyJpdiI6Ik54aXBkOUNWSEM0XC9VVDVDSndKalBnPT0iLCJ2YWx1ZSI6IkNGeEtDRU5PK0ZcL3ZOXC8zaDRCSHlNRHg0SDFXZ1RPS0h3eE5VSTZkRXZNb096d25ROGVnVUZmbVltT2ZpSVRMTFU1VTBKZlRGUWJ0XC9vNG9RUXpCaGxJakFPY3R3aHdXVVUxNVphaDFJXC9nSEM0OHJHYmQxaXhCXC9mRWZxbWtQZUkyYlkwcUdSTXI1T3pjVFNDMk8xSE1FRDJRU2hBNW1QQ0hySFZBc0NGaEFkcklWamk0R0lHQ0xFbkVGNTNVTWpOZmM2NUwzb2I0YVB1UXM0aXhTNmpOeVNWV2ZTRUVsdStUdHp0UHBGZTBWNE11R2JXYjFteFRvc29vRVlaY00raUVqTEpuaytqdDM4MTRCK3dkR3pDVHBHTXJpRktLK1VhXC9scjAzR0EyXC81VT0iLCJtYWMiOiJmYWYwMzAyMjNiNjE3ZWE3N2MwM2RjODZjOWU0NzA5NDI5YzY0MGMyYTMwOGRlZTk5YzE4OTQ0ZmIzZWNiY2U1In0=";
+        initialModelUrl1 = "https://create.bloomypro.com/embed/eyJpdiI6Ik54aXBkOUNWSEM0XC9VVDVDSndKalBnPT0iLCJ2YWx1ZSI6IkNGeEtDRU5PK0ZcL3ZOXC8zaDRCSHlNRHg0SDFXZ1RPS0h3eE5VSTZkRXZNb096d25ROGVnVUZmbVltT2ZpSVRMTFU1VTBKZlRGUWJ0XC9vNG9RUXpCaGxJakFPY3R3aHdXVVUxNVphaDFJXC9nSEM0OHJHYmQxaXhCXC9mRWZxbWtQZUkyYlkwcUdSTXI1T3pjVFNDMk8xSE1FRDJRU2hBNW1QQ0hySFZBc0NGaEFkcklWamk0R0lHQ0xFbkVGNTNVTWpOZmM2NUwzb2I0YVB1UXM0aXhTNmpOeVNWV2ZTRUVsdStUdHp0UHBGZTBWNE11R2JXYjFteFRvc29vRVlaY00raUVqTEpuaytqdDM4MTRCK3dkR3pDVHBHTXJpRktLK1VhXC9scjAzR0EyXC81VT0iLCJtYWMiOiJmYWYwMzAyMjNiNjE3ZWE3N2MwM2RjODZjOWU0NzA5NDI5YzY0MGMyYTMwOGRlZTk5YzE4OTQ0ZmIzZWNiY2U1In0=";
+        initialModelUrl2 = "https://create.bloomypro.com/embed/eyJpdiI6IkxLNVdnaVRtTGRJdmVFM3YrajNaQWc9PSIsInZhbHVlIjoiTFBTdjV0aHpRaWNkcHFmcHUyRlU1RlNXV1JxZ1ptSXVDMnVDemZSVFpLWUlhT3BkT1FwR1I4TTFJanVtN0xHdFR2dEZOQk11WHBiK1dKMmR5cHFFbFRhWlVvMnJJVzNaRlhKR3N2aDdFYm9NTHBtbFBwWDM2dGh4NG9vMTA1T2UwTUpaZU9aV2tOVVwvcVdwRERiRDBoc0lvcGE5RVhYRFFNbXh2RzRIalNFZE1JOEI0OU5lcGlsTnF5SW5SSXV3eFVjblRiZjdDanRUeHIrcm8wTzRXUkdOOTNcL1VlN3hvZkM2YTBYMjlRSDl0RkM1NzNFZXNYZmsyT1FJdTBXSmpzWk1wYlNPcEpYZEtZQTB5Q2dhVWl4dmVoQURnTzRMSTdTT3M2SWlseHVjdz0iLCJtYWMiOiI3MmIwZDExNGI5NTdhYTNjYzM2NTYxMTY4M2Y0MGVjOTgyZjMxNzU2Njg1MGI5ZTViZTdhZDEzY2Y5ZWM0ZjZkIn0=";
+        initialModelUrl3 = "https://create.bloomypro.com/embed/eyJpdiI6IldjUjFObFRaNWFnSmRGU2VyT0JodVE9PSIsInZhbHVlIjoiOGo1UWFpd0Z5WWVNNFZBS2xUaUZoTXUyejlUU3JBbndyamt5WmZraTJOc240ZFRLc2JiNCtKcGpBSTBQcVBMYjFRUGNGV3JtcVdtMjRyZWptQ0psSThBbXdXcGZCK1pMOGlLU3Y4cEJYY3c0SVV1RXJnVnd6OG80SWsyd0wxT3FaY1hKTVpwdUJKUVhyZ3MwOGVjNzhaUG45ZVIrUCtFZ3Zma1BmM3JQYXBBaVhvd2FmdDdJNnFOTHJLMW93V2FhQzFQVk40WUlOTjBSUEJrMis1TmdJcDdmT0Z3OEVwaTRUbForQlpvNEFjcUtGQ3daQkg0YVUwUkluOW8rWWtNRjdjM1RRcTVnQTlBQnhsbFR3N3duR2pzaW83eHpPT2NWVUpRSmthWmg4NzQ9IiwibWFjIjoiYTNkYjQ0ZjdkMjdlZjI1ZDJmZWY1ODgyZWI3YmQ4ODIxMzQ5YTJiYWYxNWE4MDgxY2I4ODhjMWRmNTFlYzAwYiJ9";
+        initialModelUrl4 = "https://create.bloomypro.com/embed/eyJpdiI6Ik1kbitKWmxEbXM2akFCV3YwYmd2QWc9PSIsInZhbHVlIjoiNlVPZWxYa09RamZHdDFJSGlWaE13SmRRdzRzYk5HQmc4ODB0cU5pUlIrTEZuckVuakNsbGsrYnhJRWNsaHdVb2FMQUsxcmFzRDcyV1Y1NVNxOUR4VzhPVVRtbFdpVW5kcE0rRGFwU2tFaU9ZdkpVZlwvVVBzbXo5blIzVVJSa0M4T24ybWFlaldUYmlLYmRxOHhoaWw2MnpybDdkV2g3ZzFLcWs3YVJnaUdLM2NnRk9ReG03T2w2dEtmR1cxbDhYRkhCeWNMVGRYWnNBVHdcLzZJZ1k4RW1KaCtOQm5RZXliWlBqekV4bTZoVnNIVzVuWDRrejcyY3A2WVJFeW5cLzVhRFF1bWNKMWVxQU5NMkNTZHhOUXFiRkZZaWZhdjkwUXU5STcwTTMyamR4Rkk9IiwibWFjIjoiZDRmYjkwODVlNmI0NjQyMTM5NGI1MTBjYjE5ZmVkODdkMWQ5OGEzZGM2YTRhODIwMGI2YTdlNTNjZDJlYjI3YyJ9";
+        initialModelUrl5 = "https://create.bloomypro.com/embed/eyJpdiI6IjJmbVVBZEx6T0twN0V0dTFndTc1dnc9PSIsInZhbHVlIjoiVkxLckdlRTVZUU1NajhrRDBcL1BjSDQ4dExZMlBnc2x5bURRXC9mc3o5NWJNZkpCdTJLWGxaM0c4eVdRUHlKYzJHNDl1UGZQZmlya0Vydk9IOERyQm9BR1RmV0owazBRd0h0aWhnb21cL2k0OEZNakc3WHhmd3A5T3c4aEt5V3RiVzNhUGVaRUJMNlFXYVVEZmc1bm9TMkZiajBNN1M3TEFNTXU2NHBCZExzMmoydjZsN2krSkdMVk0rWEdBWWtjeUFLSDZ1dUhXQmp0XC9ZS1NzMndsbFNxbHR4Um4ydGN6U0tCWUZ0UGY2MmVoUU5FdzZpWlR0dnltNXlnNzVjVzVEVDFWc1J5SnpUNStnM040dWJKaXN4T1FJZDJ2UHBcL0tkUUF2UkdUTlc5NHlsRT0iLCJtYWMiOiJmYmNmYjVkMDM0NWUyMDlhMTIwYTRlYzQ2ZWMzYjYyNmE4NjcwNjhiZWM3NThlNTI2ZGJhNjUwYzI5YTFhOGNkIn0=";
         break;
       case 'exp2':
-        initialModelUrl = "https://create.bloomypro.com/embed/eyJpdiI6IldQMk4rdExud3dUMGpWckhrRFAzN2c9PSIsInZhbHVlIjoiZk5TVTdkZHd3MmtkWnZWV3BaSWdxekw3aEF4U3BYS0VrXC9samdKdU5hbkdqVmMweThmMEpIaXRFWnBSR0ZSRDZqVmM2azNCRm1ldXIrRGtJUU9jdHFSa0ZRTDMwMnM5clwvUzV6aTgzV3VCWmRGWm50aEd2b3dsazc5dFY5cmlQYjNQY3RoTjJBcXk2RVVrTVVRNnlrZlJhUys3SGRmWWZ0QzFRR2hKRGdqeFVtVjdwMXJRREVENHB4MmdpWE1YYTNYcXVuamFsSDI5ZlhuQ3licXBcL1BvNFBweTlxeFBiTk5HOUxXK2ljUzl5d09XNGlKMzBISjNVQkFoS0liTHNmbENzY1EwZnlSZnM5UU1FazZ5WDVnVjBLMEFzUEdZaWRIK0M2NW42QkNmYmM9IiwibWFjIjoiNzU0YTFhYmY5MTBmMGVkYzQ0MjE1NDM2NGNjMzBiYTA5MjI0OGI2NzdjY2Q0OWMxOTM1MzhmNDc3MGIxOTllOCJ9";
+        initialModelUrl1 = "https://create.bloomypro.com/embed/eyJpdiI6IldQMk4rdExud3dUMGpWckhrRFAzN2c9PSIsInZhbHVlIjoiZk5TVTdkZHd3MmtkWnZWV3BaSWdxekw3aEF4U3BYS0VrXC9samdKdU5hbkdqVmMweThmMEpIaXRFWnBSR0ZSRDZqVmM2azNCRm1ldXIrRGtJUU9jdHFSa0ZRTDMwMnM5clwvUzV6aTgzV3VCWmRGWm50aEd2b3dsazc5dFY5cmlQYjNQY3RoTjJBcXk2RVVrTVVRNnlrZlJhUys3SGRmWWZ0QzFRR2hKRGdqeFVtVjdwMXJRREVENHB4MmdpWE1YYTNYcXVuamFsSDI5ZlhuQ3licXBcL1BvNFBweTlxeFBiTk5HOUxXK2ljUzl5d09XNGlKMzBISjNVQkFoS0liTHNmbENzY1EwZnlSZnM5UU1FazZ5WDVnVjBLMEFzUEdZaWRIK0M2NW42QkNmYmM9IiwibWFjIjoiNzU0YTFhYmY5MTBmMGVkYzQ0MjE1NDM2NGNjMzBiYTA5MjI0OGI2NzdjY2Q0OWMxOTM1MzhmNDc3MGIxOTllOCJ9";
         break;
       default:
-        initialModelUrl = "";
+        initialModelUrl1 = "";
     }
     // initialize variables
     this._allData = [
@@ -104,13 +109,63 @@ export default class ExpGraphPage extends Component {
         id: 'd1',
         parentId: 'd',
         parentX: 50, parentY: 50,
-        numChildren: 0,
+        numChildren: 4,
         focused: true, expanded: false, displayed: true,
         imageId: 1111,
         image: image_path + "1111" + image_type,
-        modelUrl: initialModelUrl,
-      }
+        modelUrl: initialModelUrl1,
+      },
     ];
+
+    var parentId = parseInt(1111);
+    var childrenImageId = this.getChildrenImageId(parentId);
+
+    this._allData.push(
+      {x: 50-dist, y: 50+dist, z: RADIUS_SMALL1,
+        id: 'd11',
+        parentId: 'd1',
+        parentX: 50, parentY: 50,
+        numChildren: 0,
+        focused: false, expanded: false, displayed: true,
+        imageId: childrenImageId[0],
+        image: image_path + childrenImageId[0] + image_type,
+        // modelUrl: this.findModelUrl(childrenImageId[0]),
+        modelUrl: initialModelUrl2,
+      },
+      {x: 50-dist, y: 50-dist, z: RADIUS_SMALL1,
+        id: 'd12',
+        parentId: 'd1',
+        parentX: 50, parentY: 50,
+        numChildren: 0,
+        focused: false, expanded: false, displayed: true,
+        imageId: childrenImageId[1],
+        image: image_path + childrenImageId[1] + image_type,
+        // modelUrl: this.findModelUrl(childrenImageId[1]),
+        modelUrl: initialModelUrl3,
+      },
+      {x: 50+dist, y: 50+dist, z: RADIUS_SMALL1,
+        id: 'd13',
+        parentId: 'd1',
+        parentX: 50, parentY: 50,
+        numChildren: 0,
+        focused: false, expanded: false, displayed: true,
+        imageId: childrenImageId[2],
+        image: image_path + childrenImageId[2] + image_type,
+        // modelUrl: this.findModelUrl(childrenImageId[2]),
+        modelUrl: initialModelUrl4,
+      },
+      {x: 50+dist, y: 50-dist, z: RADIUS_SMALL1,
+        id: 'd14',
+        parentId: 'd1',
+        parentX: 50, parentY: 50,
+        numChildren: 0,
+        focused: false, expanded: false, displayed: true,
+        imageId: childrenImageId[3],
+        image: image_path + childrenImageId[3] + image_type,
+        // modelUrl: this.findModelUrl(childrenImageId[3]),
+        modelUrl: initialModelUrl5,
+      },
+    );
 
     this._history = [
       this._allData[0]
@@ -179,42 +234,78 @@ export default class ExpGraphPage extends Component {
   }
 
   handleNodeClick(domain, d) {
-    if (d.expanded === false) {
-      if (d.focused === false) {
+    if (d.focused === false) {
+      // save log
+      var direction = "default";
+      var x = d.x - this.state.domain.x[0];
+      var y = d.y - this.state.domain.y[0];
+      if (x<50 && d.y<50)      direction = "TEXTURE";
+      else if (x>50 && y<50) direction = "SPACE";
+      else if (x<50 && y>50) direction = "COLOR";
+      else if (x>50 && y>50) direction = "FORM";
+      this.props.saveLog(d.imageId, "click "+direction+" ("+d.id+")");
 
-        // save log
-        var direction = "default";
-        var x = d.x - this.state.domain.x[0];
-        var y = d.y - this.state.domain.y[0];
-        if (x<50 && d.y<50)      direction = "TEXTURE";
-        else if (x>50 && y<50) direction = "SPACE";
-        else if (x<50 && y>50) direction = "COLOR";
-        else if (x>50 && y>50) direction = "FORM";
-        this.props.saveLog(d.imageId, "click "+direction+" ("+d.id+")");
+      d.z = RADIUS_BIG1;
+      d.focused = true;
+      this._history.push(d);
 
-        d.z = RADIUS_BIG1;
-        d.focused = true;
-        this._history.push(d);
+      this._allData.filter( obj => obj.id===d.parentId)[0].focused = false;
+      this._allData.filter( obj => obj.id===d.parentId)[0].displayed = false;
 
-        this._allData.filter( obj => obj.id===d.parentId)[0].focused = false;
-        this._allData.filter( obj => obj.id===d.parentId)[0].displayed = false;
-
-        var currentChildren = this._allData.filter( obj => obj.parentId===d.parentId);
-        for (var i=0, len=currentChildren.length; i<len; i++) {
-          if (currentChildren[i].id != d.id) {
-            currentChildren[i].displayed = false;
-          }
+      var currentChildren = this._allData.filter( obj => obj.parentId===d.parentId);
+      for (var i=0, len=currentChildren.length; i<len; i++) {
+        if (currentChildren[i].id != d.id) {
+          currentChildren[i].displayed = false;
         }
-
-        this.shiftPane(d);
       }
-      else if (d.focused === true) {
-        this.props.saveLog(d.imageId, "node expanded ("+d.id+")");
 
-        this.generateChildren(domain, d);
-        d.expanded = true;
-      }
+      this.shiftPane(d);
+      this.generateChildren(domain, d);
     }
+    else if (d.focused === true) {
+
+    }
+
+
+
+
+
+    // if (d.expanded === false) {
+    //   if (d.focused === false) {
+    //
+    //     // save log
+    //     var direction = "default";
+    //     var x = d.x - this.state.domain.x[0];
+    //     var y = d.y - this.state.domain.y[0];
+    //     if (x<50 && d.y<50)      direction = "TEXTURE";
+    //     else if (x>50 && y<50) direction = "SPACE";
+    //     else if (x<50 && y>50) direction = "COLOR";
+    //     else if (x>50 && y>50) direction = "FORM";
+    //     this.props.saveLog(d.imageId, "click "+direction+" ("+d.id+")");
+    //
+    //     d.z = RADIUS_BIG1;
+    //     d.focused = true;
+    //     this._history.push(d);
+    //
+    //     this._allData.filter( obj => obj.id===d.parentId)[0].focused = false;
+    //     this._allData.filter( obj => obj.id===d.parentId)[0].displayed = false;
+    //
+    //     var currentChildren = this._allData.filter( obj => obj.parentId===d.parentId);
+    //     for (var i=0, len=currentChildren.length; i<len; i++) {
+    //       if (currentChildren[i].id != d.id) {
+    //         currentChildren[i].displayed = false;
+    //       }
+    //     }
+    //
+    //     this.shiftPane(d);
+    //   }
+    //   else if (d.focused === true) {
+    //     this.props.saveLog(d.imageId, "node expanded ("+d.id+")");
+    //
+    //     this.generateChildren(domain, d);
+    //     d.expanded = true;
+    //   }
+    // }
   }
 
   shiftPane(d) {
@@ -237,8 +328,6 @@ export default class ExpGraphPage extends Component {
 
     var parentId = parseInt(d.imageId);
     var childrenImageId = this.getChildrenImageId(parentId);
-
-    var dist = 28;
 
     this._allData.push(
       {x: d.x-dist, y: d.y+dist, z: RADIUS_SMALL1,
@@ -311,6 +400,7 @@ export default class ExpGraphPage extends Component {
       this._allData[i].focused = false;
       this._allData[i].displayed = false;
     }
+
     d.expanded = false;
     d.focused = true;
     d.displayed = true;
@@ -329,6 +419,7 @@ export default class ExpGraphPage extends Component {
     }
 
     this.shiftPane(d);
+    this.generateChildren(this.state.domain, d);
 
   }
 
