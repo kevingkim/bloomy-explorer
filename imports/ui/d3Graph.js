@@ -139,16 +139,20 @@ d3Graph._drawNodes = function(el, scales, data, prevScales, dispatcher) {
     .attr("x1", function(d) {
       if (d.focused) { return; }
       if (prevScales) {
-        return prevScales.x(d.parentX);
+        // return prevScales.x(d.parentX);
+        return prevScales.x(d.x + (d.parentX-d.x)/3);
       }
-      return scales.x(d.parentX);
+      // return scales.x(d.parentX);
+      return scales.x(d.x + (d.parentX-d.x)/3);
     })
     .attr("y1", function(d) {
       if (d.focused) { return; }
       if (prevScales) {
-        return prevScales.y(d.parentY);
+        // return prevScales.y(d.parentY);
+        return prevScales.y(d.y + (d.parentY-d.y)/3);
       }
-      return scales.y(d.parentY);
+      // return scales.y(d.parentY);
+      return scales.y(d.y + (d.parentY-d.y)/3);
     })
     .attr("x2", function(d) {
       if (d.focused) { return; }
@@ -163,13 +167,13 @@ d3Graph._drawNodes = function(el, scales, data, prevScales, dispatcher) {
         return prevScales.y(d.y + (d.parentY-d.y)/3);
       }
       return scales.y(d.y + (d.parentY-d.y)/3);
-    });
-    // .transition()
-    //   .duration(ANIMATION_DURATION)
-    //   .attr('x1', function(d) { return scales.x(d.parentX); })
-    //   .attr('y1', function(d) { return scales.y(d.parentY); })
-    //   .attr('x2', function(d) { return scales.x(d.x); })
-    //   .attr('y2', function(d) { return scales.y(d.y); });
+    })
+    .transition()
+      .duration(ANIMATION_DURATION)
+      .attr('x1', function(d) { return scales.x(d.parentX); })
+      .attr('y1', function(d) { return scales.y(d.parentY); })
+      .attr('x2', function(d) { return scales.x(d.x); })
+      .attr('y2', function(d) { return scales.y(d.y); });
 
 
   // ENTER & UPDATE
