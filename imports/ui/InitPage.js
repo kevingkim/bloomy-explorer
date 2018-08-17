@@ -28,8 +28,8 @@ class InitPage extends Component {
     return (
       <div>
         <form className="form" onSubmit={this.handleSubmit.bind(this)}>
-          User ID:
-          <input type="text" ref="textInput" placeholder="userID" />
+          Participant ID:
+          <input type="text" ref="textInput" placeholder="Participant ID" />
           <input type="submit" value="Start" />
         </form>
       </div>

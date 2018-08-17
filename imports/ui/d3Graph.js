@@ -4,8 +4,7 @@ import d3 from '../api/d3.v3.min.js';
 import { EventEmitter } from 'events';
 
 var ANIMATION_DURATION = 600;
-// var RADIUS_BIG = 100;
-// var RADIUS_SMALL = 50;
+
 
 var d3Graph = {};
 
@@ -43,7 +42,7 @@ d3Graph._scales = function(el, domain) {
     return null;
   }
 
-  var width = 800;
+  var width = 1000;
   var height = el.offsetHeight;
 
   var x = d3.scale.linear()
@@ -72,10 +71,10 @@ d3Graph._drawNodes = function(el, scales, data, prevScales, dispatcher) {
   g.append("defs").append("marker")
     .attr("id", "arrowTip")
     .attr("viewBox", "0 0 10 10")
-    .attr("refX", 5)
+    .attr("refX", 7)
     .attr("refY", 5)
-    .attr("markerWidth", 5)
-    .attr("markerHeight", 5)
+    .attr("markerWidth", 7)
+    .attr("markerHeight", 7)
     .attr("orient", "auto")
     .style("fill", "#DADADA")
     .append("path")
@@ -240,8 +239,8 @@ d3Graph._drawDummyNodes = function(el, scales, dummyData, prevScales, dispatcher
     .attr("viewBox", "0 0 10 10")
     .attr("refX", 3)
     .attr("refY", 5)
-    .attr("markerWidth", 5)
-    .attr("markerHeight", 5)
+    .attr("markerWidth", 7)
+    .attr("markerHeight", 7)
     .attr("orient", "auto")
     .style("fill", "#7C7C7C")
     .append("path")

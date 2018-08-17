@@ -91,7 +91,7 @@ class App extends Component {
       case "graph":
         return (
           <ExpGraphPage
-            graphWidth="800px" viewerWidth="600px" height="650px"
+            graphWidth="1000px" viewerWidth="1000px" height="1000px"
             setAppState={this.setAppState.bind(this)}
             // getAppState={this.getAppState.bind(this)}
             saveLog={this.saveLog.bind(this)}
@@ -104,7 +104,7 @@ class App extends Component {
       case "linear":
         return (
           <LinearSearchPage
-            graphWidth="800px" viewerWidth="600px" height="650px"
+            graphWidth="1000px" viewerWidth="1000px" height="1000px"
             setAppState={this.setAppState.bind(this)}
             saveLog={this.saveLog.bind(this)}
             AppState={this.state}

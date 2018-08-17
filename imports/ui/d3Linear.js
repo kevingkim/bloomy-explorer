@@ -41,7 +41,7 @@ d3Linear._scales = function(el, domain) {
   }
 
   // var width = el.offsetWidth *0.6;
-  var width = 800;
+  var width = 1000;
   var height = el.offsetHeight;
 
   var x = d3.scale.linear()
@@ -158,21 +158,20 @@ d3.selection.prototype.moveToFront = function() {
 d3Linear._drawDummyNodes = function(el, scales, dummyData, prevScales, dispatcher) {
   var g = d3.select(el).selectAll('.d3-dummy-nodes');
 
-  g.append("g").attr("id", "d3-dummy-arrow");
+  // g.append("g").attr("id", "d3-dummy-arrow");
   g.append("g").attr("id", "d3-dummy-node");
-  g.append("g").attr("id", "d3-dummy-text");
 
-  g.append("defs").append("marker")
-    .attr("id", "dummyArrowTip")
-    .attr("viewBox", "0 0 10 10")
-    .attr("refX", 3)
-    .attr("refY", 5)
-    .attr("markerWidth", 5)
-    .attr("markerHeight", 5)
-    .attr("orient", "auto")
-    .style("fill", "#7C7C7C")
-    .append("path")
-    .attr("d", "M 0 0 10 5 0 10 0 5");
+  // g.append("defs").append("marker")
+  //   .attr("id", "dummyArrowTip")
+  //   .attr("viewBox", "0 0 10 10")
+  //   .attr("refX", 3)
+  //   .attr("refY", 5)
+  //   .attr("markerWidth", 5)
+  //   .attr("markerHeight", 5)
+  //   .attr("orient", "auto")
+  //   .style("fill", "#7C7C7C")
+  //   .append("path")
+  //   .attr("d", "M 0 0 10 5 0 10 0 5");
 
     var dummyNode = g.select("#d3-dummy-node")
       .selectAll('.d3-dummy-node')
@@ -181,12 +180,8 @@ d3Linear._drawDummyNodes = function(el, scales, dummyData, prevScales, dispatche
     var image = g.selectAll('.image')
       .data(dummyData, function(d) { return d.id; });
 
-    var dummyArrow = g.select("#d3-dummy-arrow")
-      .selectAll(".d3-dummy-arrow")
-      .data(dummyData, function(d) { return d.id; });
-
-    // var dummyText = g.select("#d3-dummy-text")
-    //   .selectAll(".d3-dummy-text")
+    // var dummyArrow = g.select("#d3-dummy-arrow")
+    //   .selectAll(".d3-dummy-arrow")
     //   .data(dummyData, function(d) { return d.id; });
 
     image.enter().append('pattern')
@@ -230,68 +225,42 @@ d3Linear._drawDummyNodes = function(el, scales, dummyData, prevScales, dispatche
         .attr('cy', function(d) { return scales.y(d.y); });
 
     // enter arrow
-    dummyArrow.enter().append('line')
-      .attr("class", "d3-dummy-arrow")
-      .attr("marker-end", "url(#dummyArrowTip)")
-      .attr('x1', function(d) {
-        if (prevScales) {
-          return prevScales.x(d.x);
-        }
-        return scales.x(d.x);
-      })
-      .attr('y1', function(d) {
-        if (prevScales) {
-          return prevScales.y(d.y);
-        }
-        return scales.y(d.y);
-      })
-      .attr("x2", function(d) {
-        if (d.focused) { return; }
-        if (prevScales) {
-          return prevScales.x(d.x - (d.parentX-d.x)/5);
-        }
-        return scales.x(d.x - (d.parentX-d.x)/5);
-      })
-      .attr("y2", function(d) {
-        if (d.focused) { return; }
-        if (prevScales) {
-          return prevScales.y(d.y);
-        }
-        return scales.y(d.y);
-      });
-
-    // enter text
-    // dummyText.enter().append("text")
-    //   .attr("class", "d3-dummy-text")
-    //   .text(function(d) { return d.id; })
-    //   .attr("x", function(d) {
+    // dummyArrow.enter().append('line')
+    //   .attr("class", "d3-dummy-arrow")
+    //   .attr("marker-end", "url(#dummyArrowTip)")
+    //   .attr('x1', function(d) {
     //     if (prevScales) {
-    //       // return prevScales.x(d.x)-prevScales.z(d.z)/2;
     //       return prevScales.x(d.x);
     //     }
-    //     // return scales.x(d.x)-scales.z(d.z)/2;
     //     return scales.x(d.x);
     //   })
-    //   .attr("y", function(d) {
+    //   .attr('y1', function(d) {
     //     if (prevScales) {
     //       return prevScales.y(d.y);
     //     }
     //     return scales.y(d.y);
     //   })
-    //   .attr("dy", ".30em")
-    //   .attr("text-anchor", "middle")
-    //   .style("fill", "#DADADA")
-    //   .style("font-size", 20)
-    //   .style("font-family", "sans-serif")
-    //   .style("text-anchor", "middle");
+    //   .attr("x2", function(d) {
+    //     if (d.focused) { return; }
+    //     if (prevScales) {
+    //       return prevScales.x(d.x - (d.parentX-d.x)/5);
+    //     }
+    //     return scales.x(d.x - (d.parentX-d.x)/5);
+    //   })
+    //   .attr("y2", function(d) {
+    //     if (d.focused) { return; }
+    //     if (prevScales) {
+    //       return prevScales.y(d.y);
+    //     }
+    //     return scales.y(d.y);
+    //   });
 
     dummyNode.on('click', function(d) {
           dispatcher.emit('point:dummyNodeClick', d);
         });
 
     dummyNode.exit().remove();
-    dummyArrow.exit().remove();
-    // dummyText.exit().remove();
+    // dummyArrow.exit().remove();
 
 }
 

@@ -9,6 +9,9 @@ import Viewer from './Viewer.js';
 image_prefix = "";
 image_type = ".jpg";
 
+RADIUS_BIG2 = 100;
+RADIUS_SMALL2 = 60;
+
 // App component - represents the whole app
 export default class LinearSearchPage extends Component {
 
@@ -129,21 +132,21 @@ export default class LinearSearchPage extends Component {
     }
 
     this._allData = [
-      {x: 50, y: 50, z: 60,
+      {x: 50, y: 50, z: RADIUS_BIG2,
         id: '1111',
         focused: true, expanded: false, displayed: false,
         imageId: 1111,
         image: image_path + "1111" + image_type,
         modelUrl: initialModelUrl1,
       },
-      {x: 70, y: 50, z: 50,
+      {x: 70, y: 50, z: RADIUS_SMALL2,
         id: '1112',
         focused: false, expanded: false, displayed: false,
         imageId: 1112,
         image: image_path + "1112"  + image_type,
         modelUrl: initialModelUrl2,
       },
-      {x: 90, y: 50, z: 50,
+      {x: 90, y: 50, z: RADIUS_SMALL2,
         id: '1113',
         focused: false, expanded: false, displayed: false,
         imageId: 1113,
@@ -153,7 +156,7 @@ export default class LinearSearchPage extends Component {
     ];
 
     this._history = [
-      {x: 50, y: 50, z: 60,
+      {x: 50, y: 50, z: RADIUS_BIG2,
         id: '1111',
         focused: true, expanded: false, displayed: false,
         imageId: 1111,
@@ -164,23 +167,23 @@ export default class LinearSearchPage extends Component {
     ];
 
     this._dummyData = [
-        {x: 20, y: 10, z: 30,
+        {x: 15, y: 20, z: 50,
           id: 'left',
           parentId: 'd0',
           parentX: 50, parentY: 50,
           numChildren: 0,
           focused: false, expanded: false, displayed: false,
           imageId: "_01",
-          image: image_path + "_01.jpeg",
+          image: image_path + "_02.png",
         },
-        {x: 80, y: 10, z: 30,
+        {x: 85, y: 20, z: 50,
           id: 'right',
           parentId: 'd0',
           parentX: 50, parentY: 50,
           numChildren: 0,
           focused: false, expanded: false, displayed: false,
           imageId: "_02",
-          image: image_path + "_01.jpeg",
+          image: image_path + "_01.png",
         },
       ];
   }
@@ -197,7 +200,7 @@ export default class LinearSearchPage extends Component {
             var id = i1.toString()+i2.toString()+i3.toString()+i4.toString();
             var xIndex = (i1-1)*3*3*3 + (i2-1)*3*3 + (i3-1)*3 + (i4-1) - 3;
             this._allData.push(
-              {x: this._xPos[xIndex], y: 50, z: 50,
+              {x: this._xPos[xIndex], y: 50, z: RADIUS_SMALL2,
                 id: id,
                 focused: false, expanded: false, displayed: true,
                 imageId: id,
@@ -247,7 +250,7 @@ export default class LinearSearchPage extends Component {
   }
 
   handleNodeClick(domain, d) {
-    d.z = 60;
+    d.z = RADIUS_BIG2;
     d.focused = true;
 
     var lastHistoryId = this._history[this._history.length-1].historyId;
@@ -286,7 +289,7 @@ export default class LinearSearchPage extends Component {
     if (this.state.domain.x[0]<=0 && d.id==="left") return ;
     if (this.state.domain.x[0]>=20*this._allData.length-50 && d.id==="right") return;
 
-    var dX = 40;
+    var dX = 20;
     var newDomainX = domain.x;
     var newDomainY = domain.y;
 

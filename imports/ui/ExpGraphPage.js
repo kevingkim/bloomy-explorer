@@ -14,7 +14,8 @@ image_path = image_prefix + "";
 image_type = ".jpg";
 image_original = "";
 
-
+RADIUS_BIG1 = 135;
+RADIUS_SMALL1 = 75;
 
 // App component - represents the whole app
 export default class ExpGraphPage extends Component {
@@ -25,6 +26,7 @@ export default class ExpGraphPage extends Component {
   _dummyData = [];
 
   _modelUrls = [];
+
 
   // for sample data
   constructor(props) {
@@ -98,7 +100,7 @@ export default class ExpGraphPage extends Component {
     }
     // initialize variables
     this._allData = [
-      {x: 50, y: 50, z: 100,
+      {x: 50, y: 50, z: RADIUS_BIG1,
         id: 'd1',
         parentId: 'd',
         parentX: 50, parentY: 50,
@@ -117,7 +119,7 @@ export default class ExpGraphPage extends Component {
     this._historyLog = [];
 
     this._dummyData = [
-      {x: 10, y: 90, z: 30,
+      {x: 10, y: 90, z: 40,
         id: 'Color',
         parentId: 'd0',
         parentX: 50, parentY: 50,
@@ -126,7 +128,7 @@ export default class ExpGraphPage extends Component {
         imageId: "_01",
         image: image_path + "_01.jpeg",
       },
-      {x: 10, y: 10, z: 30,
+      {x: 10, y: 10, z: 40,
         id: 'Texture',
         parentId: 'd0',
         parentX: 50, parentY: 50,
@@ -135,7 +137,7 @@ export default class ExpGraphPage extends Component {
         imageId: "_02",
         image: image_path + "_01.jpeg",
       },
-      {x: 90, y: 10, z: 30,
+      {x: 90, y: 10, z: 40,
         id: 'Space',
         parentId: 'd0',
         parentX: 50, parentY: 50,
@@ -144,7 +146,7 @@ export default class ExpGraphPage extends Component {
         imageId: "_03",
         image: image_path + "_01.jpeg",
       },
-      {x: 90, y: 90, z: 30,
+      {x: 90, y: 90, z: 40,
         id: 'Form',
         parentId: 'd0',
         parentX: 50, parentY: 50,
@@ -190,7 +192,7 @@ export default class ExpGraphPage extends Component {
         else if (x>50 && y>50) direction = "FORM";
         this.props.saveLog(d.imageId, "click "+direction+" ("+d.id+")");
 
-        d.z = 100;
+        d.z = RADIUS_BIG1;
         d.focused = true;
         this._history.push(d);
 
@@ -236,8 +238,10 @@ export default class ExpGraphPage extends Component {
     var parentId = parseInt(d.imageId);
     var childrenImageId = this.getChildrenImageId(parentId);
 
+    var dist = 28;
+
     this._allData.push(
-      {x: d.x-27, y: d.y+27, z: 50,
+      {x: d.x-dist, y: d.y+dist, z: RADIUS_SMALL1,
         id: d.id+childNum[0],
         parentId: d.id,
         parentX: d.x, parentY: d.y,
@@ -247,7 +251,7 @@ export default class ExpGraphPage extends Component {
         image: image_path + childrenImageId[0] + image_type,
         modelUrl: this.findModelUrl(childrenImageId[0]),
       },
-      {x: d.x-27, y: d.y-27, z: 50,
+      {x: d.x-dist, y: d.y-dist, z: RADIUS_SMALL1,
         id: d.id+childNum[1],
         parentId: d.id,
         parentX: d.x, parentY: d.y,
@@ -257,7 +261,7 @@ export default class ExpGraphPage extends Component {
         image: image_path + childrenImageId[1] + image_type,
         modelUrl: this.findModelUrl(childrenImageId[1]),
       },
-      {x: d.x+27, y: d.y+27, z: 50,
+      {x: d.x+dist, y: d.y+dist, z: RADIUS_SMALL1,
         id: d.id+childNum[2],
         parentId: d.id,
         parentX: d.x, parentY: d.y,
@@ -267,7 +271,7 @@ export default class ExpGraphPage extends Component {
         image: image_path + childrenImageId[2] + image_type,
         modelUrl: this.findModelUrl(childrenImageId[2]),
       },
-      {x: d.x+27, y: d.y-27, z: 50,
+      {x: d.x+dist, y: d.y-dist, z: RADIUS_SMALL1,
         id: d.id+childNum[3],
         parentId: d.id,
         parentX: d.x, parentY: d.y,
