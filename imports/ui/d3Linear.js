@@ -41,7 +41,8 @@ d3Linear._scales = function(el, domain) {
   }
 
   // var width = el.offsetWidth *0.6;
-  var width = 1000;
+  // var width = 1200;
+  var width = 800;
   var height = el.offsetHeight;
 
   var x = d3.scale.linear()

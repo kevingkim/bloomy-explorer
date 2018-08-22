@@ -14,8 +14,10 @@ image_path = image_prefix + "";
 image_type = ".jpg";
 image_original = "";
 
-RADIUS_BIG1 = 135;
-RADIUS_SMALL1 = 75;
+// RADIUS_BIG1 = 135;
+// RADIUS_SMALL1 = 75;
+RADIUS_BIG1 = 90;
+RADIUS_SMALL1 = 50;
 dist = 28;
 
 // App component - represents the whole app
@@ -137,7 +139,6 @@ export default class ExpGraphPage extends Component {
         focused: false, expanded: false, displayed: true,
         imageId: childrenImageId[0],
         image: image_path + childrenImageId[0] + image_type,
-        // modelUrl: this.findModelUrl(childrenImageId[0]),
         modelUrl: initialModelUrl2,
       },
       {x: 50-dist, y: 50-dist, z: RADIUS_SMALL1,
@@ -148,7 +149,6 @@ export default class ExpGraphPage extends Component {
         focused: false, expanded: false, displayed: true,
         imageId: childrenImageId[1],
         image: image_path + childrenImageId[1] + image_type,
-        // modelUrl: this.findModelUrl(childrenImageId[1]),
         modelUrl: initialModelUrl3,
       },
       {x: 50+dist, y: 50+dist, z: RADIUS_SMALL1,
@@ -159,7 +159,6 @@ export default class ExpGraphPage extends Component {
         focused: false, expanded: false, displayed: true,
         imageId: childrenImageId[2],
         image: image_path + childrenImageId[2] + image_type,
-        // modelUrl: this.findModelUrl(childrenImageId[2]),
         modelUrl: initialModelUrl4,
       },
       {x: 50+dist, y: 50-dist, z: RADIUS_SMALL1,
@@ -170,7 +169,6 @@ export default class ExpGraphPage extends Component {
         focused: false, expanded: false, displayed: true,
         imageId: childrenImageId[3],
         image: image_path + childrenImageId[3] + image_type,
-        // modelUrl: this.findModelUrl(childrenImageId[3]),
         modelUrl: initialModelUrl5,
       },
     );
@@ -182,53 +180,50 @@ export default class ExpGraphPage extends Component {
     this._historyLog = [];
 
     this._dummyData = [
-      {x: 10, y: 90, z: 40,
+      {x: 10, y: 90, z: 30, // 40
         id: 'Color',
         parentId: 'd0',
         parentX: 50, parentY: 50,
         numChildren: 0,
         focused: false, expanded: false, displayed: false,
         imageId: "_01",
-        image: image_path + "_01.jpeg",
+        image: image_path + "_01.jpg",
       },
-      {x: 10, y: 10, z: 40,
+      {x: 10, y: 10, z: 30, // 40
         id: 'Texture',
         parentId: 'd0',
         parentX: 50, parentY: 50,
         numChildren: 0,
         focused: false, expanded: false, displayed: false,
         imageId: "_02",
-        image: image_path + "_01.jpeg",
+        image: image_path + "_01.jpg",
       },
-      {x: 90, y: 10, z: 40,
+      {x: 90, y: 10, z: 30, // 40
         id: 'Space',
         parentId: 'd0',
         parentX: 50, parentY: 50,
         numChildren: 0,
         focused: false, expanded: false, displayed: false,
         imageId: "_03",
-        image: image_path + "_01.jpeg",
+        image: image_path + "_01.jpg",
       },
-      {x: 90, y: 90, z: 40,
+      {x: 90, y: 90, z: 30, // 40
         id: 'Form',
         parentId: 'd0',
         parentX: 50, parentY: 50,
         numChildren: 0,
         focused: false, expanded: false, displayed: false,
         imageId: "_04",
-        image: image_path + "_01.jpeg",
+        image: image_path + "_01.jpg",
       },
     ];
   }
 
   getData(domain) {
-    // console.log(this._allData);
     return _.filter(this._allData, this.isInDomain.bind(null, domain));
   }
 
   isInDomain(domain, d) {
-    // return d.x >= domain.x[0]-d.z && d.x <= domain.x[1]+d.z
-    //     && d.y >= domain.y[0]-d.z && d.y <= domain.y[1]+d.z;
     return d.displayed == true;
   }
 
@@ -273,47 +268,6 @@ export default class ExpGraphPage extends Component {
     else if (d.focused === true) {
 
     }
-
-
-
-
-
-    // if (d.expanded === false) {
-    //   if (d.focused === false) {
-    //
-    //     // save log
-    //     var direction = "default";
-    //     var x = d.x - this.state.domain.x[0];
-    //     var y = d.y - this.state.domain.y[0];
-    //     if (x<50 && d.y<50)      direction = "TEXTURE";
-    //     else if (x>50 && y<50) direction = "SPACE";
-    //     else if (x<50 && y>50) direction = "COLOR";
-    //     else if (x>50 && y>50) direction = "FORM";
-    //     this.props.saveLog(d.imageId, "click "+direction+" ("+d.id+")");
-    //
-    //     d.z = RADIUS_BIG1;
-    //     d.focused = true;
-    //     this._history.push(d);
-    //
-    //     this._allData.filter( obj => obj.id===d.parentId)[0].focused = false;
-    //     this._allData.filter( obj => obj.id===d.parentId)[0].displayed = false;
-    //
-    //     var currentChildren = this._allData.filter( obj => obj.parentId===d.parentId);
-    //     for (var i=0, len=currentChildren.length; i<len; i++) {
-    //       if (currentChildren[i].id != d.id) {
-    //         currentChildren[i].displayed = false;
-    //       }
-    //     }
-    //
-    //     this.shiftPane(d);
-    //   }
-    //   else if (d.focused === true) {
-    //     this.props.saveLog(d.imageId, "node expanded ("+d.id+")");
-    //
-    //     this.generateChildren(domain, d);
-    //     d.expanded = true;
-    //   }
-    // }
   }
 
   shiftPane(d) {
@@ -456,7 +410,7 @@ export default class ExpGraphPage extends Component {
         taskDescription = "Task description: Mrs. Heinrich, an 80-year-old regular customer, would like to buy a bouquet for her birthday party. The bouquet should stand on the dining table. The apartment is furnished in a romantic style. Her birthday is in summer.";
         break;
       case "exp2":
-        taskDescription = "Task description: A young woman enters your shop, which you have not seen before. She is interested in a round hand-bound bridal bouquet. The wedding will take place at the end of May and the bride will wear white. She informs them that she likes natural flowers and the colour purple.";
+        taskDescription = "Task description: A young woman enters your shop, whom you have not seen before. She is interested in a round hand-bound bridal bouquet. The wedding will take place at the end of May and the bride will wear white. She informs them that she likes natural flowers and the colour purple.";
       default:
         break;
     }

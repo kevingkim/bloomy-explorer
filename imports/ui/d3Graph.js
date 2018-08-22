@@ -42,7 +42,8 @@ d3Graph._scales = function(el, domain) {
     return null;
   }
 
-  var width = 1000;
+  // var width = 1200;
+  var width = 800;
   var height = el.offsetHeight;
 
   var x = d3.scale.linear()
@@ -139,19 +140,15 @@ d3Graph._drawNodes = function(el, scales, data, prevScales, dispatcher) {
     .attr("x1", function(d) {
       if (d.focused) { return; }
       if (prevScales) {
-        // return prevScales.x(d.parentX);
         return prevScales.x(d.x + (d.parentX-d.x)/3);
       }
-      // return scales.x(d.parentX);
       return scales.x(d.x + (d.parentX-d.x)/3);
     })
     .attr("y1", function(d) {
       if (d.focused) { return; }
       if (prevScales) {
-        // return prevScales.y(d.parentY);
         return prevScales.y(d.y + (d.parentY-d.y)/3);
       }
-      // return scales.y(d.parentY);
       return scales.y(d.y + (d.parentY-d.y)/3);
     })
     .attr("x2", function(d) {

@@ -21,7 +21,7 @@ class InitPage extends Component {
       page: "menu",
       userId: input,
     });
-
+    
   }
 
   render() {

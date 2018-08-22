@@ -9,8 +9,10 @@ import Viewer from './Viewer.js';
 image_prefix = "";
 image_type = ".jpg";
 
-RADIUS_BIG2 = 100;
-RADIUS_SMALL2 = 60;
+// RADIUS_BIG2 = 135;
+// RADIUS_SMALL2 = 75;
+RADIUS_BIG2 = 90;
+RADIUS_SMALL2 = 50;
 
 // App component - represents the whole app
 export default class LinearSearchPage extends Component {
@@ -55,7 +57,6 @@ export default class LinearSearchPage extends Component {
     this.loadJSON(file, function(json) {
       _self._modelUrls = JSON.parse(json);
 
-      // _self.initData();
       _self.loadDB();
 
       var domainX = [0,100];
@@ -79,8 +80,6 @@ export default class LinearSearchPage extends Component {
     var file = "/" + this.props.AppState.expId + "_modeldb.json";
     this.loadJSON(file, function(json) {
       _self._modelUrls = JSON.parse(json);
-      console.log(_self._modelUrls);
-
       _self.initData();
       _self.loadDB();
     });
@@ -103,7 +102,6 @@ export default class LinearSearchPage extends Component {
     var found = null;
     for (var i=0; i<this._modelUrls.length; i++) {
       if (this._modelUrls[i].id == key) {
-        console.log(this._modelUrls[i].url);
         return this._modelUrls[i].url;
       }
     }
@@ -250,6 +248,11 @@ export default class LinearSearchPage extends Component {
   }
 
   handleNodeClick(domain, d) {
+
+    for (var i=0; i<this._allData.length; i++) {
+      this._allData[i].z = RADIUS_SMALL2;
+    }
+
     d.z = RADIUS_BIG2;
     d.focused = true;
 
@@ -257,12 +260,8 @@ export default class LinearSearchPage extends Component {
 
     let tempNode = Object.assign({}, d);
     tempNode.historyId = lastHistoryId + '1';
-    // console.log("d", d);
-    // console.log("tempNode", tempNode);
 
     this._history.push(tempNode);
-    // this._history[this._history.length-1].id = lastId + '1';
-    // this._allData.filter( obj => obj.focused===true)[0].focused = false;
 
     // save log
     this.props.saveLog(tempNode.imageId, "click ("+tempNode.historyId+")");

@@ -4,8 +4,6 @@ import { withTracker } from 'meteor/react-meteor-data';
 import _ from 'lodash';
 
 import { UsageLogs } from '../api/usageLogs.js';
-// import { DesignStates } from '../api/designStates.js';
-// import DesignState from './DesignState.js';
 
 import ExpGraphPage from './ExpGraphPage.js';
 import LinearSearchPage from './LinearSearchPage.js';
@@ -54,7 +52,7 @@ class App extends Component {
   }
 
   handleClickFinish() {
-    this.saveLog("0", "finish and backt o menu");
+    this.saveLog("0", "finish and back to menu");
     this.setAppState({
       page: "menu",
     });
@@ -75,7 +73,6 @@ class App extends Component {
         return (
           <InitPage
             setAppState={this.setAppState.bind(this)}
-            // getAppState={this.getAppState.bind(this)}
             saveLog={this.saveLog.bind(this)}
           />
         );
@@ -91,9 +88,9 @@ class App extends Component {
       case "graph":
         return (
           <ExpGraphPage
-            graphWidth="1000px" viewerWidth="1000px" height="1000px"
+            // graphWidth="1200px" viewerWidth="900px" height="1000px"
+            graphWidth="800px" viewerWidth="700px" height="650px"
             setAppState={this.setAppState.bind(this)}
-            // getAppState={this.getAppState.bind(this)}
             saveLog={this.saveLog.bind(this)}
             AppState={this.state}
             handleClickFinish={this.handleClickFinish.bind(this)}
@@ -104,7 +101,8 @@ class App extends Component {
       case "linear":
         return (
           <LinearSearchPage
-            graphWidth="1000px" viewerWidth="1000px" height="1000px"
+            // graphWidth="1200px" viewerWidth="900px" height="1000px"
+            graphWidth="800px" viewerWidth="700px" height="650px"
             setAppState={this.setAppState.bind(this)}
             saveLog={this.saveLog.bind(this)}
             AppState={this.state}
@@ -128,7 +126,7 @@ class App extends Component {
     return (
       <div>
         <header>
-          <h1>Bouquet design exploration</h1>
+          <h1>BloomyExplorer: Bouquet design exploration</h1>
         </header>
         <div>
           {this.renderPage()}
