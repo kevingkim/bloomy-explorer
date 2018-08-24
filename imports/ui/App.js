@@ -48,7 +48,7 @@ class App extends Component {
       message: message,
     }, (error, result) => { });
 
-    console.log(UsageLogs.find().fetch());
+    // console.log(UsageLogs.find().fetch());
   }
 
   handleClickFinish() {

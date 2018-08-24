@@ -204,3 +204,13 @@ select {
   font-weight: bold;
   fill: "#DADADA";
 }
+
+.d3-tooltip-rect {
+
+}
+.d3-tooltip-text {
+  font-size: 100;
+  font-family: "sans-serif";
+  font-weight: bold;
+  fill: "#DADADA";
+}

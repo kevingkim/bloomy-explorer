@@ -4,8 +4,8 @@ import d3 from '../api/d3.v3.min.js';
 import { EventEmitter } from 'events';
 
 var ANIMATION_DURATION = 600;
-// var RADIUS_BIG = 60;
-// var RADIUS_SMALL = 50;
+var TOOLTIP_WIDTH = 120;
+var TOOLTIP_HEIGHT = 30;
 
 var d3Linear = {};
 
@@ -18,6 +18,7 @@ d3Linear.create = function(el, props, state) {
   svg.append('g').attr('class', 'd3-dummy-nodes');
   svg.append('g').attr('class', 'd3-nodes');
   svg.append('g').attr('class', 'd3-history-nodes');
+  svg.append('g').attr('class', 'd3-tooltips');
 
   var dispatcher = new EventEmitter();
   this.update(el, state, dispatcher);
@@ -33,6 +34,8 @@ d3Linear.update = function(el, state, dispatcher) {
   this._drawDummyNodes(el, scales, state.dummyData, prevScales, dispatcher);
   this._drawHistory(el, scales, state.history, prevScales, dispatcher);
   this._drawNodes(el, scales, state.data, prevScales, dispatcher);
+
+  this._drawTolltips(el, scales, state.data, prevScales);
 };
 
 d3Linear._scales = function(el, domain) {
@@ -127,7 +130,7 @@ d3Linear._drawNodes = function(el, scales, data, prevScales, dispatcher) {
       .duration(ANIMATION_DURATION)
       .attr('cx', function(d) {
         if (prevScales) {
-          prevScales.x(d.x);
+          // return prevScales.x(d.x);
         }
         return scales.x(d.x);
       })
@@ -405,5 +408,96 @@ d3Linear._drawHistory = function(el, scales, history, prevScales, dispatcher) {
     historyLine.exit().remove();
     historyText.exit().remove();
 }
+
+d3Linear._drawTolltips = function(el, scales, data, prevScales) {
+
+  var g = d3.select(el).selectAll('.d3-tooltips');
+
+  g.append("g").attr("id", "d3-tooltip-rect");
+  g.append("g").attr("id", "d3-tooltip-text");
+
+  var tooltipRect = g.select("#d3-tooltip-rect").selectAll('.d3-tooltip-rect')
+    .data(data, function(d) { return d.id; });
+  var tooltipText = g.select("#d3-tooltip-text").selectAll('.d3-tooltip-text')
+    .data(data, function(d) { return d.id; });
+
+  // Enter
+  tooltipRect.enter().append('rect')
+      .attr('class', 'd3-tooltip-rect')
+      .attr('width', TOOLTIP_WIDTH)
+      .attr('height', TOOLTIP_HEIGHT)
+      .style("fill", "#DADADA")
+      .attr('x', function(d) {
+        if (prevScales) {
+          return prevScales.x(d.x) - TOOLTIP_WIDTH/2;
+        }
+        return scales.x(d.x) - TOOLTIP_WIDTH/2;
+      })
+      .transition()
+          .duration(ANIMATION_DURATION)
+          .attr('x', function(d){ return scales.x(d.x) - TOOLTIP_WIDTH/2; })
+          .attr('y', function(d) {
+            // if (d.focused == true) {
+            //   return scales.y(d.y) + scales.z(d.z)*20 - TOOLTIP_HEIGHT;
+            // }
+            return scales.y(d.y) + scales.z(d.z)*2 - TOOLTIP_HEIGHT;
+          });
+  // Enter and update
+  tooltipRect.transition()
+    .duration(ANIMATION_DURATION)
+        .attr('x', function(d) { return scales.x(d.x) - TOOLTIP_WIDTH/2; })
+        .attr('y', function(d) {
+          // if (d.focused == true) {
+          //   return scales.y(d.y) + scales.z(d.z)*20 - TOOLTIP_HEIGHT;
+          // }
+          return scales.y(d.y) + scales.z(d.z)*2 - TOOLTIP_HEIGHT;
+        });
+  // Exit
+  tooltipRect.exit()
+      .remove();
+
+  // Enter
+  tooltipText.enter().append('text')
+      .attr('class', 'd3-tooltip-text')
+      .attr('dy', '0.35em')
+      .attr('text-anchor', 'middle')
+      .text(function(d) {
+        return d.tag;
+        // return d.id + " " + d.tag;
+      })
+      .style("font-size", "10")
+      .style("font-family", "sans-serif")
+      .attr('x', function(d) {
+        if (prevScales) {
+          return prevScales.x(d.x);
+        }
+        return scales.x(d.x);
+      })
+      .transition()
+          .duration(ANIMATION_DURATION)
+          .attr('x', function(d){ return scales.x(d.x); })
+          .attr('y', function(d) {
+            // if (d.focused == true) {
+            //   return scales.y(d.y) + scales.z(d.z)*20 - TOOLTIP_HEIGHT/2;
+            // }
+            return scales.y(d.y) + scales.z(d.z)*2 - TOOLTIP_HEIGHT/2;
+          });
+  // Enter and update
+  tooltipText.transition()
+      .duration(ANIMATION_DURATION)
+      .attr('x', function(d) { return scales.x(d.x); })
+      .attr('y', function(d) {
+        // if (d.focused == true) {
+        //   return scales.y(d.y) + scales.z(d.z)*20 - TOOLTIP_HEIGHT/2;
+        // }
+        return scales.y(d.y) + scales.z(d.z)*2 - TOOLTIP_HEIGHT/2;
+      });
+  // Exit
+  tooltipText.exit()
+      .remove();
+
+}
+
+
 
 export default d3Linear;

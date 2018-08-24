@@ -130,31 +130,34 @@ export default class LinearSearchPage extends Component {
     }
 
     this._allData = [
-      {x: 50, y: 50, z: RADIUS_BIG2,
+      {x: 50, y: 65, z: RADIUS_BIG2,
         id: '1111',
         focused: true, expanded: false, displayed: false,
         imageId: 1111,
         image: image_path + "1111" + image_type,
         modelUrl: initialModelUrl1,
+        tag: "",
       },
-      {x: 70, y: 50, z: RADIUS_SMALL2,
+      {x: 70, y: 65, z: RADIUS_SMALL2,
         id: '1112',
         focused: false, expanded: false, displayed: false,
         imageId: 1112,
         image: image_path + "1112"  + image_type,
         modelUrl: initialModelUrl2,
+        tag: "space",
       },
-      {x: 90, y: 50, z: RADIUS_SMALL2,
+      {x: 90, y: 65, z: RADIUS_SMALL2,
         id: '1113',
         focused: false, expanded: false, displayed: false,
         imageId: 1113,
         image: image_path + "1113"  + image_type,
         modelUrl: initialModelUrl3,
+        tag: "space",
       },
     ];
 
     this._history = [
-      {x: 50, y: 50, z: RADIUS_BIG2,
+      {x: 50, y: 65, z: RADIUS_BIG2,
         id: '1111',
         focused: true, expanded: false, displayed: false,
         imageId: 1111,
@@ -165,7 +168,7 @@ export default class LinearSearchPage extends Component {
     ];
 
     this._dummyData = [
-        {x: 15, y: 20, z: 50,
+        {x: 15, y: 15, z: 50,
           id: 'left',
           parentId: 'd0',
           parentX: 50, parentY: 50,
@@ -174,7 +177,7 @@ export default class LinearSearchPage extends Component {
           imageId: "_01",
           image: image_path + "_02.png",
         },
-        {x: 85, y: 20, z: 50,
+        {x: 85, y: 15, z: 50,
           id: 'right',
           parentId: 'd0',
           parentX: 50, parentY: 50,
@@ -197,13 +200,21 @@ export default class LinearSearchPage extends Component {
             if (i1==1 && i2==1 && i3==1)  continue;
             var id = i1.toString()+i2.toString()+i3.toString()+i4.toString();
             var xIndex = (i1-1)*3*3*3 + (i2-1)*3*3 + (i3-1)*3 + (i4-1) - 3;
+
+            var tag = "";
+            if (i1 != 1) tag += "color ";
+            if (i2 != 1) tag += "texture ";
+            if (i3 != 1) tag += "form ";
+            if (i4 != 1) tag += "space";
+
             this._allData.push(
-              {x: this._xPos[xIndex], y: 50, z: RADIUS_SMALL2,
+              {x: this._xPos[xIndex], y: 65, z: RADIUS_SMALL2,
                 id: id,
                 focused: false, expanded: false, displayed: true,
                 imageId: id,
                 image: image_path + id + image_type,
                 modelUrl: this.findModelUrl(id),
+                tag: tag,
               }
             );
           }
@@ -249,24 +260,64 @@ export default class LinearSearchPage extends Component {
 
   handleNodeClick(domain, d) {
 
+    if (this._history[this._history.length-1].id != d.id) {
+      for (var i=0; i<this._allData.length; i++) {
+        this._allData[i].z = RADIUS_SMALL2;
+      }
+
+      d.z = RADIUS_BIG2;
+      d.focused = true;
+
+      var lastHistoryId = this._history[this._history.length-1].historyId;
+
+      let tempNode = Object.assign({}, d);
+      tempNode.historyId = lastHistoryId + '1';
+
+      this._history.push(tempNode);
+
+      // save log
+      this.props.saveLog(tempNode.imageId, "click ("+tempNode.historyId+")");
+
+      this.updateTags(d);
+      this.shiftPane(d);
+    }
+  }
+
+  updateTags(d) {
+
     for (var i=0; i<this._allData.length; i++) {
-      this._allData[i].z = RADIUS_SMALL2;
+      var newTag = "";
+      if (this._allData[i].id[0] != d.id[0]) newTag += "color ";
+      if (this._allData[i].id[1] != d.id[1]) newTag += "texture ";
+      if (this._allData[i].id[2] != d.id[2]) newTag += "form ";
+      if (this._allData[i].id[3] != d.id[3]) newTag += "space ";
+      this._allData[i].tag = newTag;
     }
 
-    d.z = RADIUS_BIG2;
-    d.focused = true;
+    var newDomainX = [d.x-2, d.x-1];
+    var newDomainY = [0, 100];
+    this.setAppState({
+      data: this.getData({x:newDomainX, y:newDomainY}),
+      domain: _.assign({}, this.state.domain, {
+        x: newDomainX,
+        y: newDomainY,
+      }),
+      prevDomain: this.state.domain,
+      history: this.getHistory(),
+    });
 
-    var lastHistoryId = this._history[this._history.length-1].historyId;
+    var newDomainX = [d.x-50, d.x+50];
+    var newDomainY = [0, 100];
+    this.setAppState({
+      data: this.getData({x:newDomainX, y:newDomainY}),
+      domain: _.assign({}, this.state.domain, {
+        x: newDomainX,
+        y: newDomainY,
+      }),
+      prevDomain: this.state.domain,
+      history: this.getHistory(),
+    });
 
-    let tempNode = Object.assign({}, d);
-    tempNode.historyId = lastHistoryId + '1';
-
-    this._history.push(tempNode);
-
-    // save log
-    this.props.saveLog(tempNode.imageId, "click ("+tempNode.historyId+")");
-
-    this.shiftPane(d);
   }
 
   shiftPane(d) {
@@ -315,21 +366,36 @@ export default class LinearSearchPage extends Component {
   }
 
   handleHistoryClick (domain, d) {
-    // store history
-    this._historyLog.push(Object.assign({}, this._history));
 
-    // update history
-    for (var i=this._history.length-1; i>=0; i--) {
-      if (this._history[i].historyId == d.historyId) {
-        break;
+    if (this._history[this._history.length-1].id != d.id) {
+      for (var i=0; i<this._allData.length; i++) {
+        if (this._allData[i].id == d.id) {
+          this._allData[i].z = RADIUS_BIG2;
+          this._allData[i].focused = true;
+        }
+        else {
+          this._allData[i].z = RADIUS_SMALL2;
+          this._allData[i].focused = false;
+        }
       }
-      this._history = this._history.slice(0,i);
+
+      // store history
+      this._historyLog.push(Object.assign({}, this._history));
+
+      // update history
+      for (var i=this._history.length-1; i>=0; i--) {
+        if (this._history[i].historyId == d.historyId) {
+          break;
+        }
+        this._history = this._history.slice(0,i);
+      }
+
+      // save log
+      this.props.saveLog(d.imageId, "history click ("+d.historyId+")");
+
+      this.updateTags(d);
+      this.shiftPane(d);
     }
-
-    // save log
-    this.props.saveLog(d.imageId, "history click ("+d.historyId+")");
-
-    this.shiftPane(d);
   }
 
   setAppState(partialState, callback) {
