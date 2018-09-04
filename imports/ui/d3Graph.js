@@ -42,8 +42,8 @@ d3Graph._scales = function(el, domain) {
     return null;
   }
 
-  // var width = 1200;
-  var width = 800;
+  var width = 1200;
+  // var width = 800;
   var height = el.offsetHeight;
 
   var x = d3.scale.linear()
@@ -74,8 +74,8 @@ d3Graph._drawNodes = function(el, scales, data, prevScales, dispatcher) {
     .attr("viewBox", "0 0 10 10")
     .attr("refX", 7)
     .attr("refY", 5)
-    .attr("markerWidth", 7)
-    .attr("markerHeight", 7)
+    .attr("markerWidth", 10)
+    .attr("markerHeight", 10)
     .attr("orient", "auto")
     .style("fill", "#DADADA")
     .append("path")
@@ -240,8 +240,8 @@ d3Graph._drawDummyNodes = function(el, scales, dummyData, prevScales, dispatcher
     .attr("viewBox", "0 0 10 10")
     .attr("refX", 3)
     .attr("refY", 5)
-    .attr("markerWidth", 7)
-    .attr("markerHeight", 7)
+    .attr("markerWidth", 10)
+    .attr("markerHeight", 10)
     .attr("orient", "auto")
     .style("fill", "#7C7C7C")
     .append("path")

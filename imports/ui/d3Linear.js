@@ -4,8 +4,8 @@ import d3 from '../api/d3.v3.min.js';
 import { EventEmitter } from 'events';
 
 var ANIMATION_DURATION = 600;
-var TOOLTIP_WIDTH = 120;
-var TOOLTIP_HEIGHT = 30;
+var TOOLTIP_WIDTH = 170;
+var TOOLTIP_HEIGHT = 40;
 
 var d3Linear = {};
 
@@ -44,8 +44,8 @@ d3Linear._scales = function(el, domain) {
   }
 
   // var width = el.offsetWidth *0.6;
-  // var width = 1200;
-  var width = 800;
+  var width = 1200;
+  // var width = 800;
   var height = el.offsetHeight;
 
   var x = d3.scale.linear()
@@ -437,9 +437,9 @@ d3Linear._drawTolltips = function(el, scales, data, prevScales) {
           .duration(ANIMATION_DURATION)
           .attr('x', function(d){ return scales.x(d.x) - TOOLTIP_WIDTH/2; })
           .attr('y', function(d) {
-            // if (d.focused == true) {
-            //   return scales.y(d.y) + scales.z(d.z)*20 - TOOLTIP_HEIGHT;
-            // }
+            if (d.focused == true) {
+              return scales.y(d.y) + scales.z(d.z)*20 - TOOLTIP_HEIGHT;
+            }
             return scales.y(d.y) + scales.z(d.z)*2 - TOOLTIP_HEIGHT;
           });
   // Enter and update
@@ -447,9 +447,9 @@ d3Linear._drawTolltips = function(el, scales, data, prevScales) {
     .duration(ANIMATION_DURATION)
         .attr('x', function(d) { return scales.x(d.x) - TOOLTIP_WIDTH/2; })
         .attr('y', function(d) {
-          // if (d.focused == true) {
-          //   return scales.y(d.y) + scales.z(d.z)*20 - TOOLTIP_HEIGHT;
-          // }
+          if (d.focused == true) {
+            return scales.y(d.y) + scales.z(d.z)*20 - TOOLTIP_HEIGHT;
+          }
           return scales.y(d.y) + scales.z(d.z)*2 - TOOLTIP_HEIGHT;
         });
   // Exit
@@ -465,7 +465,8 @@ d3Linear._drawTolltips = function(el, scales, data, prevScales) {
         return d.tag;
         // return d.id + " " + d.tag;
       })
-      .style("font-size", "10")
+      .style("font-size", "30")
+      .style("fill", "#323639")
       .style("font-family", "sans-serif")
       .attr('x', function(d) {
         if (prevScales) {
@@ -477,9 +478,9 @@ d3Linear._drawTolltips = function(el, scales, data, prevScales) {
           .duration(ANIMATION_DURATION)
           .attr('x', function(d){ return scales.x(d.x); })
           .attr('y', function(d) {
-            // if (d.focused == true) {
-            //   return scales.y(d.y) + scales.z(d.z)*20 - TOOLTIP_HEIGHT/2;
-            // }
+            if (d.focused == true) {
+              return scales.y(d.y) + scales.z(d.z)*20 - TOOLTIP_HEIGHT/2;
+            }
             return scales.y(d.y) + scales.z(d.z)*2 - TOOLTIP_HEIGHT/2;
           });
   // Enter and update
@@ -487,9 +488,9 @@ d3Linear._drawTolltips = function(el, scales, data, prevScales) {
       .duration(ANIMATION_DURATION)
       .attr('x', function(d) { return scales.x(d.x); })
       .attr('y', function(d) {
-        // if (d.focused == true) {
-        //   return scales.y(d.y) + scales.z(d.z)*20 - TOOLTIP_HEIGHT/2;
-        // }
+        if (d.focused == true) {
+          return scales.y(d.y) + scales.z(d.z)*20 - TOOLTIP_HEIGHT/2;
+        }
         return scales.y(d.y) + scales.z(d.z)*2 - TOOLTIP_HEIGHT/2;
       });
   // Exit

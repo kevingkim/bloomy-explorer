@@ -9,10 +9,10 @@ import Viewer from './Viewer.js';
 image_prefix = "";
 image_type = ".jpg";
 
-// RADIUS_BIG2 = 135;
-// RADIUS_SMALL2 = 75;
-RADIUS_BIG2 = 90;
-RADIUS_SMALL2 = 50;
+RADIUS_BIG2 = 135;
+RADIUS_SMALL2 = 75;
+// RADIUS_BIG2 = 90;
+// RADIUS_SMALL2 = 50;
 
 // App component - represents the whole app
 export default class LinearSearchPage extends Component {
@@ -32,6 +32,8 @@ export default class LinearSearchPage extends Component {
     var domainY = [0,100];
 
     image_path = image_prefix + "/db_" + this.props.AppState.expId + "/";
+
+    inHistory = false;
 
     this.initData();
 
@@ -254,32 +256,57 @@ export default class LinearSearchPage extends Component {
   }
 
   getCurrentNode() {
-    return this._history[this._history.length-1];
-    // return this._allData.filter( obj => obj.focused===true )[0];
+    // return this._history[this._history.length-1];
+    return this._allData.filter( obj => obj.focused===true )[0];
   }
 
   handleNodeClick(domain, d) {
 
-    if (this._history[this._history.length-1].id != d.id) {
-      for (var i=0; i<this._allData.length; i++) {
-        this._allData[i].z = RADIUS_SMALL2;
+    // if (this._history[this._history.length-1].id != d.id) {
+    if (d.focused == false) {
+
+      // get the last focus
+      var lastFocus = this._history.filter( obj => obj.focused==true )[0];
+      console.log("last focus: ", lastFocus.id);
+
+      // cut history if necessary
+      for (var i=this._history.length-1; i>=0; i--) {
+        console.log("check: ", this._history[i].historyId, lastFocus.historyId);
+        if (this._history[i].historyId == lastFocus.historyId) {
+          break;
+        }
+        this._history = this._history.slice(0,i);
       }
 
-      d.z = RADIUS_BIG2;
-      d.focused = true;
-
-      var lastHistoryId = this._history[this._history.length-1].historyId;
+      this.setAppState({
+        history: this.getHistory(),
+      });
 
       let tempNode = Object.assign({}, d);
-      tempNode.historyId = lastHistoryId + '1';
-
+      tempNode.historyId = lastFocus.historyId + '1';
+      tempNode.focused = true;
       this._history.push(tempNode);
+
+      lastFocus.focused = false;
+      inHistory = false;
 
       // save log
       this.props.saveLog(tempNode.imageId, "click ("+tempNode.historyId+")");
+      console.log(tempNode.imageId, "click ("+tempNode.historyId+")");
 
       this.updateTags(d);
       this.shiftPane(d);
+
+      for (var i=0; i<this._allData.length; i++) {
+        this._allData[i].z = RADIUS_SMALL2;
+        this._allData[i].focused = false;
+      }
+      d.z = RADIUS_BIG2;
+      d.focused = true;
+
+      this.setAppState({
+        history: this.getHistory(),
+      });
     }
   }
 
@@ -367,7 +394,11 @@ export default class LinearSearchPage extends Component {
 
   handleHistoryClick (domain, d) {
 
-    if (this._history[this._history.length-1].id != d.id) {
+    // if (this._history[this._history.length-1].id != d.id) {
+    // if (d.focused == false) {
+
+    var lastFocus = this._history.filter( obj => obj.focused==true )[0];
+    if (d != lastFocus) {
       for (var i=0; i<this._allData.length; i++) {
         if (this._allData[i].id == d.id) {
           this._allData[i].z = RADIUS_BIG2;
@@ -379,19 +410,14 @@ export default class LinearSearchPage extends Component {
         }
       }
 
-      // store history
-      this._historyLog.push(Object.assign({}, this._history));
+      lastFocus.focused = false;
+      d.focused = true;
 
-      // update history
-      for (var i=this._history.length-1; i>=0; i--) {
-        if (this._history[i].historyId == d.historyId) {
-          break;
-        }
-        this._history = this._history.slice(0,i);
-      }
+      inHistory = true;
 
       // save log
       this.props.saveLog(d.imageId, "history click ("+d.historyId+")");
+      console.log(d.imageId, "history click ("+d.historyId+")");
 
       this.updateTags(d);
       this.shiftPane(d);
@@ -445,8 +471,8 @@ export default class LinearSearchPage extends Component {
         </div>
 
         <div className="description">
-          <button className="button" onClick={this.props.handleClickFinish.bind(this)}>
-            Finish
+          <button className="button" onClick={this.props.handleClickReturnToMenu.bind(this)}>
+            Return to menu
           </button>
           <button className="button" onClick={this.props.handleClickExit.bind(this)}>
             Exit

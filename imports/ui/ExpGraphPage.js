@@ -14,10 +14,10 @@ image_path = image_prefix + "";
 image_type = ".jpg";
 image_original = "";
 
-// RADIUS_BIG1 = 135;
-// RADIUS_SMALL1 = 75;
-RADIUS_BIG1 = 90;
-RADIUS_SMALL1 = 50;
+RADIUS_BIG1 = 135;
+RADIUS_SMALL1 = 75;
+// RADIUS_BIG1 = 90;
+// RADIUS_SMALL1 = 50;
 dist = 28;
 
 // App component - represents the whole app
@@ -39,6 +39,8 @@ export default class ExpGraphPage extends Component {
 
     image_path = image_prefix + "/db_" + this.props.AppState.expId + "/";
     image_original = image_path + "1111" + image_type;
+
+    inHistory = false;
 
     this.initData();
 
@@ -180,7 +182,7 @@ export default class ExpGraphPage extends Component {
     this._historyLog = [];
 
     this._dummyData = [
-      {x: 10, y: 90, z: 30, // 40
+      {x: 10, y: 90, z: 50, // 30
         id: 'Color',
         parentId: 'd0',
         parentX: 50, parentY: 50,
@@ -189,7 +191,7 @@ export default class ExpGraphPage extends Component {
         imageId: "_01",
         image: image_path + "_01.jpg",
       },
-      {x: 10, y: 10, z: 30, // 40
+      {x: 10, y: 10, z: 50, // 30
         id: 'Texture',
         parentId: 'd0',
         parentX: 50, parentY: 50,
@@ -198,7 +200,7 @@ export default class ExpGraphPage extends Component {
         imageId: "_02",
         image: image_path + "_01.jpg",
       },
-      {x: 90, y: 10, z: 30, // 40
+      {x: 90, y: 10, z: 50, // 30
         id: 'Space',
         parentId: 'd0',
         parentX: 50, parentY: 50,
@@ -207,7 +209,7 @@ export default class ExpGraphPage extends Component {
         imageId: "_03",
         image: image_path + "_01.jpg",
       },
-      {x: 90, y: 90, z: 30, // 40
+      {x: 90, y: 90, z: 50, // 30
         id: 'Form',
         parentId: 'd0',
         parentX: 50, parentY: 50,
@@ -232,12 +234,27 @@ export default class ExpGraphPage extends Component {
   }
 
   getCurrentNode() {
-    return this._history[this._history.length-1];
-    // return this._allData.filter( obj => obj.focused===true )[0];
+    // return this._history[this._history.length-1];
+    return this._allData.filter( obj => obj.focused===true )[0];
   }
 
   handleNodeClick(domain, d) {
     if (d.focused === false) {
+
+      if (inHistory == true) {
+        var children = this._allData.filter( obj => obj.id.length > d.id.length );
+        this.pruneChildren(children);
+
+        // update history
+        for (var i=this._history.length-1; i>=0; i--) {
+          if (this._history[i].id == d.parentId) {
+            break;
+          }
+          this._history = this._history.slice(0,i);
+        }
+        inHistory = false;
+      }
+
       // save log
       var direction = "default";
       var x = d.x - this.state.domain.x[0];
@@ -266,7 +283,6 @@ export default class ExpGraphPage extends Component {
       this.generateChildren(domain, d);
     }
     else if (d.focused === true) {
-
     }
   }
 
@@ -352,8 +368,8 @@ export default class ExpGraphPage extends Component {
   }
 
   handleHistoryClick (domain, d) {
-    var children = this._allData.filter( obj => obj.id.length > d.id.length );
-    this.pruneChildren(children);
+    // var children = this._allData.filter( obj => obj.id.length > d.id.length );
+    // this.pruneChildren(children);
 
     // save log
     this.props.saveLog(d.imageId, "history click ("+d.id+")");
@@ -361,29 +377,69 @@ export default class ExpGraphPage extends Component {
     for (var i=0; i<this._allData.length; i++) {
       this._allData[i].focused = false;
       this._allData[i].displayed = false;
+      this._allData[i].z = RADIUS_SMALL1;
     }
 
     d.expanded = false;
     d.focused = true;
     d.displayed = true;
+    d.z = RADIUS_BIG1;
     d.numChildren = 0;
 
     // store history
     this._historyLog.push(Object.assign({}, this._history));
 
-    // update history
-    for (var i=this._history.length-1; i>=0; i--) {
-      if (this._history[i].id == d.id) {
-        break;
-      }
-      // console.log(this._history[i].id);
-      this._history = this._history.slice(0,i);
-    }
+    inHistory = true;
 
     this.shiftPane(d);
-    this.generateChildren(this.state.domain, d);
+    this.displayChildren(d);
 
   }
+
+  displayChildren (d) {
+    var children = this._allData.filter( obj => obj.parentId == d.id );
+    for (var i=0; i<children.length; i++) {
+      children[i].displayed = true;
+    }
+
+    this.setAppState({
+      data: this.getData(this.state.domain),
+      prevDomain: null,
+    });
+  }
+  // handleHistoryClick (domain, d) {
+  //   var children = this._allData.filter( obj => obj.id.length > d.id.length );
+  //   this.pruneChildren(children);
+  //
+  //   // save log
+  //   this.props.saveLog(d.imageId, "history click ("+d.id+")");
+  //
+  //   for (var i=0; i<this._allData.length; i++) {
+  //     this._allData[i].focused = false;
+  //     this._allData[i].displayed = false;
+  //   }
+  //
+  //   d.expanded = false;
+  //   d.focused = true;
+  //   d.displayed = true;
+  //   d.numChildren = 0;
+  //
+  //   // store history
+  //   this._historyLog.push(Object.assign({}, this._history));
+  //
+  //   // update history
+  //   for (var i=this._history.length-1; i>=0; i--) {
+  //     if (this._history[i].id == d.id) {
+  //       break;
+  //     }
+  //     // console.log(this._history[i].id);
+  //     this._history = this._history.slice(0,i);
+  //   }
+  //
+  //   this.shiftPane(d);
+  //   this.generateChildren(this.state.domain, d);
+  //
+  // }
 
   pruneChildren(children) {
     for (var i=0, len=children.length; i<len; i++) {
@@ -442,8 +498,8 @@ export default class ExpGraphPage extends Component {
         </div>
 
         <div className="description">
-          <button className="button" onClick={this.props.handleClickFinish.bind(this)}>
-            Finish
+          <button className="button" onClick={this.props.handleClickReturnToMenu.bind(this)}>
+            Return to menu
           </button>
           <button className="button" onClick={this.props.handleClickExit.bind(this)}>
             Exit

@@ -51,8 +51,8 @@ class App extends Component {
     // console.log(UsageLogs.find().fetch());
   }
 
-  handleClickFinish() {
-    this.saveLog("0", "finish and back to menu");
+  handleClickReturnToMenu() {
+    this.saveLog("0", "finish and return to menu");
     this.setAppState({
       page: "menu",
     });
@@ -88,12 +88,12 @@ class App extends Component {
       case "graph":
         return (
           <ExpGraphPage
-            // graphWidth="1200px" viewerWidth="900px" height="1000px"
-            graphWidth="800px" viewerWidth="700px" height="650px"
+            graphWidth="1200px" viewerWidth="900px" height="1000px"
+            // graphWidth="800px" viewerWidth="700px" height="650px"
             setAppState={this.setAppState.bind(this)}
             saveLog={this.saveLog.bind(this)}
             AppState={this.state}
-            handleClickFinish={this.handleClickFinish.bind(this)}
+            handleClickReturnToMenu={this.handleClickReturnToMenu.bind(this)}
             handleClickExit={this.handleClickExit.bind(this)}
           />
         );
@@ -101,12 +101,12 @@ class App extends Component {
       case "linear":
         return (
           <LinearSearchPage
-            // graphWidth="1200px" viewerWidth="900px" height="1000px"
-            graphWidth="800px" viewerWidth="700px" height="650px"
+            graphWidth="1200px" viewerWidth="900px" height="1000px"
+            // graphWidth="800px" viewerWidth="700px" height="650px"
             setAppState={this.setAppState.bind(this)}
             saveLog={this.saveLog.bind(this)}
             AppState={this.state}
-            handleClickFinish={this.handleClickFinish.bind(this)}
+            handleClickReturnToMenu={this.handleClickReturnToMenu.bind(this)}
             handleClickExit={this.handleClickExit.bind(this)}
           />
         );
