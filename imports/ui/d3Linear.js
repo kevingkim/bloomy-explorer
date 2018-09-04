@@ -335,6 +335,14 @@ d3Linear._drawHistory = function(el, scales, history, prevScales, dispatcher) {
           .duration(ANIMATION_DURATION)
           .attr('cx', function(d) {
             return 70 * (history.length - d.historyId.length + 2);
+          })
+          .style('stroke', function(d) {
+            if (d.focused==true) {
+              return "red";
+            }
+            else {
+              return "#323639";
+            }
           });
 
     historyArrow.enter().append('line')
@@ -382,6 +390,14 @@ d3Linear._drawHistory = function(el, scales, history, prevScales, dispatcher) {
         .duration(ANIMATION_DURATION)
         .attr('cx', function(d) {
           return 70 * (history.length - d.historyId.length + 2);
+        })
+        .style('stroke', function(d) {
+          if (d.focused==true) {
+            return "red";
+          }
+          else {
+            return "#323639";
+          }
         });
 
     historyArrow.on('click', function(d) {
