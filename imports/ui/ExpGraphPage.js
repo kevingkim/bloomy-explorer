@@ -428,7 +428,7 @@ export default class ExpGraphPage extends Component {
       currentNode.saved = true;
       this.props.saveLog(currentNode.imageId, "save design ("+currentNode.id+")");
       console.log(currentNode.imageId, "save design ("+currentNode.id+")");
-      alert("Design saved.");
+      alert("Design saved. Saved designs will be shown in red circles in the history.");
 
       var fromHistory = this._history.filter( obj => obj.id == currentNode.id );
       for (var i=0; i<fromHistory.length; i++) {

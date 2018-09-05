@@ -117,13 +117,13 @@ export default class LinearSearchPage extends Component {
     switch(this.props.AppState.expId) {
       case 'exp1':
         initialModelUrl1 = "https://create.bloomypro.com/embed/eyJpdiI6Ik54aXBkOUNWSEM0XC9VVDVDSndKalBnPT0iLCJ2YWx1ZSI6IkNGeEtDRU5PK0ZcL3ZOXC8zaDRCSHlNRHg0SDFXZ1RPS0h3eE5VSTZkRXZNb096d25ROGVnVUZmbVltT2ZpSVRMTFU1VTBKZlRGUWJ0XC9vNG9RUXpCaGxJakFPY3R3aHdXVVUxNVphaDFJXC9nSEM0OHJHYmQxaXhCXC9mRWZxbWtQZUkyYlkwcUdSTXI1T3pjVFNDMk8xSE1FRDJRU2hBNW1QQ0hySFZBc0NGaEFkcklWamk0R0lHQ0xFbkVGNTNVTWpOZmM2NUwzb2I0YVB1UXM0aXhTNmpOeVNWV2ZTRUVsdStUdHp0UHBGZTBWNE11R2JXYjFteFRvc29vRVlaY00raUVqTEpuaytqdDM4MTRCK3dkR3pDVHBHTXJpRktLK1VhXC9scjAzR0EyXC81VT0iLCJtYWMiOiJmYWYwMzAyMjNiNjE3ZWE3N2MwM2RjODZjOWU0NzA5NDI5YzY0MGMyYTMwOGRlZTk5YzE4OTQ0ZmIzZWNiY2U1In0=";
-        initialModelUrl2 = "https://create.bloomypro.com/embed/eyJpdiI6IjJmbVVBZEx6T0twN0V0dTFndTc1dnc9PSIsInZhbHVlIjoiVkxLckdlRTVZUU1NajhrRDBcL1BjSDQ4dExZMlBnc2x5bURRXC9mc3o5NWJNZkpCdTJLWGxaM0c4eVdRUHlKYzJHNDl1UGZQZmlya0Vydk9IOERyQm9BR1RmV0owazBRd0h0aWhnb21cL2k0OEZNakc3WHhmd3A5T3c4aEt5V3RiVzNhUGVaRUJMNlFXYVVEZmc1bm9TMkZiajBNN1M3TEFNTXU2NHBCZExzMmoydjZsN2krSkdMVk0rWEdBWWtjeUFLSDZ1dUhXQmp0XC9ZS1NzMndsbFNxbHR4Um4ydGN6U0tCWUZ0UGY2MmVoUU5FdzZpWlR0dnltNXlnNzVjVzVEVDFWc1J5SnpUNStnM040dWJKaXN4T1FJZDJ2UHBcL0tkUUF2UkdUTlc5NHlsRT0iLCJtYWMiOiJmYmNmYjVkMDM0NWUyMDlhMTIwYTRlYzQ2ZWMzYjYyNmE4NjcwNjhiZWM3NThlNTI2ZGJhNjUwYzI5YTFhOGNkIn0=";
-        initialModelUrl3 = "https://create.bloomypro.com/embed/eyJpdiI6IkVpdFR0K1pwemMrdlIzTk9uWDJrSEE9PSIsInZhbHVlIjoiZGhHeEZyMkZZVUVTbVFiMkJzZFwvT2FkcUNkRGtXSVBoVTJ3QVpybUpoVmJWTE92WkNKQ2Jxazc4aUx6VG9COXFvMFcwSHhZZFpmM2xkdjI2TjJjVDF6WmN3WGVWdnVJZDRvRzVneEg1SEwrcGgzXC9sbUtyc3hYc3JEZGV6bUlEWTlvaGxIN2xhRGFJVGpEZDdZV0pBb3hSS2t4Rk9QaGlWZ3dlXC9NYkg1YUxKV2dkRXRpdEw0RjNsaGxJWE5yb2NGWWdDSkJkeTNcL2pSczR5SUJwVmJVNHpvQU91dFRmRm9UdUlFTEd1MW1aK1dBTVdlSUh5d0gwMGJGRkUrUWs0VVFtTW5RbkZBcGo0UzRyQlloSUJsR0s0QWFDY1g0SzhEYkM3YzR3Tkg0azk4PSIsIm1hYyI6ImE2MTgxNGM2YTYzMjNmNDc1YWM4NjJkZGQ5OTI3NTFiMjU1OTcyZjM2OGI3YTc3NGZhZTM1YzM4ZGFmYmMzOTcifQ==";
+        initialModelUrl2 = "https://create.bloomypro.com/embed/eyJpdiI6IlhmdmVWNStPUFFzRWhQM0NuZWFRdUE9PSIsInZhbHVlIjoidGJhNnRsd3JmSTB2UmliR1dPV3U3UjZmQUFucHVUN1ZiSXk2TTluOXU3a2NXQWcrbnVhV3E5S1loVElSXC81MFRXYVwvaENFR2JcL3ZWd3RcL2tVSFNkKzZPejNsT1RxYUVzVWo1N1pcL3U4TWVtVFRTUjV6OHUrblJqaDNiZzUrcnh3RGlkV2h3VWpENndcL0pmWHY2THVuVHJSOGp2Nzhia2FTTGNvTHF3NmhialFqUHB0NVYzTU9NeHBFaFBLczBjVWE1bDRcL0V5NU9DZEUzR0U5NUNQUndCSzdIWXBBaXhjaHpSR3lBV1ppTENUUERPXC9DWVNHNXFEcUYxRVVFUlRFd2R2OGhwT3BaNDVTZGVsYk5xc0Zlc1BWYWZWN1o4MmdQS1hKblRtcXlUSDJKWT0iLCJtYWMiOiIyNDg1ODI1ZmE4NWMyMjJjOTk0MGUzYzQ3ZmQzM2U5YzIzMjlhYmNjMTIyNjE2ODZmNTExMGYxNTZiYWI5YWU1In0=";
+        initialModelUrl3 = "https://create.bloomypro.com/embed/eyJpdiI6ImJlTnJlakFQK2J1Z2hKc2xBNVwvajJRPT0iLCJ2YWx1ZSI6InJrMVpuK21yXC9udjdhd3MzSGVKNHd2b0J4MWxlbGpqYWRHTVU1QUpTYWZnNnlEeGJGbE03SGZNd01kS29TQmZcL2lxb1k3MmNDWktuQjZEUFF2c0VZOGZXU2lzeGRzaitvckNZS0Urck5JQ2dpUE1rOHBWQ25TcFl5N1hVa1lHdU9vV1hnaFJhTnU5ZXlhUitBeVF2QmpcL1k2TEFmbGpNYWlpU2ZEMGt1ODZWVGVsRnlvZUIxbmxBdkkzV1JicWpCNDMrclBZYWpxZ0dLTnRYNGxVWFVkQmg2QUlXMEU5U2cyUUJMT1hJa1g2a2pSaUV1NFkxM2RBbWlESVIwQW5oblJXc29vTHQwUVZoTmxsRkJ3UkZvN01XZDVPcTJRVkdiTDZramRLYWdhR2UwPSIsIm1hYyI6IjMxYzZjZDc0YTUxNDNhNzBiN2VjZDNmNWMyYjQ5ZjQ0YmZkNGI1YTVjNGUzMzllODlmMGMyODFiOTQ3OWZmMzEifQ==";
         break;
       case 'exp2':
         initialModelUrl1 = "https://create.bloomypro.com/embed/eyJpdiI6IldQMk4rdExud3dUMGpWckhrRFAzN2c9PSIsInZhbHVlIjoiZk5TVTdkZHd3MmtkWnZWV3BaSWdxekw3aEF4U3BYS0VrXC9samdKdU5hbkdqVmMweThmMEpIaXRFWnBSR0ZSRDZqVmM2azNCRm1ldXIrRGtJUU9jdHFSa0ZRTDMwMnM5clwvUzV6aTgzV3VCWmRGWm50aEd2b3dsazc5dFY5cmlQYjNQY3RoTjJBcXk2RVVrTVVRNnlrZlJhUys3SGRmWWZ0QzFRR2hKRGdqeFVtVjdwMXJRREVENHB4MmdpWE1YYTNYcXVuamFsSDI5ZlhuQ3licXBcL1BvNFBweTlxeFBiTk5HOUxXK2ljUzl5d09XNGlKMzBISjNVQkFoS0liTHNmbENzY1EwZnlSZnM5UU1FazZ5WDVnVjBLMEFzUEdZaWRIK0M2NW42QkNmYmM9IiwibWFjIjoiNzU0YTFhYmY5MTBmMGVkYzQ0MjE1NDM2NGNjMzBiYTA5MjI0OGI2NzdjY2Q0OWMxOTM1MzhmNDc3MGIxOTllOCJ9";
-        initialModelUrl2 = "https://create.bloomypro.com/embed/eyJpdiI6IkFHTGdiOGN2TWozREdyVExnMWZWN3c9PSIsInZhbHVlIjoiTU1FekRkckdFN3IrTWExcnVmcG9yam5qdlNXQzY0WVQ5WkZZemx5RjFGMTVBVlZVUFVpekhOb041U0NiUEMrXC8yTnBPOTM1R2xvVlJZa2VpZEt4RHMwN2F0TWFYdnBDSWVUYURLUVFXNnpWWEJGbHBrYjh2azN0a0htRFlYNXB2VHRCc0NrSXE3RnFQTWI4ZGM0RzBMdUlMb1V4MlhBcDVXU2lFQzRZdmhkb1wvaHR0WnNNYVBDZm5KVzhCOW1kMXR2bmd1d3ZtNFNkRStTOURid0syMDRqcXB6STdGeFliaHQ2WDFBa0N4V0xVemlmbFFIeGk3WXhZT0xDdFcwWVhyN2NobWNQT3lCYUZTNUlnT1IxM3ZhME9taFJFS2VyeURFUlBrK2Erc29pdz0iLCJtYWMiOiI2OWVmYWJlNTAzYTE0NWU4NDJiZTBlYjc0ODEyNDkyZDY2Yjk1ZjllODI3NmEwMTMyNWU0YmE3NjM2N2ZkOTg4In0=";
-        initialModelUrl3 = "https://create.bloomypro.com/embed/eyJpdiI6IkZ5UHpuVG5pajNyYm5hXC93dDBZOUd3PT0iLCJ2YWx1ZSI6Im8wb3A3TFwvMG1VQUVxN0ZzTFJyRzlDTldraHl2Zmp4QXQ5Y2ROMkZ1Q0kxUkVJa1lmTTZDVHByWGF5T2E0b1dKclFxekpGTU1ZcEVSWEFoZTVnVHJocytrY0dpdU0xUDg0dDl4S3MxZVI4WWlHXC8rRUIwRGZoYmJ3bUpTbUdacUJMdkYwQlNKZUxYWmJFZkNjY09WbW0zWDJKdkRrNmNkSnFPR0pDaWlCait6alNnS0N3SWgyWGQ2R0FWUll3NHpzZ2o3aW1RQ2E0SzlwRU92aE5HM2JvTHlPSVVQZTN0ekFvTTdOczg0TjZuN3BRcVBteXFwY2VmZkdaVmIyKzl1cHd6ZGxYUTZYcFJBZWFOK2JMaHI5OFBqaGdEYXZPOHVZVDBlSFZJSDZqTGc9IiwibWFjIjoiNjQ2ZWVjZTdiOWU2ODhlYTcyMTg5ZDFkNTRkYTAyNDY2NWIyZWI0NmQzZDljNzM1ODY0YzMzYTc4MWZhOWY4ZiJ9";
+        initialModelUrl2 = "https://create.bloomypro.com/embed/eyJpdiI6IjV1SWVUSG13bW5mYmxrK0xwNEFYblE9PSIsInZhbHVlIjoiR2s2MVBHTG1NTUNZaEpnZ01TZytGUXNiYWkwNVRiK0s2b1FWK1BpcWZmbzNGTHcxVjd5djU4blNxaGQzMVhQRUlvb1UrN2oycUlSOHUxXC94VytpNzliRWpNVHoraTY2ZXBHcTB5U1U1N2tGV1BuT1ViRXhmRnZIMVFEZzhNdWlobStlWlFKSWp4T1pGNzNTUmNBMEE1UUxtUW45VkdxZVFKK0ZZZDZnU3M5QlNvbEhkWmZYOWs5eUNRSGc0bTBYR2dCdWlFbm0wWHQ2N0NobzF6SGticVFQeDNvT3Q0eU9nRjBidmtuSVZDNm50RTZkeFFJUE9YWk1ZTFhXV3lHVWtQUHJQWXRaK3RSelwvYVVsRWp5SFdnZSttdUhyYzI5RzN4YnhtcFFrUVNMMD0iLCJtYWMiOiJmOWM2MWIzNWRiZmViZjk1NTdjYjc2NmJlZjY5MTBjY2M2MDIzN2ZiNDQzMWMxNDQ1NTEzYmI1NWM0ZDlkNTIyIn0=";
+        initialModelUrl3 = "https://create.bloomypro.com/embed/eyJpdiI6Inp1Rjk1TFwvc0QxeUVydEl1Z3Rnc0ZRPT0iLCJ2YWx1ZSI6Im1kRE1QQlA2MzcwSnJCRnczVWZrVmhHRUVGaG9ScTRmZzZad2g1Sk81MFYrNDlUVEp2eE1WY2VSNXN6cmNCbzZoUTNrQWVGdkEwR05zWTlhOTQySVYwT2xPY05mUE1GM0tUMUJFM0RaVUkzU3dkY3RMRGxQVUxTZHh4NWY3RUNPOExjcEV5Y0lFTTRhOGZwamN6K3FJVGRUMFBUVHVWQkJwQjRTS3h1VEt2bmxSYlZiZDBZTE14VVlXTmhhVHZnWkRnK3NBSnpPKzY2T3AwSForQU5OWGttOXhqYWk2T1ZzRmJlS0Q2aHp0bTdGYUFRREJkSnRleG9CWFRBaXJiQVVIR0JBd2xFNU9UMU0xRTJXelN2OUdkVzliY0dLb2hkeWMrUVRwNW1xZlwvdz0iLCJtYWMiOiI2Mzk5YTMzOTY5ZjJhYzRkZjQzMDgzNDQxNDllZWU2ZGIxMTM5OTY1ODBmMDBiY2I2MmFmZDkwMmYyNDEzYTdhIn0=";
         break;
       default:
         initialModelUrl1 = "";
@@ -140,21 +140,37 @@ export default class LinearSearchPage extends Component {
         modelUrl: initialModelUrl1,
         tag: ["______", "______", "______", "______"],
       },
+      // {x: 70, y: 65, z: RADIUS_SMALL2,
+      //   id: '1112',
+      //   focused: false, saved: false, displayed: false,
+      //   imageId: 1112,
+      //   image: image_path + "1112"  + image_type,
+      //   modelUrl: initialModelUrl2,
+      //   tag: ["______", "______", "______", "space"],
+      // },
+      // {x: 90, y: 65, z: RADIUS_SMALL2,
+      //   id: '1113',
+      //   focused: false, saved: false, displayed: false,
+      //   imageId: 1113,
+      //   image: image_path + "1113"  + image_type,
+      //   modelUrl: initialModelUrl3,
+      //   tag: ["______", "______", "______", "space"],
+      // },
       {x: 70, y: 65, z: RADIUS_SMALL2,
-        id: '1112',
+        id: '1212',
         focused: false, saved: false, displayed: false,
-        imageId: 1112,
-        image: image_path + "1112"  + image_type,
+        imageId: 1212,
+        image: image_path + "1212"  + image_type,
         modelUrl: initialModelUrl2,
-        tag: ["______", "______", "______", "space"],
+        tag: ["______", "texture", "______", "space"],
       },
       {x: 90, y: 65, z: RADIUS_SMALL2,
-        id: '1113',
+        id: '3211',
         focused: false, saved: false, displayed: false,
-        imageId: 1113,
-        image: image_path + "1113"  + image_type,
+        imageId: 3211,
+        image: image_path + "3211"  + image_type,
         modelUrl: initialModelUrl3,
-        tag: ["______", "______", "______", "space"],
+        tag: ["color_ ", "texture", "______", "______"],
       },
     ];
 
@@ -199,15 +215,12 @@ export default class LinearSearchPage extends Component {
       for (var i2=1; i2<4; i2++) {
         for (var i3=1; i3<4; i3++) {
           for (var i4=1; i4<4; i4++) {
-            if (i1==1 && i2==1 && i3==1)  continue;
+            // if (i1==1 && i2==1 && i3==1)  continue;
+            if (i1==1 && i2==2 && i3==1 && i4==2)  continue;
+            if (i1==3 && i2==2 && i3==1 && i4==1)  continue;
             var id = i1.toString()+i2.toString()+i3.toString()+i4.toString();
             var xIndex = (i1-1)*3*3*3 + (i2-1)*3*3 + (i3-1)*3 + (i4-1) - 3;
 
-            // var tag = "";
-            // if (i1 != 1) tag += "color ";
-            // if (i2 != 1) tag += "texture ";
-            // if (i3 != 1) tag += "form ";
-            // if (i4 != 1) tag += "space";
             var tag = ["______", "______", "______", "______"];
             if (i1 != 1) tag[0] = "color_ ";
             if (i2 != 1) tag[1] = "texture";
@@ -444,7 +457,7 @@ export default class LinearSearchPage extends Component {
       currentNode.saved = true;
       this.props.saveLog(currentNode.imageId, "save design ("+currentNode.id+")");
       console.log(currentNode.imageId, "save design ("+currentNode.id+")");
-      alert("Design saved.");
+      alert("Design saved. Saved designs will be shown in red circles in the history.");
 
       var fromHistory = this._history.filter( obj => obj.id == currentNode.id );
       for (var i=0; i<fromHistory.length; i++) {
