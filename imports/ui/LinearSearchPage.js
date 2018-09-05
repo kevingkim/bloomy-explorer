@@ -138,7 +138,7 @@ export default class LinearSearchPage extends Component {
         imageId: 1111,
         image: image_path + "1111" + image_type,
         modelUrl: initialModelUrl1,
-        tag: "",
+        tag: ["______", "______", "______", "______"],
       },
       {x: 70, y: 65, z: RADIUS_SMALL2,
         id: '1112',
@@ -146,7 +146,7 @@ export default class LinearSearchPage extends Component {
         imageId: 1112,
         image: image_path + "1112"  + image_type,
         modelUrl: initialModelUrl2,
-        tag: "space",
+        tag: ["______", "______", "______", "space"],
       },
       {x: 90, y: 65, z: RADIUS_SMALL2,
         id: '1113',
@@ -154,7 +154,7 @@ export default class LinearSearchPage extends Component {
         imageId: 1113,
         image: image_path + "1113"  + image_type,
         modelUrl: initialModelUrl3,
-        tag: "space",
+        tag: ["______", "______", "______", "space"],
       },
     ];
 
@@ -203,11 +203,16 @@ export default class LinearSearchPage extends Component {
             var id = i1.toString()+i2.toString()+i3.toString()+i4.toString();
             var xIndex = (i1-1)*3*3*3 + (i2-1)*3*3 + (i3-1)*3 + (i4-1) - 3;
 
-            var tag = "";
-            if (i1 != 1) tag += "color ";
-            if (i2 != 1) tag += "texture ";
-            if (i3 != 1) tag += "form ";
-            if (i4 != 1) tag += "space";
+            // var tag = "";
+            // if (i1 != 1) tag += "color ";
+            // if (i2 != 1) tag += "texture ";
+            // if (i3 != 1) tag += "form ";
+            // if (i4 != 1) tag += "space";
+            var tag = ["______", "______", "______", "______"];
+            if (i1 != 1) tag[0] = "color_ ";
+            if (i2 != 1) tag[1] = "texture";
+            if (i3 != 1) tag[2] = "form__";
+            if (i4 != 1) tag[3] = "space";
 
             this._allData.push(
               {x: this._xPos[xIndex], y: 65, z: RADIUS_SMALL2,
@@ -313,11 +318,16 @@ export default class LinearSearchPage extends Component {
   updateTags(d) {
 
     for (var i=0; i<this._allData.length; i++) {
-      var newTag = "";
-      if (this._allData[i].id[0] != d.id[0]) newTag += "color ";
-      if (this._allData[i].id[1] != d.id[1]) newTag += "texture ";
-      if (this._allData[i].id[2] != d.id[2]) newTag += "form ";
-      if (this._allData[i].id[3] != d.id[3]) newTag += "space ";
+      // var newTag = "";
+      // if (this._allData[i].id[0] != d.id[0]) newTag += "color ";
+      // if (this._allData[i].id[1] != d.id[1]) newTag += "texture ";
+      // if (this._allData[i].id[2] != d.id[2]) newTag += "form ";
+      // if (this._allData[i].id[3] != d.id[3]) newTag += "space ";
+      var newTag = ["______", "______", "______", "______"];
+      if (this._allData[i].id[0] != d.id[0]) newTag[0] = "color_ ";
+      if (this._allData[i].id[1] != d.id[1]) newTag[1] = "texture";
+      if (this._allData[i].id[2] != d.id[2]) newTag[2] = "form__";
+      if (this._allData[i].id[3] != d.id[3]) newTag[3] = "space";
       this._allData[i].tag = newTag;
     }
 

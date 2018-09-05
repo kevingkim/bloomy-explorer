@@ -4,8 +4,8 @@ import d3 from '../api/d3.v3.min.js';
 import { EventEmitter } from 'events';
 
 var ANIMATION_DURATION = 600;
-var TOOLTIP_WIDTH = 170;
-var TOOLTIP_HEIGHT = 40;
+var TOOLTIP_WIDTH = 150;
+var TOOLTIP_HEIGHT = 150;
 
 var d3Linear = {};
 
@@ -228,37 +228,6 @@ d3Linear._drawDummyNodes = function(el, scales, dummyData, prevScales, dispatche
         .attr('cx', function(d) { return scales.x(d.x); })
         .attr('cy', function(d) { return scales.y(d.y); });
 
-    // enter arrow
-    // dummyArrow.enter().append('line')
-    //   .attr("class", "d3-dummy-arrow")
-    //   .attr("marker-end", "url(#dummyArrowTip)")
-    //   .attr('x1', function(d) {
-    //     if (prevScales) {
-    //       return prevScales.x(d.x);
-    //     }
-    //     return scales.x(d.x);
-    //   })
-    //   .attr('y1', function(d) {
-    //     if (prevScales) {
-    //       return prevScales.y(d.y);
-    //     }
-    //     return scales.y(d.y);
-    //   })
-    //   .attr("x2", function(d) {
-    //     if (d.focused) { return; }
-    //     if (prevScales) {
-    //       return prevScales.x(d.x - (d.parentX-d.x)/5);
-    //     }
-    //     return scales.x(d.x - (d.parentX-d.x)/5);
-    //   })
-    //   .attr("y2", function(d) {
-    //     if (d.focused) { return; }
-    //     if (prevScales) {
-    //       return prevScales.y(d.y);
-    //     }
-    //     return scales.y(d.y);
-    //   });
-
     dummyNode.on('click', function(d) {
           dispatcher.emit('point:dummyNodeClick', d);
         });
@@ -456,7 +425,7 @@ d3Linear._drawTolltips = function(el, scales, data, prevScales) {
             if (d.focused == true) {
               return scales.y(d.y) + scales.z(d.z)*20 - TOOLTIP_HEIGHT;
             }
-            return scales.y(d.y) + scales.z(d.z)*2 - TOOLTIP_HEIGHT;
+            return scales.y(d.y) + scales.z(d.z)*3 - TOOLTIP_HEIGHT;
           });
   // Enter and update
   tooltipRect.transition()
@@ -466,7 +435,7 @@ d3Linear._drawTolltips = function(el, scales, data, prevScales) {
           if (d.focused == true) {
             return scales.y(d.y) + scales.z(d.z)*20 - TOOLTIP_HEIGHT;
           }
-          return scales.y(d.y) + scales.z(d.z)*2 - TOOLTIP_HEIGHT;
+          return scales.y(d.y) + scales.z(d.z)*3 - TOOLTIP_HEIGHT;
         });
   // Exit
   tooltipRect.exit()
@@ -475,11 +444,24 @@ d3Linear._drawTolltips = function(el, scales, data, prevScales) {
   // Enter
   tooltipText.enter().append('text')
       .attr('class', 'd3-tooltip-text')
+      .attr('x', function(d){ return scales.x(d.x); })
       .attr('dy', '0.35em')
       .attr('text-anchor', 'middle')
-      .text(function(d) {
-        return d.tag;
-        // return d.id + " " + d.tag;
+      // .text(function(d) {
+      //   return d.tag;
+      // })
+      .html(function(d) {
+        var x = scales.x(d.x) - TOOLTIP_WIDTH/2;
+        // var dx = -117;
+        var dx = -100;
+        var t1 = d.tag[0];
+        var t2 = "<tspan dx=" +dx+ " dy=1.0em>" + d.tag[1] + "</tspan>";
+        var t3 = "<tspan dx=" +dx+ " dy=1.0em>" + d.tag[2] + "</tspan>";
+        var t4 = "<tspan dx=" +dx+ " dy=1.0em>" + d.tag[3] + "</tspan>";
+        // var t2 = "<tspan x=" +x+ " dy=1.0em>" + d.tag[1] + "</tspan>";
+        // var t3 = "<tspan x=" +x+ " dy=1.0em>" + d.tag[2] + "</tspan>";
+        // var t4 = "<tspan x=" +x+ " dy=1.0em>" + d.tag[3] + "</tspan>";
+        return t1 + t2 + t3 + t4;
       })
       .style("font-size", "30")
       .style("fill", "#323639")
@@ -495,19 +477,20 @@ d3Linear._drawTolltips = function(el, scales, data, prevScales) {
           .attr('x', function(d){ return scales.x(d.x); })
           .attr('y', function(d) {
             if (d.focused == true) {
-              return scales.y(d.y) + scales.z(d.z)*20 - TOOLTIP_HEIGHT/2;
+              return scales.y(d.y) + scales.z(d.z)*20 - TOOLTIP_HEIGHT +25;
             }
-            return scales.y(d.y) + scales.z(d.z)*2 - TOOLTIP_HEIGHT/2;
+            return scales.y(d.y) + scales.z(d.z)*3 - TOOLTIP_HEIGHT +25;
           });
+
   // Enter and update
   tooltipText.transition()
       .duration(ANIMATION_DURATION)
       .attr('x', function(d) { return scales.x(d.x); })
       .attr('y', function(d) {
         if (d.focused == true) {
-          return scales.y(d.y) + scales.z(d.z)*20 - TOOLTIP_HEIGHT/2;
+          return scales.y(d.y) + scales.z(d.z)*20 - TOOLTIP_HEIGHT +25;
         }
-        return scales.y(d.y) + scales.z(d.z)*2 - TOOLTIP_HEIGHT/2;
+        return scales.y(d.y) + scales.z(d.z)*3 - TOOLTIP_HEIGHT +25;
       });
   // Exit
   tooltipText.exit()

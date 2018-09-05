@@ -407,40 +407,7 @@ export default class ExpGraphPage extends Component {
       prevDomain: null,
     });
   }
-  // handleHistoryClick (domain, d) {
-  //   var children = this._allData.filter( obj => obj.id.length > d.id.length );
-  //   this.pruneChildren(children);
-  //
-  //   // save log
-  //   this.props.saveLog(d.imageId, "history click ("+d.id+")");
-  //
-  //   for (var i=0; i<this._allData.length; i++) {
-  //     this._allData[i].focused = false;
-  //     this._allData[i].displayed = false;
-  //   }
-  //
-  //   d.expanded = false;
-  //   d.focused = true;
-  //   d.displayed = true;
-  //   d.numChildren = 0;
-  //
-  //   // store history
-  //   this._historyLog.push(Object.assign({}, this._history));
-  //
-  //   // update history
-  //   for (var i=this._history.length-1; i>=0; i--) {
-  //     if (this._history[i].id == d.id) {
-  //       break;
-  //     }
-  //     // console.log(this._history[i].id);
-  //     this._history = this._history.slice(0,i);
-  //   }
-  //
-  //   this.shiftPane(d);
-  //   this.generateChildren(this.state.domain, d);
-  //
-  // }
-
+  
   pruneChildren(children) {
     for (var i=0, len=children.length; i<len; i++) {
       this._allData = _.reject(this._allData, {id: children[i].id});
