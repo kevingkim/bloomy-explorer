@@ -35,7 +35,7 @@ d3Linear.update = function(el, state, dispatcher) {
   this._drawHistory(el, scales, state.history, prevScales, dispatcher);
   this._drawNodes(el, scales, state.data, prevScales, dispatcher);
 
-  this._drawTolltips(el, scales, state.data, prevScales);
+  this._drawTooltips(el, scales, state.data, prevScales);
 };
 
 d3Linear._scales = function(el, domain) {
@@ -118,6 +118,17 @@ d3Linear._drawNodes = function(el, scales, data, prevScales, dispatcher) {
         if (d.image) {
           return ("url(#" + d.id + ")");
         }
+      })
+      .style('stroke', function(d) {
+        if (d.focused==true) {
+          return "yellow";
+        }
+        // else if (d.saved==true) {
+        //   return "red";
+        // }
+        else {
+          return "#323639";
+        }
       });
 
   // ENTER & UPDATE
@@ -135,7 +146,18 @@ d3Linear._drawNodes = function(el, scales, data, prevScales, dispatcher) {
         return scales.x(d.x);
       })
       .attr('cy', function(d) { return scales.y(d.y); })
-      .attr('r',  function(d) { return scales.z(d.z); });
+      .attr('r',  function(d) { return scales.z(d.z); })
+      .style('stroke', function(d) {
+        if (d.focused==true) {
+          return "yellow";
+        }
+        // else if (d.saved==true) {
+        //   return "red";
+        // }
+        else {
+          return "#323639";
+        }
+      });
 
   // EXIT
   if (prevScales) {
@@ -307,6 +329,9 @@ d3Linear._drawHistory = function(el, scales, history, prevScales, dispatcher) {
           })
           .style('stroke', function(d) {
             if (d.focused==true) {
+              return "yellow";
+            }
+            else if (d.saved==true) {
               return "red";
             }
             else {
@@ -362,6 +387,9 @@ d3Linear._drawHistory = function(el, scales, history, prevScales, dispatcher) {
         })
         .style('stroke', function(d) {
           if (d.focused==true) {
+            return "yellow";
+          }
+          else if (d.saved==true) {
             return "red";
           }
           else {
@@ -394,7 +422,7 @@ d3Linear._drawHistory = function(el, scales, history, prevScales, dispatcher) {
     historyText.exit().remove();
 }
 
-d3Linear._drawTolltips = function(el, scales, data, prevScales) {
+d3Linear._drawTooltips = function(el, scales, data, prevScales) {
 
   var g = d3.select(el).selectAll('.d3-tooltips');
 

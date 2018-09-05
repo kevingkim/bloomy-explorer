@@ -30,7 +30,6 @@ export default class ExpGraphPage extends Component {
 
   _modelUrls = [];
 
-
   // for sample data
   constructor(props) {
     super(props);
@@ -122,7 +121,7 @@ export default class ExpGraphPage extends Component {
         parentId: 'd',
         parentX: 50, parentY: 50,
         numChildren: 4,
-        focused: true, expanded: false, displayed: true,
+        focused: true, saved: false, displayed: true,
         imageId: 1111,
         image: image_path + "1111" + image_type,
         modelUrl: initialModelUrl1,
@@ -138,7 +137,7 @@ export default class ExpGraphPage extends Component {
         parentId: 'd1',
         parentX: 50, parentY: 50,
         numChildren: 0,
-        focused: false, expanded: false, displayed: true,
+        focused: false, saved: false, displayed: true,
         imageId: childrenImageId[0],
         image: image_path + childrenImageId[0] + image_type,
         modelUrl: initialModelUrl2,
@@ -148,7 +147,7 @@ export default class ExpGraphPage extends Component {
         parentId: 'd1',
         parentX: 50, parentY: 50,
         numChildren: 0,
-        focused: false, expanded: false, displayed: true,
+        focused: false, saved: false, displayed: true,
         imageId: childrenImageId[1],
         image: image_path + childrenImageId[1] + image_type,
         modelUrl: initialModelUrl3,
@@ -158,7 +157,7 @@ export default class ExpGraphPage extends Component {
         parentId: 'd1',
         parentX: 50, parentY: 50,
         numChildren: 0,
-        focused: false, expanded: false, displayed: true,
+        focused: false, saved: false, displayed: true,
         imageId: childrenImageId[2],
         image: image_path + childrenImageId[2] + image_type,
         modelUrl: initialModelUrl4,
@@ -168,7 +167,7 @@ export default class ExpGraphPage extends Component {
         parentId: 'd1',
         parentX: 50, parentY: 50,
         numChildren: 0,
-        focused: false, expanded: false, displayed: true,
+        focused: false, saved: false, displayed: true,
         imageId: childrenImageId[3],
         image: image_path + childrenImageId[3] + image_type,
         modelUrl: initialModelUrl5,
@@ -187,7 +186,7 @@ export default class ExpGraphPage extends Component {
         parentId: 'd0',
         parentX: 50, parentY: 50,
         numChildren: 0,
-        focused: false, expanded: false, displayed: false,
+        focused: false, saved: false, displayed: false,
         imageId: "_01",
         image: image_path + "_01.jpg",
       },
@@ -196,7 +195,7 @@ export default class ExpGraphPage extends Component {
         parentId: 'd0',
         parentX: 50, parentY: 50,
         numChildren: 0,
-        focused: false, expanded: false, displayed: false,
+        focused: false, saved: false, displayed: false,
         imageId: "_02",
         image: image_path + "_01.jpg",
       },
@@ -205,7 +204,7 @@ export default class ExpGraphPage extends Component {
         parentId: 'd0',
         parentX: 50, parentY: 50,
         numChildren: 0,
-        focused: false, expanded: false, displayed: false,
+        focused: false, saved: false, displayed: false,
         imageId: "_03",
         image: image_path + "_01.jpg",
       },
@@ -214,7 +213,7 @@ export default class ExpGraphPage extends Component {
         parentId: 'd0',
         parentX: 50, parentY: 50,
         numChildren: 0,
-        focused: false, expanded: false, displayed: false,
+        focused: false, saved: false, displayed: false,
         imageId: "_04",
         image: image_path + "_01.jpg",
       },
@@ -313,7 +312,7 @@ export default class ExpGraphPage extends Component {
         parentId: d.id,
         parentX: d.x, parentY: d.y,
         numChildren: 0,
-        focused: false, expanded: false, displayed: true,
+        focused: false, saved: false, displayed: true,
         imageId: childrenImageId[0],
         image: image_path + childrenImageId[0] + image_type,
         modelUrl: this.findModelUrl(childrenImageId[0]),
@@ -323,7 +322,7 @@ export default class ExpGraphPage extends Component {
         parentId: d.id,
         parentX: d.x, parentY: d.y,
         numChildren: 0,
-        focused: false, expanded: false, displayed: true,
+        focused: false, saved: false, displayed: true,
         imageId: childrenImageId[1],
         image: image_path + childrenImageId[1] + image_type,
         modelUrl: this.findModelUrl(childrenImageId[1]),
@@ -333,7 +332,7 @@ export default class ExpGraphPage extends Component {
         parentId: d.id,
         parentX: d.x, parentY: d.y,
         numChildren: 0,
-        focused: false, expanded: false, displayed: true,
+        focused: false, saved: false, displayed: true,
         imageId: childrenImageId[2],
         image: image_path + childrenImageId[2] + image_type,
         modelUrl: this.findModelUrl(childrenImageId[2]),
@@ -343,7 +342,7 @@ export default class ExpGraphPage extends Component {
         parentId: d.id,
         parentX: d.x, parentY: d.y,
         numChildren: 0,
-        focused: false, expanded: false, displayed: true,
+        focused: false, saved: false, displayed: true,
         imageId: childrenImageId[3],
         image: image_path + childrenImageId[3] + image_type,
         modelUrl: this.findModelUrl(childrenImageId[3]),
@@ -380,7 +379,6 @@ export default class ExpGraphPage extends Component {
       this._allData[i].z = RADIUS_SMALL1;
     }
 
-    d.expanded = false;
     d.focused = true;
     d.displayed = true;
     d.z = RADIUS_BIG1;
@@ -394,6 +392,7 @@ export default class ExpGraphPage extends Component {
     this.shiftPane(d);
     this.displayChildren(d);
 
+    // console.log("focused:", d.focused, " saved:", d.saved);
   }
 
   displayChildren (d) {
@@ -407,7 +406,7 @@ export default class ExpGraphPage extends Component {
       prevDomain: null,
     });
   }
-  
+
   pruneChildren(children) {
     for (var i=0, len=children.length; i<len; i++) {
       this._allData = _.reject(this._allData, {id: children[i].id});
@@ -415,12 +414,44 @@ export default class ExpGraphPage extends Component {
 
     this.setAppState({
       data: this.getData(this.state.domain),
-      prevDomain: null
+      prevDomain: null,
     });
   }
 
   setAppState(partialState, callback) {
     return this.setState(partialState, callback);
+  }
+
+  handleClickSave() {
+    var currentNode = this.getCurrentNode();
+    if (currentNode.saved==false) {
+      currentNode.saved = true;
+      this.props.saveLog(currentNode.imageId, "save design ("+currentNode.id+")");
+      console.log(currentNode.imageId, "save design ("+currentNode.id+")");
+      alert("Design saved.");
+
+      var fromHistory = this._history.filter( obj => obj.id == currentNode.id );
+      for (var i=0; i<fromHistory.length; i++) {
+        fromHistory[i].saved = true;
+      }
+    }
+    else {
+      currentNode.saved = false;
+      this.props.saveLog(currentNode.imageId, "unsave design ("+currentNode.id+")");
+      console.log(currentNode.imageId, "unsave design ("+currentNode.id+")");
+      alert("Design unsaved.");
+
+      var fromHistory = this._history.filter( obj => obj.id == currentNode.id );
+      for (var i=0; i<fromHistory.length; i++) {
+        fromHistory[i].saved = false;
+      }
+    }
+
+    this.setAppState({
+      data: this.getData(this.state.domain),
+      prevDomain: null,
+    });
+
   }
 
   renderTaskDescription() {
@@ -465,6 +496,9 @@ export default class ExpGraphPage extends Component {
         </div>
 
         <div className="description">
+          <button className="button" onClick={this.handleClickSave.bind(this)}>
+            Save/Unsave this design
+          </button>
           <button className="button" onClick={this.props.handleClickReturnToMenu.bind(this)}>
             Return to menu
           </button>

@@ -134,7 +134,7 @@ export default class LinearSearchPage extends Component {
     this._allData = [
       {x: 50, y: 65, z: RADIUS_BIG2,
         id: '1111',
-        focused: true, expanded: false, displayed: false,
+        focused: true, saved: false, displayed: false,
         imageId: 1111,
         image: image_path + "1111" + image_type,
         modelUrl: initialModelUrl1,
@@ -142,7 +142,7 @@ export default class LinearSearchPage extends Component {
       },
       {x: 70, y: 65, z: RADIUS_SMALL2,
         id: '1112',
-        focused: false, expanded: false, displayed: false,
+        focused: false, saved: false, displayed: false,
         imageId: 1112,
         image: image_path + "1112"  + image_type,
         modelUrl: initialModelUrl2,
@@ -150,7 +150,7 @@ export default class LinearSearchPage extends Component {
       },
       {x: 90, y: 65, z: RADIUS_SMALL2,
         id: '1113',
-        focused: false, expanded: false, displayed: false,
+        focused: false, saved: false, displayed: false,
         imageId: 1113,
         image: image_path + "1113"  + image_type,
         modelUrl: initialModelUrl3,
@@ -161,7 +161,7 @@ export default class LinearSearchPage extends Component {
     this._history = [
       {x: 50, y: 65, z: RADIUS_BIG2,
         id: '1111',
-        focused: true, expanded: false, displayed: false,
+        focused: true, saved: false, displayed: false,
         imageId: 1111,
         image: image_path + "1111"  + image_type,
         modelUrl: initialModelUrl1,
@@ -175,7 +175,7 @@ export default class LinearSearchPage extends Component {
           parentId: 'd0',
           parentX: 50, parentY: 50,
           numChildren: 0,
-          focused: false, expanded: false, displayed: false,
+          focused: false, saved: false, displayed: false,
           imageId: "_01",
           image: image_path + "_02.png",
         },
@@ -184,7 +184,7 @@ export default class LinearSearchPage extends Component {
           parentId: 'd0',
           parentX: 50, parentY: 50,
           numChildren: 0,
-          focused: false, expanded: false, displayed: false,
+          focused: false, saved: false, displayed: false,
           imageId: "_02",
           image: image_path + "_01.png",
         },
@@ -217,7 +217,7 @@ export default class LinearSearchPage extends Component {
             this._allData.push(
               {x: this._xPos[xIndex], y: 65, z: RADIUS_SMALL2,
                 id: id,
-                focused: false, expanded: false, displayed: true,
+                focused: false, saved: false, displayed: true,
                 imageId: id,
                 image: image_path + id + image_type,
                 modelUrl: this.findModelUrl(id),
@@ -438,6 +438,33 @@ export default class LinearSearchPage extends Component {
     return this.setState(partialState, callback);
   }
 
+  handleClickSave() {
+    var currentNode = this.getCurrentNode();
+    if (currentNode.saved==false) {
+      currentNode.saved = true;
+      this.props.saveLog(currentNode.imageId, "save design ("+currentNode.id+")");
+      console.log(currentNode.imageId, "save design ("+currentNode.id+")");
+      alert("Design saved.");
+
+      var fromHistory = this._history.filter( obj => obj.id == currentNode.id );
+      for (var i=0; i<fromHistory.length; i++) {
+        fromHistory[i].saved = true;
+      }
+    }
+    else {
+      currentNode.saved = false;
+      this.props.saveLog(currentNode.imageId, "unsave design ("+currentNode.id+")");
+      console.log(currentNode.imageId, "unsave design ("+currentNode.id+")");
+      alert("Design unsaved.");
+
+      var fromHistory = this._history.filter( obj => obj.id == currentNode.id );
+      for (var i=0; i<fromHistory.length; i++) {
+        fromHistory[i].saved = false;
+      }
+    }
+
+  }
+
   renderTaskDescription() {
     var taskDescription = "";
     switch(this.props.AppState.expId) {
@@ -481,6 +508,9 @@ export default class LinearSearchPage extends Component {
         </div>
 
         <div className="description">
+          <button className="button" onClick={this.handleClickSave.bind(this)}>
+            Save/Unsave this design
+          </button>
           <button className="button" onClick={this.props.handleClickReturnToMenu.bind(this)}>
             Return to menu
           </button>

@@ -132,7 +132,18 @@ d3Graph._drawNodes = function(el, scales, data, prevScales, dispatcher) {
       .duration(ANIMATION_DURATION)
       .attr('cx', function(d) { return scales.x(d.x); })
       .attr('cy', function(d) { return scales.y(d.y); })
-      .attr('r', function(d) { return scales.z(d.z); });
+      .attr('r', function(d) { return scales.z(d.z); })
+      .style('stroke', function(d) {
+        if (d.focused==true) {
+          return "yellow";
+        }
+        else if (d.saved==true) {
+          return "red";
+        }
+        else {
+          return "#323639";
+        }
+      });
 
   arrow.enter().append('line')
     .attr("class", "d3-arrow")
@@ -181,7 +192,18 @@ d3Graph._drawNodes = function(el, scales, data, prevScales, dispatcher) {
       .duration(ANIMATION_DURATION)
       .attr('cx', function(d) { return scales.x(d.x); })
       .attr('cy', function(d) { return scales.y(d.y); })
-      .attr('r',  function(d) { return scales.z(d.z); });
+      .attr('r',  function(d) { return scales.z(d.z); })
+      .style('stroke', function(d) {
+        if (d.focused==true) {
+          return "yellow";
+        }
+        else if (d.saved==true) {
+          return "red";
+        }
+        else {
+          return "#323639";
+        }
+      });
 
   arrow.on('click', function(d) {
         // dispatcher.emit('point:nodeClick', d);
@@ -426,6 +448,7 @@ d3Graph._drawHistory = function(el, scales, history, prevScales, dispatcher) {
         })
         .attr('cy', 55)
         .attr('r', 30)
+        .style('stroke-width', 3)
         .style('fill', function(d) {
           if (d.image) {
             return ("url(#" + d.id + ")");
@@ -437,7 +460,11 @@ d3Graph._drawHistory = function(el, scales, history, prevScales, dispatcher) {
             return 70 * (history.length - d.id.length + 2);
           })
           .style('stroke', function(d) {
+            console.log("focused:", d.focused, " saved:", d.saved);
             if (d.focused==true) {
+              return "yellow";
+            }
+            else if (d.saved==true) {
               return "red";
             }
             else {
@@ -493,6 +520,9 @@ d3Graph._drawHistory = function(el, scales, history, prevScales, dispatcher) {
         })
         .style('stroke', function(d) {
           if (d.focused==true) {
+            return "yellow";
+          }
+          else if (d.saved==true) {
             return "red";
           }
           else {
