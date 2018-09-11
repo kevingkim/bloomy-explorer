@@ -35,6 +35,14 @@ export default class Viewer extends Component {
         scrolling="no"
         allowFullScreen="true">
       </iframe>
+      // <object id="200_194_express_html_inpage_0.if"
+      //   data={this.props.getCurrentNode().modelUrl}
+      //   width={this.props.width}
+      //   height={this.props.height}
+      //   frameBorder="0"
+      //   scrolling="no"
+      //   allowFullScreen="true">
+      // </object>
     );
   }
 
@@ -42,14 +50,6 @@ export default class Viewer extends Component {
     return (
       <div className="viewer-container" margin="auto">
         {this.renderViewer()}
-        {/* <iframe id="200_194_express_html_inpage_0.if"
-          src={this.props.getCurrentNode().modelUrl}
-          width={this.props.width}
-          height={this.props.height}
-          frameBorder="0"
-          scrolling="no"
-          allowFullScreen="true">
-        </iframe> */}
       </div>
     );
   }

@@ -9,10 +9,10 @@ import Viewer from './Viewer.js';
 image_prefix = "";
 image_type = ".jpg";
 
-RADIUS_BIG2 = 135;
-RADIUS_SMALL2 = 75;
-// RADIUS_BIG2 = 90;
-// RADIUS_SMALL2 = 50;
+// RADIUS_BIG2 = 135;
+// RADIUS_SMALL2 = 75;
+RADIUS_BIG2 = 100;
+RADIUS_SMALL2 = 60;
 
 // App component - represents the whole app
 export default class LinearSearchPage extends Component {
@@ -211,15 +211,17 @@ export default class LinearSearchPage extends Component {
     for (var i=3; i<81; i++)  this._xPos.push(50 + 20*i);
     this._xPos = this.shuffle(this._xPos);
 
+    var idx = 0;
     for (var i1=1; i1<4; i1++) {
       for (var i2=1; i2<4; i2++) {
         for (var i3=1; i3<4; i3++) {
           for (var i4=1; i4<4; i4++) {
             // if (i1==1 && i2==1 && i3==1)  continue;
+            if (i1==1 && i2==1 && i3==1 && i4==1)  continue;
             if (i1==1 && i2==2 && i3==1 && i4==2)  continue;
             if (i1==3 && i2==2 && i3==1 && i4==1)  continue;
             var id = i1.toString()+i2.toString()+i3.toString()+i4.toString();
-            var xIndex = (i1-1)*3*3*3 + (i2-1)*3*3 + (i3-1)*3 + (i4-1) - 3;
+            // var xIndex = (i1-1)*3*3*3 + (i2-1)*3*3 + (i3-1)*3 + (i4-1) - 3;
 
             var tag = ["______", "______", "______", "______"];
             if (i1 != 1) tag[0] = "color_ ";
@@ -228,7 +230,7 @@ export default class LinearSearchPage extends Component {
             if (i4 != 1) tag[3] = "space";
 
             this._allData.push(
-              {x: this._xPos[xIndex], y: 65, z: RADIUS_SMALL2,
+              {x: this._xPos[idx], y: 65, z: RADIUS_SMALL2,
                 id: id,
                 focused: false, saved: false, displayed: true,
                 imageId: id,
@@ -237,6 +239,8 @@ export default class LinearSearchPage extends Component {
                 tag: tag,
               }
             );
+
+            idx++;
           }
         }
       }

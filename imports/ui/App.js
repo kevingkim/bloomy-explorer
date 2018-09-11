@@ -88,8 +88,8 @@ class App extends Component {
       case "graph":
         return (
           <ExpGraphPage
-            graphWidth="1200px" viewerWidth="900px" height="1000px"
-            // graphWidth="800px" viewerWidth="700px" height="650px"
+            // graphWidth="1200px" viewerWidth="900px" height="1000px"
+            graphWidth="900px" viewerWidth="730px" height="680px"
             setAppState={this.setAppState.bind(this)}
             saveLog={this.saveLog.bind(this)}
             AppState={this.state}
@@ -101,8 +101,8 @@ class App extends Component {
       case "linear":
         return (
           <LinearSearchPage
-            graphWidth="1200px" viewerWidth="900px" height="1000px"
-            // graphWidth="800px" viewerWidth="700px" height="650px"
+            // graphWidth="1200px" viewerWidth="900px" height="1000px"
+            graphWidth="900px" viewerWidth="730px" height="680px"
             setAppState={this.setAppState.bind(this)}
             saveLog={this.saveLog.bind(this)}
             AppState={this.state}

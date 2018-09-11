@@ -42,9 +42,9 @@ d3Graph._scales = function(el, domain) {
     return null;
   }
 
-  var width = 1200;
-  // var width = 800;
-  var height = el.offsetHeight;
+  // var width = 1200;
+  var width = 900;
+  var height = el.offsetHeight -20;
 
   var x = d3.scale.linear()
     .range([0, width])
@@ -74,8 +74,10 @@ d3Graph._drawNodes = function(el, scales, data, prevScales, dispatcher) {
     .attr("viewBox", "0 0 10 10")
     .attr("refX", 7)
     .attr("refY", 5)
-    .attr("markerWidth", 10)
-    .attr("markerHeight", 10)
+    // .attr("markerWidth", 10)
+    // .attr("markerHeight", 10)
+    .attr("markerWidth", 7)
+    .attr("markerHeight", 7)
     .attr("orient", "auto")
     .style("fill", "#DADADA")
     .append("path")
@@ -262,8 +264,10 @@ d3Graph._drawDummyNodes = function(el, scales, dummyData, prevScales, dispatcher
     .attr("viewBox", "0 0 10 10")
     .attr("refX", 3)
     .attr("refY", 5)
-    .attr("markerWidth", 10)
-    .attr("markerHeight", 10)
+    // .attr("markerWidth", 10)
+    // .attr("markerHeight", 10)
+    .attr("markerWidth", 7)
+    .attr("markerHeight", 7)
     .attr("orient", "auto")
     .style("fill", "#7C7C7C")
     .append("path")
@@ -371,7 +375,7 @@ d3Graph._drawDummyNodes = function(el, scales, dummyData, prevScales, dispatcher
       .attr("dy", ".30em")
       .attr("text-anchor", "middle")
       .style("fill", "#DADADA")
-      .style("font-size", 35)
+      .style("font-size", "35px")
       .style("font-family", "sans-serif")
       .style("text-anchor", "middle");
 
@@ -506,7 +510,7 @@ d3Graph._drawHistory = function(el, scales, history, prevScales, dispatcher) {
           .attr("y", 10)
           .attr("dy", ".35em")
           .style("fill", "#DADADA")
-          .style("font-size", 15)
+          .style("font-size", "15px")
           .style("font-family", "sans-serif");
 
     // ENTER & UPDATE

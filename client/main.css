@@ -186,10 +186,10 @@ select {
 }
 
 .d3-history-text {
-  /*font-size: 100;
+  /* font-size: 15;
   font-family: "sans-serif";
   font-weight: bold;
-  fill: "#DADADA";*/
+  fill: "#DADADA"; */
 }
 
 .d3-dummy-arrow {
@@ -198,18 +198,19 @@ select {
 }
 
 .d3-dummy-text {
-  font-size: 100;
-  font-family: "sans-serif";
   font-weight: bold;
+  /* font-size: 35;
+  font-family: "sans-serif";
   fill: "#DADADA";
+  text-anchor: "middle"; */
 }
 
 .d3-tooltip-rect {
 
 }
 .d3-tooltip-text {
-  font-size: 100;
-  font-family: "sans-serif";
   font-weight: bold;
-  fill: "#DADADA";
+  /* font-size: 23;
+  font-family: "sans-serif";
+  fill: "#DADADA"; */
 }

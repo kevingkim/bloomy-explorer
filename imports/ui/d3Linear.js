@@ -6,6 +6,8 @@ import { EventEmitter } from 'events';
 var ANIMATION_DURATION = 600;
 var TOOLTIP_WIDTH = 150;
 var TOOLTIP_HEIGHT = 150;
+var TOOLTIP_WIDTH = 120;
+var TOOLTIP_HEIGHT = 120;
 
 var d3Linear = {};
 
@@ -44,9 +46,9 @@ d3Linear._scales = function(el, domain) {
   }
 
   // var width = el.offsetWidth *0.6;
-  var width = 1200;
-  // var width = 800;
-  var height = el.offsetHeight;
+  // var width = 1200;
+  var width = 900;
+  var height = el.offsetHeight -20;
 
   var x = d3.scale.linear()
     .range([0, width])
@@ -373,7 +375,7 @@ d3Linear._drawHistory = function(el, scales, history, prevScales, dispatcher) {
       .attr("y", 10)
       .attr("dy", ".35em")
       .style("fill", "#DADADA")
-      .style("font-size", 15)
+      .style("font-size", "15px")
       .style("font-family", "sans-serif");
 
     // ENTER & UPDATE
@@ -480,8 +482,8 @@ d3Linear._drawTooltips = function(el, scales, data, prevScales) {
       // })
       .html(function(d) {
         var x = scales.x(d.x) - TOOLTIP_WIDTH/2;
-        // var dx = -117;
-        var dx = -100;
+        // var dx = -100;
+        var dx = -75;
         var t1 = d.tag[0];
         var t2 = "<tspan dx=" +dx+ " dy=1.0em>" + d.tag[1] + "</tspan>";
         var t3 = "<tspan dx=" +dx+ " dy=1.0em>" + d.tag[2] + "</tspan>";
@@ -491,7 +493,7 @@ d3Linear._drawTooltips = function(el, scales, data, prevScales) {
         // var t4 = "<tspan x=" +x+ " dy=1.0em>" + d.tag[3] + "</tspan>";
         return t1 + t2 + t3 + t4;
       })
-      .style("font-size", "30")
+      .style("font-size", "23px")
       .style("fill", "#323639")
       .style("font-family", "sans-serif")
       .attr('x', function(d) {
