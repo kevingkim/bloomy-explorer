@@ -28,6 +28,9 @@ export default class ExpGraphPage extends Component {
   _historyLog = [];
   _dummyData = [];
 
+  _dummyDataHist = [];
+  _histShiftCounter = 0;
+
   _modelUrls = [];
 
   // for sample data
@@ -46,6 +49,8 @@ export default class ExpGraphPage extends Component {
     this.state = {
       data: this.getData({x:domainX, y:domainY}),
       dummyData: this._dummyData,
+      dummyDataHist: this._dummyDataHist,
+      histShiftCounter: this._histShiftCounter,
       domain: {x:domainX, y:domainY},
       prevDomain: null,
       history: this.getHistory(),
@@ -218,6 +223,29 @@ export default class ExpGraphPage extends Component {
         image: image_path + "_01.jpg",
       },
     ];
+
+    this._dummyDataHist = [
+        {x: 90, y: 0, z: 20,
+          id: 'left',
+          // parentId: 'd0',
+          parentX: 50, parentY: 50,
+          numChildren: 0,
+          focused: false, saved: false, displayed: false,
+          imageId: "_01",
+          image: image_path + "_02.png",
+        },
+        {x: 95, y: 0, z: 50,
+          id: 'right',
+          // parentId: 'd0',
+          parentX: 50, parentY: 20,
+          numChildren: 0,
+          focused: false, saved: false, displayed: false,
+          imageId: "_02",
+          image: image_path + "_01.png",
+        },
+      ];
+
+    this._histShftCounter = 0;
   }
 
   getData(domain) {
@@ -230,6 +258,10 @@ export default class ExpGraphPage extends Component {
 
   getHistory() {
     return this._history;
+  }
+
+  getHistShitCounter() {
+    return this._histShftCounter;
   }
 
   getCurrentNode() {
@@ -278,11 +310,13 @@ export default class ExpGraphPage extends Component {
         }
       }
 
+      this._histShftCounter = 0;
+
       this.shiftPane(d);
       this.generateChildren(domain, d);
     }
-    else if (d.focused === true) {
-    }
+    // else if (d.focused === true) {
+    // }
   }
 
   shiftPane(d) {
@@ -296,6 +330,7 @@ export default class ExpGraphPage extends Component {
       }),
       prevDomain: null,
       history: this.getHistory(),
+      histShiftCounter: this.getHistShitCounter(),
     });
   }
 
@@ -422,6 +457,22 @@ export default class ExpGraphPage extends Component {
     return this.setState(partialState, callback);
   }
 
+  handleDummyHistClick(domain, d) {
+    if (d.id==="left") {
+      if (this._histShftCounter==0) return;
+      this._histShftCounter++;
+    }
+    else if (d.id==="right") {
+      this._histShftCounter--;
+    }
+
+    this.props.saveLog("-", "history navigate "+d.id);
+    // console.log(this._histShftCounter);
+    this.setAppState({
+      histShiftCounter: this.getHistShitCounter(),
+    });
+  }
+
   handleClickSave() {
     var currentNode = this.getCurrentNode();
     if (currentNode.saved==false) {
@@ -485,6 +536,7 @@ export default class ExpGraphPage extends Component {
             setAppState={this.setAppState.bind(this)}
             handleNodeClick={this.handleNodeClick.bind(this)}
             handleHistoryClick={this.handleHistoryClick.bind(this)}
+            handleDummyHistClick={this.handleDummyHistClick.bind(this)}
           />
 
           <Viewer

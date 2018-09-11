@@ -22,6 +22,7 @@ export default class LinearSearch extends Component {
     dispatcher.on('point:nodeClick', this.props.handleNodeClick.bind(null, domain));
     dispatcher.on('point:historyClick', this.props.handleHistoryClick.bind(null, domain));
     dispatcher.on('point:dummyNodeClick', this.props.handleDummyNodeClick.bind(null, domain));
+    dispatcher.on('point:dummyHistClick', this.props.handleDummyHistClick.bind(null, domain));
     this.dispatcher = dispatcher;
   }
 

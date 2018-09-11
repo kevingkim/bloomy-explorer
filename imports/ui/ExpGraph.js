@@ -21,6 +21,7 @@ export default class ExpGraph extends Component {
     var domain = this.props.appState.domain;
     dispatcher.on('point:nodeClick', this.props.handleNodeClick.bind(null, domain));
     dispatcher.on('point:historyClick', this.props.handleHistoryClick.bind(null, domain));
+    dispatcher.on('point:dummyHistClick', this.props.handleDummyHistClick.bind(null, domain));
     this.dispatcher = dispatcher;
   }
 

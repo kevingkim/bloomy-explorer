@@ -23,6 +23,9 @@ export default class LinearSearchPage extends Component {
   _dummyData = [];
   _xPos = [];
 
+  _dummyDataHist = [];
+  _histShiftCounter = 0;
+
   _modelUrls = [];
 
   // for sample data
@@ -40,6 +43,8 @@ export default class LinearSearchPage extends Component {
     this.state = {
       data: this.getData({x:domainX, y:domainY}),
       dummyData: this._dummyData,
+      dummyDataHist: this._dummyDataHist,
+      histShiftCounter: this._histShiftCounter,
       domain: {x:domainX, y:domainY},
       prevDomain: null,
       history: this.getHistory(),
@@ -66,6 +71,8 @@ export default class LinearSearchPage extends Component {
       _self.state = {
         data: _self.getData({x:domainX, y:domainY}),
         dummyData: _self._dummyData,
+        dummyDataHist: _self._dummyDataHist,
+        histShiftCounter: this._histShiftCounter,
         domain: {x:domainX, y:domainY},
         prevDomain: null,
         history: _self.getHistory(),
@@ -205,6 +212,29 @@ export default class LinearSearchPage extends Component {
           image: image_path + "_01.png",
         },
       ];
+
+      this._dummyDataHist = [
+          {x: 90, y: 0, z: 20,
+            id: 'left',
+            // parentId: 'd0',
+            parentX: 50, parentY: 50,
+            numChildren: 0,
+            focused: false, saved: false, displayed: false,
+            imageId: "_01",
+            image: image_path + "_02.png",
+          },
+          {x: 95, y: 0, z: 50,
+            id: 'right',
+            // parentId: 'd0',
+            parentX: 50, parentY: 20,
+            numChildren: 0,
+            focused: false, saved: false, displayed: false,
+            imageId: "_02",
+            image: image_path + "_01.png",
+          },
+        ];
+
+      this._histShftCounter = 0;
   }
 
   loadDB() {
@@ -277,6 +307,10 @@ export default class LinearSearchPage extends Component {
     return this._history;
   }
 
+  getHistShitCounter() {
+    return this._histShftCounter;
+  }
+
   getCurrentNode() {
     // return this._history[this._history.length-1];
     return this._allData.filter( obj => obj.focused===true )[0];
@@ -289,11 +323,11 @@ export default class LinearSearchPage extends Component {
 
       // get the last focus
       var lastFocus = this._history.filter( obj => obj.focused==true )[0];
-      console.log("last focus: ", lastFocus.id);
+      // console.log("last focus: ", lastFocus.id);
 
       // cut history if necessary
       for (var i=this._history.length-1; i>=0; i--) {
-        console.log("check: ", this._history[i].historyId, lastFocus.historyId);
+        // console.log("check: ", this._history[i].historyId, lastFocus.historyId);
         if (this._history[i].historyId == lastFocus.historyId) {
           break;
         }
@@ -326,8 +360,11 @@ export default class LinearSearchPage extends Component {
       d.z = RADIUS_BIG2;
       d.focused = true;
 
+      this._histShftCounter = 0;
+
       this.setAppState({
         history: this.getHistory(),
+        histShiftCounter: this.getHistShitCounter(),
       });
     }
   }
@@ -416,7 +453,22 @@ export default class LinearSearchPage extends Component {
       prevDomain: this.state.domain,
       history: this.getHistory(),
     });
+  }
 
+  handleDummyHistClick(domain, d) {
+    if (d.id==="left") {
+      if (this._histShftCounter==0) return;
+      this._histShftCounter++;
+    }
+    else if (d.id==="right") {
+      this._histShftCounter--;
+    }
+
+    this.props.saveLog("-", "history navigate "+d.id);
+    // console.log(this._histShftCounter);
+    this.setAppState({
+      histShiftCounter: this.getHistShitCounter(),
+    });
   }
 
   handleHistoryClick (domain, d) {
@@ -514,6 +566,7 @@ export default class LinearSearchPage extends Component {
             handleNodeClick={this.handleNodeClick.bind(this)}
             handleHistoryClick = {this.handleHistoryClick.bind(this)}
             handleDummyNodeClick={this.handleDummyNodeClick.bind(this)}
+            handleDummyHistClick={this.handleDummyHistClick.bind(this)}
           />
 
           <Viewer
