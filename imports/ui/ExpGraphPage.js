@@ -188,6 +188,7 @@ export default class ExpGraphPage extends Component {
     this._dummyData = [
       {x: 10, y: 90, z: 30, // 30/50
         id: 'Color',
+        id_de: 'Farbe',
         parentId: 'd0',
         parentX: 50, parentY: 50,
         numChildren: 0,
@@ -197,6 +198,7 @@ export default class ExpGraphPage extends Component {
       },
       {x: 10, y: 10, z: 30, // 30/50
         id: 'Texture',
+        id_de: 'Textur',
         parentId: 'd0',
         parentX: 50, parentY: 50,
         numChildren: 0,
@@ -206,6 +208,7 @@ export default class ExpGraphPage extends Component {
       },
       {x: 90, y: 10, z: 30, // 30/50
         id: 'Space',
+        id_de: 'Abstand',
         parentId: 'd0',
         parentX: 50, parentY: 50,
         numChildren: 0,
@@ -215,6 +218,7 @@ export default class ExpGraphPage extends Component {
       },
       {x: 90, y: 90, z: 30, // 30/50
         id: 'Form',
+        id_de: 'Form',
         parentId: 'd0',
         parentX: 50, parentY: 50,
         numChildren: 0,
@@ -290,7 +294,7 @@ export default class ExpGraphPage extends Component {
       var direction = "default";
       var x = d.x - this.state.domain.x[0];
       var y = d.y - this.state.domain.y[0];
-      if (x<50 && d.y<50)      direction = "TEXTURE";
+      if (x<=50 && d.y<=50)      direction = "TEXTURE";
       else if (x>50 && y<50) direction = "SPACE";
       else if (x<50 && y>50) direction = "COLOR";
       else if (x>50 && y>50) direction = "FORM";
@@ -479,7 +483,8 @@ export default class ExpGraphPage extends Component {
       currentNode.saved = true;
       this.props.saveLog(currentNode.imageId, "save design ("+currentNode.id+")");
       console.log(currentNode.imageId, "save design ("+currentNode.id+")");
-      alert("Design saved. Saved designs will be shown in red circles in the history.");
+      // alert("Design saved. Saved designs will be shown in red circles in the history.");
+      alert("Design gespeichert. Gespeicherte Designs werden in der Historie in roten Kreisen angezeigt.");
 
       var fromHistory = this._history.filter( obj => obj.id == currentNode.id );
       for (var i=0; i<fromHistory.length; i++) {
@@ -490,7 +495,7 @@ export default class ExpGraphPage extends Component {
       currentNode.saved = false;
       this.props.saveLog(currentNode.imageId, "unsave design ("+currentNode.id+")");
       console.log(currentNode.imageId, "unsave design ("+currentNode.id+")");
-      alert("Design unsaved.");
+      alert("Design nicht gespeichert.");
 
       var fromHistory = this._history.filter( obj => obj.id == currentNode.id );
       for (var i=0; i<fromHistory.length; i++) {
@@ -509,13 +514,16 @@ export default class ExpGraphPage extends Component {
     var taskDescription = "";
     switch(this.props.AppState.expId) {
       case "trial":
-        taskDescription = "Task description: Find red dotted squares that are tightly-spaced in linear formation";
+        // taskDescription = "Task description: Find red dotted squares that are tightly-spaced in linear formation.";
+        taskDescription = "Aufgabenbeschreibung: Finden Sie rot gestrichelte Felder, die in einer Reihe angeordnet, eng beieinander liegen.";
         break;
       case "exp1":
-        taskDescription = "Task description: Mrs. Heinrich, an 80-year-old regular customer, would like to buy a bouquet for her birthday party. The bouquet should stand on the dining table. The apartment is furnished in a romantic style. Her birthday is in summer.";
+        // taskDescription = "Task description: Mrs. Heinrich, an 80-year-old regular customer, would like to buy a bouquet for her birthday party. The bouquet should stand on the dining table. The apartment is furnished in a romantic style. Her birthday is in summer.";
+        taskDescription = "Aufgabenbeschreibung: Frau Heinrich, eine 80-jährige Stammkundin, möchte gerne einen Blumenstrauss zum Anlass ihrer Geburtstagsfeier kaufen. Der Blumenstrauss soll auf dem Esstisch stehen. Die Wohnung ist im romantischen Stiel eingerichtet. Ihr Geburtstag ist im Sommer.";
         break;
       case "exp2":
-        taskDescription = "Task description: A young woman enters your shop, whom you have not seen before. She is interested in a round hand-bound bridal bouquet. The wedding will take place at the end of May and the bride will wear white. She informs them that she likes natural flowers and the colour purple.";
+        // taskDescription = "Task description: A young woman enters your shop, whom you have not seen before. She is interested in a round hand-bound bridal bouquet. The wedding will take place at the end of May and the bride will wear white. She informs them that she likes natural flowers and the colour purple.";
+        taskDescription = "Aufgabenbeschreibung: Eine junge Frau betritt Ihren Laden, die sie zuvor noch nicht gesehen haben. Sie ist an einem Hochzeitsblumenstrauss interessiert. Die Hochzeit findet im Mai statt und die Braut wird weiss tragen. Sie informiert sie, dass natürliche Blumen und die Farbe Lila mag.";
       default:
         break;
     }
@@ -549,13 +557,16 @@ export default class ExpGraphPage extends Component {
 
         <div className="description">
           <button className="button" onClick={this.handleClickSave.bind(this)}>
-            Save/Unsave this design
+            {/* Save/Unsave this design */}
+            Speichern/Dieses Design aufheben
           </button>
           <button className="button" onClick={this.props.handleClickReturnToMenu.bind(this)}>
-            Return to menu
+            {/* Return to menu */}
+            Zurück zum Menü
           </button>
           <button className="button" onClick={this.props.handleClickExit.bind(this)}>
-            Exit
+            {/* Exit */}
+            Beenden
           </button>
         </div>
       </div>

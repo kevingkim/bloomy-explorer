@@ -362,7 +362,8 @@ d3Graph._drawDummyNodes = function(el, scales, dummyData, prevScales, dispatcher
     // enter text
     dummyText.enter().append("text")
       .attr("class", "d3-dummy-text")
-      .text(function(d) { return d.id; })
+      // .text(function(d) { return d.id; })
+      .text(function(d) { return d.id_de; })
       .attr("x", function(d) {
         if (prevScales) {
           return prevScales.x(d.x);

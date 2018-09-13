@@ -524,12 +524,9 @@ d3Linear._drawTooltips = function(el, scales, data, prevScales) {
         // var dx = -100;
         var dx = -75;
         var t1 = d.tag[0];
-        var t2 = "<tspan dx=" +dx+ " dy=1.0em>" + d.tag[1] + "</tspan>";
-        var t3 = "<tspan dx=" +dx+ " dy=1.0em>" + d.tag[2] + "</tspan>";
-        var t4 = "<tspan dx=" +dx+ " dy=1.0em>" + d.tag[3] + "</tspan>";
-        // var t2 = "<tspan x=" +x+ " dy=1.0em>" + d.tag[1] + "</tspan>";
-        // var t3 = "<tspan x=" +x+ " dy=1.0em>" + d.tag[2] + "</tspan>";
-        // var t4 = "<tspan x=" +x+ " dy=1.0em>" + d.tag[3] + "</tspan>";
+        var t2 = "<tspan dx=" +dx+ " dy=1.0em>" + d.tag_de[1] + "</tspan>";
+        var t3 = "<tspan dx=" +dx+ " dy=1.0em>" + d.tag_de[2] + "</tspan>";
+        var t4 = "<tspan dx=" +dx+ " dy=1.0em>" + d.tag_de[3] + "</tspan>";
         return t1 + t2 + t3 + t4;
       })
       .style("font-size", "23px")

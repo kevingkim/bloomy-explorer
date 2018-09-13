@@ -63,39 +63,57 @@ class MenuPage extends Component {
     return (
       <ul>
         <li className="">
-          <span className="text">Trial - Expanding graph </span>
+          <span className="text">
+            {/* Example - Expanding graph  */}
+            Beispiel - Graph
+          </span>
           <button className="button" onClick={this.handleClickTrialGraph.bind(this)}>
             Start
           </button>
         </li>
         <li className="">
-          <span className="text">Trial - Linear search </span>
+          <span className="text">
+            {/* Trial - Linear search  */}
+            Beispiel - Linear
+          </span>
           <button className="button" onClick={this.handleClickTrialLinear.bind(this)}>
             Start
           </button>
         </li>
 
         <li className="">
-          <span className="text">[Exp1] Birthday - Expanding graph </span>
+          <span className="text">
+            {/* [Exp1] Birthday - Graph  */}
+            [Exp1] Geburtstag - Graph
+          </span>
           <button className="button" onClick={this.handleClickExp1Graph.bind(this)}>
             Start
           </button>
         </li>
         <li className="">
-          <span className="text">[Exp1] Birthday - Linear search </span>
+          <span className="text">
+            {/* [Exp1] Birthday - Linear */}
+            [Exp1] Geburtstag - Linear
+          </span>
           <button className="button" onClick={this.handleClickExp1Linear.bind(this)}>
             Start
           </button>
         </li>
 
         <li className="">
-          <span className="text">[Exp2] Wedding - Expanding graph </span>
+          <span className="text">
+            {/* [Exp2] Wedding - Graph  */}
+            [Exp2] Hochzeit - Graph
+          </span>
           <button className="button" onClick={this.handleClickExp2Graph.bind(this)}>
             Start
           </button>
         </li>
         <li className="">
-          <span className="text">[Exp2] Wedding - Linear search </span>
+          <span className="text">
+            {/* [Exp2] Wedding - Linear */}
+            [Exp2] Hochzeit - Linear  
+          </span>
           <button className="button" onClick={this.handleClickExp2Linear.bind(this)}>
             Start
           </button>

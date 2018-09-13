@@ -146,6 +146,7 @@ export default class LinearSearchPage extends Component {
         image: image_path + "1111" + image_type,
         modelUrl: initialModelUrl1,
         tag: ["______", "______", "______", "______"],
+        tag_de: ["______", "______", "______", "______"],
       },
       // {x: 70, y: 65, z: RADIUS_SMALL2,
       //   id: '1112',
@@ -170,6 +171,7 @@ export default class LinearSearchPage extends Component {
         image: image_path + "1212"  + image_type,
         modelUrl: initialModelUrl2,
         tag: ["______", "texture", "______", "space"],
+        tag_de: ["______", "Textur ", "______", "Abstand"],
       },
       {x: 90, y: 65, z: RADIUS_SMALL2,
         id: '3211',
@@ -177,7 +179,8 @@ export default class LinearSearchPage extends Component {
         imageId: 3211,
         image: image_path + "3211"  + image_type,
         modelUrl: initialModelUrl3,
-        tag: ["color_ ", "texture", "______", "______"],
+        tag:    ["color_ ", "texture", "______", "______"],
+        tag_de: ["Farbe_ ", "Textur ", "______", "______"],
       },
     ];
 
@@ -254,10 +257,23 @@ export default class LinearSearchPage extends Component {
             // var xIndex = (i1-1)*3*3*3 + (i2-1)*3*3 + (i3-1)*3 + (i4-1) - 3;
 
             var tag = ["______", "______", "______", "______"];
-            if (i1 != 1) tag[0] = "color_ ";
-            if (i2 != 1) tag[1] = "texture";
-            if (i3 != 1) tag[2] = "form__";
-            if (i4 != 1) tag[3] = "space";
+            var tag_de = ["______", "______", "______", "______"];
+            if (i1 != 1) {
+              tag[0] = "color_ ";
+              tag_de[0] = "Farbe_ ";
+            }
+            if (i2 != 1) {
+              tag[1] = "texture";
+              tag_de[1] = "Textur ";
+            }
+            if (i3 != 1) {
+              tag[2] = "form__";
+              tag_de[2] = "Form_ ";
+            }
+            if (i4 != 1) {
+              tag[3] = "space";
+              tag_de[3] = "Abstand";
+            }
 
             this._allData.push(
               {x: this._xPos[idx], y: 65, z: RADIUS_SMALL2,
@@ -267,6 +283,7 @@ export default class LinearSearchPage extends Component {
                 image: image_path + id + image_type,
                 modelUrl: this.findModelUrl(id),
                 tag: tag,
+                tag_de: tag_de,
               }
             );
 
@@ -372,17 +389,26 @@ export default class LinearSearchPage extends Component {
   updateTags(d) {
 
     for (var i=0; i<this._allData.length; i++) {
-      // var newTag = "";
-      // if (this._allData[i].id[0] != d.id[0]) newTag += "color ";
-      // if (this._allData[i].id[1] != d.id[1]) newTag += "texture ";
-      // if (this._allData[i].id[2] != d.id[2]) newTag += "form ";
-      // if (this._allData[i].id[3] != d.id[3]) newTag += "space ";
       var newTag = ["______", "______", "______", "______"];
-      if (this._allData[i].id[0] != d.id[0]) newTag[0] = "color_ ";
-      if (this._allData[i].id[1] != d.id[1]) newTag[1] = "texture";
-      if (this._allData[i].id[2] != d.id[2]) newTag[2] = "form__";
-      if (this._allData[i].id[3] != d.id[3]) newTag[3] = "space";
+      var newTag_de = ["______", "______", "______", "______"];
+      if (this._allData[i].id[0] != d.id[0]) {
+        newTag[0] = "color_ ";
+        newTag_de[0] = "Farbe_ ";
+      }
+      if (this._allData[i].id[1] != d.id[1]) {
+        newTag[1] = "texture";
+        newTag_de[1] = "Textur ";
+      }
+      if (this._allData[i].id[2] != d.id[2]) {
+        newTag[2] = "form__";
+        newTag_de[2] = "Form_ ";
+      }
+      if (this._allData[i].id[3] != d.id[3]) {
+        newTag[3] = "space";
+        newTag_de[3] = "Abstand";
+      }
       this._allData[i].tag = newTag;
+      this._allData[i].tag_de = newTag_de;
     }
 
     var newDomainX = [d.x-2, d.x-1];
@@ -538,13 +564,16 @@ export default class LinearSearchPage extends Component {
     var taskDescription = "";
     switch(this.props.AppState.expId) {
       case "trial":
-        taskDescription = "Task description: Find red dotted squares that are tightly-spaced in linear formation";
+      // taskDescription = "Task description: Find red dotted squares that are tightly-spaced in linear formation.";
+      taskDescription = "Aufgabenbeschreibung: Finden Sie rot gestrichelte Felder, die in einer Reihe angeordnet, eng beieinander liegen.";
         break;
       case "exp1":
-        taskDescription = "Task description: Mrs. Heinrich, an 80-year-old regular customer, would like to buy a bouquet for her birthday party. The bouquet should stand on the dining table. The apartment is furnished in a romantic style. Her birthday is in summer.";
+      // taskDescription = "Task description: Mrs. Heinrich, an 80-year-old regular customer, would like to buy a bouquet for her birthday party. The bouquet should stand on the dining table. The apartment is furnished in a romantic style. Her birthday is in summer.";
+      taskDescription = "Aufgabenbeschreibung: Frau Heinrich, eine 80-jährige Stammkundin, möchte gerne einen Blumenstrauss zum Anlass ihrer Geburtstagsfeier kaufen. Der Blumenstrauss soll auf dem Esstisch stehen. Die Wohnung ist im romantischen Stiel eingerichtet. Ihr Geburtstag ist im Sommer.";
         break;
       case "exp2":
-        taskDescription = "Task description: A young woman enters your shop, which you have not seen before. She is interested in a round hand-bound bridal bouquet. The wedding will take place at the end of May and the bride will wear white. She informs them that she likes natural flowers and the colour purple.";
+      // taskDescription = "Task description: A young woman enters your shop, whom you have not seen before. She is interested in a round hand-bound bridal bouquet. The wedding will take place at the end of May and the bride will wear white. She informs them that she likes natural flowers and the colour purple.";
+      taskDescription = "Aufgabenbeschreibung: Eine junge Frau betritt Ihren Laden, die sie zuvor noch nicht gesehen haben. Sie ist an einem Hochzeitsblumenstrauss interessiert. Die Hochzeit findet im Mai statt und die Braut wird weiss tragen. Sie informiert sie, dass natürliche Blumen und die Farbe Lila mag.";
       default:
         break;
     }
@@ -579,13 +608,16 @@ export default class LinearSearchPage extends Component {
 
         <div className="description">
           <button className="button" onClick={this.handleClickSave.bind(this)}>
-            Save/Unsave this design
+            {/* Save/Unsave this design */}
+            Speichern/Dieses Design aufheben
           </button>
           <button className="button" onClick={this.props.handleClickReturnToMenu.bind(this)}>
-            Return to menu
+            {/* Return to menu */}
+            Zurück zum Menü
           </button>
           <button className="button" onClick={this.props.handleClickExit.bind(this)}>
-            Exit
+            {/* Exit */}
+            Beenden
           </button>
         </div>
       </div>
