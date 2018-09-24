@@ -17,42 +17,42 @@ class MenuPage extends Component {
   }
 
   handleClickTrialGraph(d) {
-    this.props.saveLog("0", "click trial-graph");
+    this.props.saveLog("0", "click trial-graph", "-");
     this.props.setAppState({
       page: "graph",
       expId: "trial",
     });
   }
   handleClickTrialLinear(d) {
-    this.props.saveLog("0", "click trial-linear");
+    this.props.saveLog("0", "click trial-linear", "-");
     this.props.setAppState({
       page: "linear",
       expId: "trial",
     });
   }
   handleClickExp1Graph(d) {
-    this.props.saveLog("0", "click exp1-graph");
+    this.props.saveLog("0", "click exp1-graph", "-");
     this.props.setAppState({
       page: "graph",
       expId: "exp1",
     });
   }
   handleClickExp1Linear(d) {
-    this.props.saveLog("0", "click exp1-linear");
+    this.props.saveLog("0", "click exp1-linear", "-");
     this.props.setAppState({
       page: "linear",
       expId: "exp1",
     });
   }
   handleClickExp2Graph(d) {
-    this.props.saveLog("0", "click exp2-graph");
+    this.props.saveLog("0", "click exp2-graph", "-");
     this.props.setAppState({
       page: "graph",
       expId: "exp2",
     });
   }
   handleClickExp2Linear(d) {
-    this.props.saveLog("0", "click exp2-linear");
+    this.props.saveLog("0", "click exp2-linear", "-");
     this.props.setAppState({
       page: "linear",
       expId: "exp2",
@@ -83,8 +83,8 @@ class MenuPage extends Component {
 
         <li className="">
           <span className="text">
-            {/* [Exp1] Birthday - Graph  */}
-            [Exp1] Geburtstag - Graph
+            {/* [Scenario 1] Birthday - Graph  */}
+            [Scenario 1] Geburtstag - Graph
           </span>
           <button className="button" onClick={this.handleClickExp1Graph.bind(this)}>
             Start
@@ -92,8 +92,8 @@ class MenuPage extends Component {
         </li>
         <li className="">
           <span className="text">
-            {/* [Exp1] Birthday - Linear */}
-            [Exp1] Geburtstag - Linear
+            {/* [Scenario 1] Birthday - Linear */}
+            [Scenario 1] Geburtstag - Linear
           </span>
           <button className="button" onClick={this.handleClickExp1Linear.bind(this)}>
             Start
@@ -102,8 +102,8 @@ class MenuPage extends Component {
 
         <li className="">
           <span className="text">
-            {/* [Exp2] Wedding - Graph  */}
-            [Exp2] Hochzeit - Graph
+            {/* [Scenario 2] Wedding - Graph  */}
+            [Scenario 2] Hochzeit - Graph
           </span>
           <button className="button" onClick={this.handleClickExp2Graph.bind(this)}>
             Start
@@ -111,8 +111,8 @@ class MenuPage extends Component {
         </li>
         <li className="">
           <span className="text">
-            {/* [Exp2] Wedding - Linear */}
-            [Exp2] Hochzeit - Linear  
+            {/* [Scenario 2] Wedding - Linear */}
+            [Scenario 2] Hochzeit - Linear
           </span>
           <button className="button" onClick={this.handleClickExp2Linear.bind(this)}>
             Start

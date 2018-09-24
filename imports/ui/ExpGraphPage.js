@@ -59,7 +59,7 @@ export default class ExpGraphPage extends Component {
     this.loadModelUrls();
 
     this.props.saveLog(this.getCurrentNode().imageId,
-        "initial node ("+this.getCurrentNode().id+")");
+        "initial node", this.getCurrentNode().id);
   }
 
   loadModelUrls() {
@@ -298,7 +298,7 @@ export default class ExpGraphPage extends Component {
       else if (x>50 && y<50) direction = "SPACE";
       else if (x<50 && y>50) direction = "COLOR";
       else if (x>50 && y>50) direction = "FORM";
-      this.props.saveLog(d.imageId, "click "+direction+" ("+d.id+")");
+      this.props.saveLog(d.imageId, "click "+direction, d.id);
 
       d.z = RADIUS_BIG1;
       d.focused = true;
@@ -410,7 +410,7 @@ export default class ExpGraphPage extends Component {
     // this.pruneChildren(children);
 
     // save log
-    this.props.saveLog(d.imageId, "history click ("+d.id+")");
+    this.props.saveLog(d.imageId, "history click", d.id);
 
     for (var i=0; i<this._allData.length; i++) {
       this._allData[i].focused = false;
@@ -470,7 +470,7 @@ export default class ExpGraphPage extends Component {
       this._histShftCounter--;
     }
 
-    this.props.saveLog("-", "history navigate "+d.id);
+    this.props.saveLog("-", "history navigate "+d.id, "-");
     // console.log(this._histShftCounter);
     this.setAppState({
       histShiftCounter: this.getHistShitCounter(),
@@ -481,8 +481,8 @@ export default class ExpGraphPage extends Component {
     var currentNode = this.getCurrentNode();
     if (currentNode.saved==false) {
       currentNode.saved = true;
-      this.props.saveLog(currentNode.imageId, "save design ("+currentNode.id+")");
-      console.log(currentNode.imageId, "save design ("+currentNode.id+")");
+      this.props.saveLog(currentNode.imageId, "save design", currentNode.id);
+      // console.log(currentNode.imageId, "save design ("+currentNode.id+")");
       // alert("Design saved. Saved designs will be shown in red circles in the history.");
       alert("Design gespeichert. Gespeicherte Designs werden in der Historie in roten Kreisen angezeigt.");
 
@@ -493,8 +493,8 @@ export default class ExpGraphPage extends Component {
     }
     else {
       currentNode.saved = false;
-      this.props.saveLog(currentNode.imageId, "unsave design ("+currentNode.id+")");
-      console.log(currentNode.imageId, "unsave design ("+currentNode.id+")");
+      this.props.saveLog(currentNode.imageId, "unsave design", currentNode.id);
+      // console.log(currentNode.imageId, "unsave design ("+currentNode.id+")");
       alert("Design nicht gespeichert.");
 
       var fromHistory = this._history.filter( obj => obj.id == currentNode.id );
@@ -558,7 +558,7 @@ export default class ExpGraphPage extends Component {
         <div className="description">
           <button className="button" onClick={this.handleClickSave.bind(this)}>
             {/* Save/Unsave this design */}
-            Speichern/Dieses Design aufheben
+            Dieses Design speichern/aufheben
           </button>
           <button className="button" onClick={this.props.handleClickReturnToMenu.bind(this)}>
             {/* Return to menu */}

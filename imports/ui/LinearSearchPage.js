@@ -51,7 +51,7 @@ export default class LinearSearchPage extends Component {
     };
 
     this.props.saveLog(this.getCurrentNode().imageId,
-        "initial node ("+this.getCurrentNode().historyId+")");
+        "initial node", this.getCurrentNode().historyId);
 
     this.generateDB();
 
@@ -79,7 +79,7 @@ export default class LinearSearchPage extends Component {
       };
 
       _self.props.saveLog(_self.getCurrentNode().imageId,
-          "initial node ("+_self.getCurrentNode().historyId+")");
+          "initial node", _self.getCurrentNode().historyId);
     });
   }
 
@@ -141,6 +141,7 @@ export default class LinearSearchPage extends Component {
     this._allData = [
       {x: 50, y: 65, z: RADIUS_BIG2,
         id: '1111',
+        historyId: 'h1',
         focused: true, saved: false, displayed: false,
         imageId: 1111,
         image: image_path + "1111" + image_type,
@@ -180,7 +181,7 @@ export default class LinearSearchPage extends Component {
         image: image_path + "3211"  + image_type,
         modelUrl: initialModelUrl3,
         tag:    ["color_ ", "texture", "______", "______"],
-        tag_de: ["Farbe_ ", "Textur ", "______", "______"],
+        tag_de: ["Farbe_", "Textur ", "______", "______"],
       },
     ];
 
@@ -260,7 +261,7 @@ export default class LinearSearchPage extends Component {
             var tag_de = ["______", "______", "______", "______"];
             if (i1 != 1) {
               tag[0] = "color_ ";
-              tag_de[0] = "Farbe_ ";
+              tag_de[0] = "Farbe_";
             }
             if (i2 != 1) {
               tag[1] = "texture";
@@ -364,8 +365,8 @@ export default class LinearSearchPage extends Component {
       inHistory = false;
 
       // save log
-      this.props.saveLog(tempNode.imageId, "click ("+tempNode.historyId+")");
-      console.log(tempNode.imageId, "click ("+tempNode.historyId+")");
+      this.props.saveLog(tempNode.imageId, "click DESIGN", tempNode.historyId);
+      // console.log(tempNode.imageId, "click ("+tempNode.historyId+")");
 
       this.updateTags(d);
       this.shiftPane(d);
@@ -393,7 +394,7 @@ export default class LinearSearchPage extends Component {
       var newTag_de = ["______", "______", "______", "______"];
       if (this._allData[i].id[0] != d.id[0]) {
         newTag[0] = "color_ ";
-        newTag_de[0] = "Farbe_ ";
+        newTag_de[0] = "Farbe_";
       }
       if (this._allData[i].id[1] != d.id[1]) {
         newTag[1] = "texture";
@@ -468,7 +469,7 @@ export default class LinearSearchPage extends Component {
     }
 
     // save log
-    this.props.saveLog("-", "navigate "+d.id);
+    this.props.saveLog("-", "navigate "+d.id, "-");
 
     this.setAppState({
       data: this.getData({x:newDomainX, y:newDomainY}),
@@ -490,7 +491,7 @@ export default class LinearSearchPage extends Component {
       this._histShftCounter--;
     }
 
-    this.props.saveLog("-", "history navigate "+d.id);
+    this.props.saveLog("-", "history navigate "+d.id, "-");
     // console.log(this._histShftCounter);
     this.setAppState({
       histShiftCounter: this.getHistShitCounter(),
@@ -521,8 +522,8 @@ export default class LinearSearchPage extends Component {
       inHistory = true;
 
       // save log
-      this.props.saveLog(d.imageId, "history click ("+d.historyId+")");
-      console.log(d.imageId, "history click ("+d.historyId+")");
+      this.props.saveLog(d.imageId, "history click", d.historyId);
+      // console.log(d.imageId, "history click ("+d.historyId+")");
 
       this.updateTags(d);
       this.shiftPane(d);
@@ -537,9 +538,10 @@ export default class LinearSearchPage extends Component {
     var currentNode = this.getCurrentNode();
     if (currentNode.saved==false) {
       currentNode.saved = true;
-      this.props.saveLog(currentNode.imageId, "save design ("+currentNode.id+")");
-      console.log(currentNode.imageId, "save design ("+currentNode.id+")");
-      alert("Design saved. Saved designs will be shown in red circles in the history.");
+      this.props.saveLog(currentNode.imageId, "save design", currentNode.id);
+      // console.log(currentNode.imageId, "save design ("+currentNode.id+")");
+      // alert("Design saved. Saved designs will be shown in red circles in the history.");
+      alert("Design gespeichert. Gespeicherte Designs werden in der Historie in roten Kreisen angezeigt.");
 
       var fromHistory = this._history.filter( obj => obj.id == currentNode.id );
       for (var i=0; i<fromHistory.length; i++) {
@@ -548,9 +550,10 @@ export default class LinearSearchPage extends Component {
     }
     else {
       currentNode.saved = false;
-      this.props.saveLog(currentNode.imageId, "unsave design ("+currentNode.id+")");
-      console.log(currentNode.imageId, "unsave design ("+currentNode.id+")");
-      alert("Design unsaved.");
+      this.props.saveLog(currentNode.imageId, "unsave design", currentNode.id);
+      // console.log(currentNode.imageId, "unsave design ("+currentNode.id+")");
+      // alert("Design unsaved.");
+      alert("Design nicht gespeichert.");
 
       var fromHistory = this._history.filter( obj => obj.id == currentNode.id );
       for (var i=0; i<fromHistory.length; i++) {

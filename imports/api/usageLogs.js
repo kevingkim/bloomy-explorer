@@ -19,10 +19,13 @@ const schema = new SimpleSchema({
   expId: {
     type: String,
   },
-  status: {
+  node: {
     type: String,
   },
   message: {
+    type: String,
+  },
+  history: {
     type: String,
   },
 });

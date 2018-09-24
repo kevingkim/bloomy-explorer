@@ -523,7 +523,7 @@ d3Linear._drawTooltips = function(el, scales, data, prevScales) {
         var x = scales.x(d.x) - TOOLTIP_WIDTH/2;
         // var dx = -100;
         var dx = -75;
-        var t1 = d.tag[0];
+        var t1 = d.tag_de[0];
         var t2 = "<tspan dx=" +dx+ " dy=1.0em>" + d.tag_de[1] + "</tspan>";
         var t3 = "<tspan dx=" +dx+ " dy=1.0em>" + d.tag_de[2] + "</tspan>";
         var t4 = "<tspan dx=" +dx+ " dy=1.0em>" + d.tag_de[3] + "</tspan>";

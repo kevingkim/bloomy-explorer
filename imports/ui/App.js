@@ -37,29 +37,30 @@ class App extends Component {
     return this.state;
   }
 
-  saveLog(status, message) {
+  saveLog(node, message, historyNode) {
     UsageLogs.insert({
       userId: this.state.userId,
       time: new Date(),
       timeStamp: new Date().getTime(),
       page: this.state.page,
       expId: this.state.expId,
-      status: status,
+      node: node,
       message: message,
+      history: historyNode,
     }, (error, result) => { });
 
     // console.log(UsageLogs.find().fetch());
   }
 
   handleClickReturnToMenu() {
-    this.saveLog("0", "finish and return to menu");
+    this.saveLog("0", "finish and return to menu", "-");
     this.setAppState({
       page: "menu",
     });
   }
 
   handleClickExit() {
-    this.saveLog("0", "exit");
+    this.saveLog("0", "exit", "-");
     this.setAppState({
       page: "init",
       userId: "none",

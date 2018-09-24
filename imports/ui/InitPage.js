@@ -16,12 +16,12 @@ class InitPage extends Component {
 
     const input = ReactDOM.findDOMNode(this.refs.textInput).value;
 
-    this.props.saveLog("0", "user id set: "+input);
+    this.props.saveLog("0", "user id set: "+input, "-");
     this.props.setAppState({
       page: "menu",
       userId: input,
     });
-    
+
   }
 
   render() {
