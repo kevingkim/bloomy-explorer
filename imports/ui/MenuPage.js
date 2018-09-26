@@ -64,7 +64,7 @@ class MenuPage extends Component {
       <ul>
         <li className="">
           <span className="text">
-            {/* Example - Expanding graph  */}
+            {/* Example - Expanding graph */}
             Beispiel - Graph
           </span>
           <button className="button" onClick={this.handleClickTrialGraph.bind(this)}>
@@ -73,7 +73,7 @@ class MenuPage extends Component {
         </li>
         <li className="">
           <span className="text">
-            {/* Trial - Linear search  */}
+            {/* Example - Linear search */}
             Beispiel - Linear
           </span>
           <button className="button" onClick={this.handleClickTrialLinear.bind(this)}>
@@ -83,7 +83,7 @@ class MenuPage extends Component {
 
         <li className="">
           <span className="text">
-            {/* [Scenario 1] Birthday - Graph  */}
+            {/* [Scenario 1] Birthday - Graph */}
             [Scenario 1] Geburtstag - Graph
           </span>
           <button className="button" onClick={this.handleClickExp1Graph.bind(this)}>
@@ -102,7 +102,7 @@ class MenuPage extends Component {
 
         <li className="">
           <span className="text">
-            {/* [Scenario 2] Wedding - Graph  */}
+            {/* [Scenario 2] Wedding - Graph */}
             [Scenario 2] Hochzeit - Graph
           </span>
           <button className="button" onClick={this.handleClickExp2Graph.bind(this)}>

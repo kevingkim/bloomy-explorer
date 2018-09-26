@@ -496,6 +496,7 @@ export default class ExpGraphPage extends Component {
       this.props.saveLog(currentNode.imageId, "unsave design", currentNode.id);
       // console.log(currentNode.imageId, "unsave design ("+currentNode.id+")");
       alert("Design nicht gespeichert.");
+      // alert("Design unsaved.");
 
       var fromHistory = this._history.filter( obj => obj.id == currentNode.id );
       for (var i=0; i<fromHistory.length; i++) {
