@@ -3,7 +3,7 @@
 import d3 from '../api/d3.v3.min.js';
 import { EventEmitter } from 'events';
 
-var ANIMATION_DURATION = 600;
+var ANIMATION_DURATION = 450;
 var TOOLTIP_WIDTH = 150;
 var TOOLTIP_HEIGHT = 150;
 var TOOLTIP_WIDTH = 120;
@@ -354,7 +354,8 @@ d3Linear._drawHistory = function(el, scales, history, cnt, prevScales, dispatche
     historyNode.enter().append('circle')
         .attr('class', 'd3-history-node')
         .attr('cx', function(d) {
-          return 70 * (history.length - d.historyId.length + 2 +cnt);
+          // return 70 * (history.length - d.historyId.length + 2 +cnt);
+          return 70 * (d.historyId.length - cnt - 1);
         })
         .attr('cy', 55)
         .attr('r', 30)
@@ -366,7 +367,8 @@ d3Linear._drawHistory = function(el, scales, history, cnt, prevScales, dispatche
         .transition()
           .duration(ANIMATION_DURATION)
           .attr('cx', function(d) {
-            return 70 * (history.length - d.historyId.length + 2 +cnt);
+            // return 70 * (history.length - d.historyId.length + 2 +cnt);
+            return 70 * (d.historyId.length - cnt - 1);
           })
           .style('stroke', function(d) {
             if (d.focused==true) {
@@ -384,20 +386,24 @@ d3Linear._drawHistory = function(el, scales, history, cnt, prevScales, dispatche
       .attr("class", "d3-history-arrow")
       .attr("marker-end", "url(#historyArrowTip)")
       .attr("x1", function(d) {
-        return 70 * (history.length - d.historyId.length + 2 +cnt);
+        // return 70 * (history.length - d.historyId.length + 2 +cnt);
+        return 70 * (d.historyId.length - cnt - 1);
       })
       .attr("y1", 55)
       .attr("x2", function(d) {
-        return 70 * (history.length - d.historyId.length + 1 +cnt) + 33;
+        // return 70 * (history.length - d.historyId.length + 1 +cnt) + 33;
+        return 70 * (d.historyId.length - cnt - 1) + 33;
       })
       .attr("y2", 55)
       .transition()
         .duration(ANIMATION_DURATION)
         .attr('x1', function(d) {
-          return 70 * (history.length - d.historyId.length + 2 +cnt);
+          // return 70 * (history.length - d.historyId.length + 2 +cnt);
+          return 70 * (d.historyId.length - cnt - 1);
         })
         .attr("x2", function(d) {
-          return 70 * (history.length - d.historyId.length + 1 +cnt) + 33;
+          // return 70 * (history.length - d.historyId.length + 1 +cnt) + 33;
+          return 70 * (d.historyId.length - cnt - 1) + 33;
         });
 
     historyLine.enter().append('line')
@@ -424,7 +430,8 @@ d3Linear._drawHistory = function(el, scales, history, cnt, prevScales, dispatche
       .transition()
         .duration(ANIMATION_DURATION)
         .attr('cx', function(d) {
-          return 70 * (history.length - d.historyId.length + 2 +cnt);
+          // return 70 * (history.length - d.historyId.length + 2 +cnt);
+          return 70 * (d.historyId.length - cnt - 1);
         })
         .style('stroke', function(d) {
           if (d.focused==true) {
@@ -444,10 +451,12 @@ d3Linear._drawHistory = function(el, scales, history, cnt, prevScales, dispatche
     .transition()
       .duration(ANIMATION_DURATION)
       .attr('x1', function(d) {
-        return 70 * (history.length - d.historyId.length + 2 +cnt);
+        // return 70 * (history.length - d.historyId.length + 2 +cnt);
+        return 70 * (d.historyId.length - cnt - 1);
       })
       .attr("x2", function(d) {
-        return 70 * (history.length - d.historyId.length + 1 +cnt) + 33;
+        // return 70 * (history.length - d.historyId.length + 1 +cnt) + 33;
+        return 70 * (d.historyId.length - cnt - 1) + 33;
       });
       historyLine.on('click', function(d) {
         //

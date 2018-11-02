@@ -3,7 +3,7 @@
 import d3 from '../api/d3.v3.min.js';
 import { EventEmitter } from 'events';
 
-var ANIMATION_DURATION = 600;
+var ANIMATION_DURATION = 450;
 
 
 var d3Graph = {};
@@ -505,7 +505,8 @@ d3Graph._drawHistory = function(el, scales, history, cnt, prevScales, dispatcher
     historyNode.enter().append('circle')
         .attr('class', 'd3-history-node')
         .attr('cx', function(d) {
-          return 70 * (history.length - d.id.length + 2 +cnt);
+          // return 70 * (history.length - d.id.length + 2 +cnt);
+          return 70 * (d.id.length - cnt - 1);
         })
         .attr('cy', 55)
         .attr('r', 30)
@@ -518,7 +519,8 @@ d3Graph._drawHistory = function(el, scales, history, cnt, prevScales, dispatcher
         .transition()
           .duration(ANIMATION_DURATION)
           .attr('cx', function(d) {
-            return 70 * (history.length - d.id.length + 2 +cnt);
+            // return 70 * (history.length - d.id.length + 2 +cnt);
+            return 70 * (d.id.length - cnt - 1);
           })
           .style('stroke', function(d) {
             console.log("focused:", d.focused, " saved:", d.saved);
@@ -537,20 +539,24 @@ d3Graph._drawHistory = function(el, scales, history, cnt, prevScales, dispatcher
       .attr("class", "d3-history-arrow")
       .attr("marker-end", "url(#historyArrowTip)")
       .attr("x1", function(d) {
-        return 70 * (history.length - d.id.length + 2 +cnt);
+        // return 70 * (history.length - d.id.length + 2 +cnt);
+        return 70 * (d.id.length - cnt - 1);
       })
       .attr("y1", 55)
       .attr("x2", function(d) {
-        return 70 * (history.length - d.id.length + 1 +cnt) + 33;
+        // return 70 * (history.length - d.id.length + 1 +cnt) + 33;
+        return 70 * (d.id.length - cnt - 1) + 33;
       })
       .attr("y2", 55)
       .transition()
         .duration(ANIMATION_DURATION)
         .attr('x1', function(d) {
-          return 70 * (history.length - d.id.length + 2 +cnt);
+          // return 70 * (history.length - d.id.length + 2 +cnt);
+          return 70 * (d.id.length - cnt - 1);
         })
         .attr("x2", function(d) {
-          return 70 * (history.length - d.id.length + 1 +cnt) + 33;
+          // return 70 * (history.length - d.id.length + 1 +cnt) + 33;
+          return 70 * (d.id.length - cnt - 1) + 33;
         });
 
     historyLine.enter().append('line')
@@ -577,7 +583,8 @@ d3Graph._drawHistory = function(el, scales, history, cnt, prevScales, dispatcher
       .transition()
         .duration(ANIMATION_DURATION)
         .attr('cx', function(d) {
-          return 70 * (history.length - d.id.length + 2 +cnt);
+          // return 70 * (history.length - d.id.length + 2 +cnt);
+          return 70 * (d.id.length - cnt - 1);
         })
         .style('stroke', function(d) {
           if (d.focused==true) {
@@ -597,10 +604,12 @@ d3Graph._drawHistory = function(el, scales, history, cnt, prevScales, dispatcher
     .transition()
       .duration(ANIMATION_DURATION)
       .attr('x1', function(d) {
-        return 70 * (history.length - d.id.length + 2 +cnt);
+        // return 70 * (history.length - d.id.length + 2 +cnt);
+        return 70 * (d.id.length - cnt - 1);
       })
       .attr("x2", function(d) {
-        return 70 * (history.length - d.id.length + 1 +cnt) + 33;
+        // return 70 * (history.length - d.id.length + 1 +cnt) + 33;
+        return 70 * (d.id.length - cnt - 1) + 33;
       });
       historyLine.on('click', function(d) {
         //

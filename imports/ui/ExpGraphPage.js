@@ -314,7 +314,13 @@ export default class ExpGraphPage extends Component {
         }
       }
 
-      this._histShftCounter = 0;
+      // this._histShftCounter = 0;
+      if (this.state.history.length - this._histShftCounter >= 11) {
+        this._histShftCounter = this.state.history.length - 11;
+      }
+      else if (this.state.history.length < 11) {
+        this._histShftCounter = 0;
+      }
 
       this.shiftPane(d);
       this.generateChildren(domain, d);
@@ -463,11 +469,12 @@ export default class ExpGraphPage extends Component {
 
   handleDummyHistClick(domain, d) {
     if (d.id==="left") {
-      if (this._histShftCounter==0) return;
-      this._histShftCounter++;
+      if (this._histShftCounter > 0)
+        this._histShftCounter--;
     }
     else if (d.id==="right") {
-      this._histShftCounter--;
+      if (this.state.history.length - this._histShftCounter > 11)
+        this._histShftCounter++;
     }
 
     this.props.saveLog("-", "history navigate "+d.id, "-");

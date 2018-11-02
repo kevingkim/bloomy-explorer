@@ -388,7 +388,13 @@ export default class LinearSearchPage extends Component {
       d.z = RADIUS_BIG2;
       d.focused = true;
 
-      this._histShftCounter = 0;
+      // this._histShftCounter = 0;
+      if (this.state.history.length - this._histShftCounter >= 11) {
+        this._histShftCounter = this.state.history.length - 11;
+      }
+      else if (this.state.history.length < 11) {
+        this._histShftCounter = 0;
+      }
 
       this.setAppState({
         history: this.getHistory(),
@@ -493,12 +499,15 @@ export default class LinearSearchPage extends Component {
   }
 
   handleDummyHistClick(domain, d) {
+    // console.log("hist length: ", this.state.history.length);
+    // console.log("shft counter: ", this._histShftCounter);
     if (d.id==="left") {
-      if (this._histShftCounter==0) return;
-      this._histShftCounter++;
+      if (this._histShftCounter > 0)
+        this._histShftCounter--;
     }
     else if (d.id==="right") {
-      this._histShftCounter--;
+      if (this.state.history.length - this._histShftCounter > 11)
+        this._histShftCounter++;
     }
 
     this.props.saveLog("-", "history navigate "+d.id, "-");
