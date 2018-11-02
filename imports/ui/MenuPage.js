@@ -84,7 +84,7 @@ class MenuPage extends Component {
         <li className="">
           <span className="text">
             {/* [Scenario 1] Birthday - Graph */}
-            [Scenario 1] Geburtstag - Graph
+            Geburtstag - Graph
           </span>
           <button className="button" onClick={this.handleClickExp1Graph.bind(this)}>
             Start
@@ -93,7 +93,7 @@ class MenuPage extends Component {
         <li className="">
           <span className="text">
             {/* [Scenario 1] Birthday - Linear */}
-            [Scenario 1] Geburtstag - Linear
+            Geburtstag - Linear
           </span>
           <button className="button" onClick={this.handleClickExp1Linear.bind(this)}>
             Start
@@ -103,7 +103,7 @@ class MenuPage extends Component {
         <li className="">
           <span className="text">
             {/* [Scenario 2] Wedding - Graph */}
-            [Scenario 2] Hochzeit - Graph
+            Hochzeit - Graph
           </span>
           <button className="button" onClick={this.handleClickExp2Graph.bind(this)}>
             Start
@@ -112,7 +112,7 @@ class MenuPage extends Component {
         <li className="">
           <span className="text">
             {/* [Scenario 2] Wedding - Linear */}
-            [Scenario 2] Hochzeit - Linear
+            Hochzeit - Linear
           </span>
           <button className="button" onClick={this.handleClickExp2Linear.bind(this)}>
             Start

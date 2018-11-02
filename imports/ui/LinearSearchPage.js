@@ -31,7 +31,7 @@ export default class LinearSearchPage extends Component {
   // for sample data
   constructor(props) {
     super(props);
-    var domainX = [0,100];
+    var domainX = [40,140];
     var domainY = [0,100];
 
     image_path = image_prefix + "/db_" + this.props.AppState.expId + "/";
@@ -66,7 +66,7 @@ export default class LinearSearchPage extends Component {
 
       _self.loadDB();
 
-      var domainX = [0,100];
+      var domainX = [40,140];
       var domainY = [0,100];
       _self.state = {
         data: _self.getData({x:domainX, y:domainY}),
@@ -124,18 +124,24 @@ export default class LinearSearchPage extends Component {
     switch(this.props.AppState.expId) {
       case 'exp1':
         initialModelUrl1 = "https://create.bloomypro.com/embed/eyJpdiI6Ik54aXBkOUNWSEM0XC9VVDVDSndKalBnPT0iLCJ2YWx1ZSI6IkNGeEtDRU5PK0ZcL3ZOXC8zaDRCSHlNRHg0SDFXZ1RPS0h3eE5VSTZkRXZNb096d25ROGVnVUZmbVltT2ZpSVRMTFU1VTBKZlRGUWJ0XC9vNG9RUXpCaGxJakFPY3R3aHdXVVUxNVphaDFJXC9nSEM0OHJHYmQxaXhCXC9mRWZxbWtQZUkyYlkwcUdSTXI1T3pjVFNDMk8xSE1FRDJRU2hBNW1QQ0hySFZBc0NGaEFkcklWamk0R0lHQ0xFbkVGNTNVTWpOZmM2NUwzb2I0YVB1UXM0aXhTNmpOeVNWV2ZTRUVsdStUdHp0UHBGZTBWNE11R2JXYjFteFRvc29vRVlaY00raUVqTEpuaytqdDM4MTRCK3dkR3pDVHBHTXJpRktLK1VhXC9scjAzR0EyXC81VT0iLCJtYWMiOiJmYWYwMzAyMjNiNjE3ZWE3N2MwM2RjODZjOWU0NzA5NDI5YzY0MGMyYTMwOGRlZTk5YzE4OTQ0ZmIzZWNiY2U1In0=";
-        initialModelUrl2 = "https://create.bloomypro.com/embed/eyJpdiI6IlhmdmVWNStPUFFzRWhQM0NuZWFRdUE9PSIsInZhbHVlIjoidGJhNnRsd3JmSTB2UmliR1dPV3U3UjZmQUFucHVUN1ZiSXk2TTluOXU3a2NXQWcrbnVhV3E5S1loVElSXC81MFRXYVwvaENFR2JcL3ZWd3RcL2tVSFNkKzZPejNsT1RxYUVzVWo1N1pcL3U4TWVtVFRTUjV6OHUrblJqaDNiZzUrcnh3RGlkV2h3VWpENndcL0pmWHY2THVuVHJSOGp2Nzhia2FTTGNvTHF3NmhialFqUHB0NVYzTU9NeHBFaFBLczBjVWE1bDRcL0V5NU9DZEUzR0U5NUNQUndCSzdIWXBBaXhjaHpSR3lBV1ppTENUUERPXC9DWVNHNXFEcUYxRVVFUlRFd2R2OGhwT3BaNDVTZGVsYk5xc0Zlc1BWYWZWN1o4MmdQS1hKblRtcXlUSDJKWT0iLCJtYWMiOiIyNDg1ODI1ZmE4NWMyMjJjOTk0MGUzYzQ3ZmQzM2U5YzIzMjlhYmNjMTIyNjE2ODZmNTExMGYxNTZiYWI5YWU1In0=";
-        initialModelUrl3 = "https://create.bloomypro.com/embed/eyJpdiI6ImJlTnJlakFQK2J1Z2hKc2xBNVwvajJRPT0iLCJ2YWx1ZSI6InJrMVpuK21yXC9udjdhd3MzSGVKNHd2b0J4MWxlbGpqYWRHTVU1QUpTYWZnNnlEeGJGbE03SGZNd01kS29TQmZcL2lxb1k3MmNDWktuQjZEUFF2c0VZOGZXU2lzeGRzaitvckNZS0Urck5JQ2dpUE1rOHBWQ25TcFl5N1hVa1lHdU9vV1hnaFJhTnU5ZXlhUitBeVF2QmpcL1k2TEFmbGpNYWlpU2ZEMGt1ODZWVGVsRnlvZUIxbmxBdkkzV1JicWpCNDMrclBZYWpxZ0dLTnRYNGxVWFVkQmg2QUlXMEU5U2cyUUJMT1hJa1g2a2pSaUV1NFkxM2RBbWlESVIwQW5oblJXc29vTHQwUVZoTmxsRkJ3UkZvN01XZDVPcTJRVkdiTDZramRLYWdhR2UwPSIsIm1hYyI6IjMxYzZjZDc0YTUxNDNhNzBiN2VjZDNmNWMyYjQ5ZjQ0YmZkNGI1YTVjNGUzMzllODlmMGMyODFiOTQ3OWZmMzEifQ==";
+        initialModelUrl2 = "https://create.bloomypro.com/embed/eyJpdiI6IlNFTzdCNDhYT29cLzdXOWY2WlE2TUJBPT0iLCJ2YWx1ZSI6InFIT0U0RVo3MXF1Zm9KWXlnd2RKU1NtVytwcXFuR2RBalpKYjZMa3A5OWpGVjJuWnFzc0FNdXFFaG5zNEtXQmVOZFppV0lTY1Azc0REd1wvdCtpeVVWSDJTQlk1MUw0UlwvOEt3YVJIU29KdzBrSXQ3VVFnYUdsbmsydlpISGtLNnFJamZjcUxRMlhnWlwvZ3BrNmpjRFBoNTZFZ2d1VW05QnVBY2JpZ0JcLzZFOFU2YlBGTUlHZTg4eE16dkhyWmdycjFRT0VnNzMwazdQOWg2VDZJd0ZRaVdOZTFGbkRxQWpET1l3XC9KeXBBRGhYRVhxVTd0TU5TN0I4MDIxOFFcL1wva2NFc0RNcVVkRmJsN3diTzV0XC9zbkl1Mmpyc3RzdUl4elBTOXBjWFpON0FTWjQ9IiwibWFjIjoiZDRlNmE4ZDUzMDRiNjg4NTY2MzQ1YjZmYmE1Y2QwY2QxNTY4YTdlODg1ZTg0ZTNhZjEyMWIwZDYwMGUwNTJiYiJ9";
+        initialModelUrl3 = "https://create.bloomypro.com/embed/eyJpdiI6Imd0MXJhSkNHZFwvQjgrdVwvXC9CMmlUSnc9PSIsInZhbHVlIjoiSHlNVzZObENSQk5mYWhrV043d21BeFlyanhra2N2UUZSb1Q2Q0VBTUR2NHQ2SlBIZUIxXC9qSktGTmhOQkdqMDhFaGNOWDJsOG9PeWtyRnd0TzdDaW5KRkJsMnRVUjd3QW0xZjRHUkhEaGJrVjNUXC9sSUoybnZiakw2UTlOZnM1SGFacHRtdCtCUFo4a2E2ZkVFRFVlU01SS3E4Vk9jdWM3VFVYYVA1aTQ2czNObVJaK25IeEY1cGtSaGY4YW9NRE5aTDBSeklOUHhhNHpmTE55Y3l0NFM4M1VEbjdMMjFcL01XOGZtTGtzMTNvSTNMOEkyenBkZm1FK2xOUzFZcFhEaVdLUmphaUdFOTRmNTc2YjRGdUsxdUgyS1llT2Y3M3pkYW1pbHcrU2I4RDQ9IiwibWFjIjoiZjgyMmE0MTk2MGI0MzA1ODkyYTAzNjQ0MmE0ZDIzODg4NzNjNjRjYTBmZGNhNDY4Zjk4N2M3ZWNhMzJhNzkzMyJ9";
+        initialModelUrl4 = "https://create.bloomypro.com/embed/eyJpdiI6IlhmdmVWNStPUFFzRWhQM0NuZWFRdUE9PSIsInZhbHVlIjoidGJhNnRsd3JmSTB2UmliR1dPV3U3UjZmQUFucHVUN1ZiSXk2TTluOXU3a2NXQWcrbnVhV3E5S1loVElSXC81MFRXYVwvaENFR2JcL3ZWd3RcL2tVSFNkKzZPejNsT1RxYUVzVWo1N1pcL3U4TWVtVFRTUjV6OHUrblJqaDNiZzUrcnh3RGlkV2h3VWpENndcL0pmWHY2THVuVHJSOGp2Nzhia2FTTGNvTHF3NmhialFqUHB0NVYzTU9NeHBFaFBLczBjVWE1bDRcL0V5NU9DZEUzR0U5NUNQUndCSzdIWXBBaXhjaHpSR3lBV1ppTENUUERPXC9DWVNHNXFEcUYxRVVFUlRFd2R2OGhwT3BaNDVTZGVsYk5xc0Zlc1BWYWZWN1o4MmdQS1hKblRtcXlUSDJKWT0iLCJtYWMiOiIyNDg1ODI1ZmE4NWMyMjJjOTk0MGUzYzQ3ZmQzM2U5YzIzMjlhYmNjMTIyNjE2ODZmNTExMGYxNTZiYWI5YWU1In0=";
+        initialModelUrl5 = "https://create.bloomypro.com/embed/eyJpdiI6ImJlTnJlakFQK2J1Z2hKc2xBNVwvajJRPT0iLCJ2YWx1ZSI6InJrMVpuK21yXC9udjdhd3MzSGVKNHd2b0J4MWxlbGpqYWRHTVU1QUpTYWZnNnlEeGJGbE03SGZNd01kS29TQmZcL2lxb1k3MmNDWktuQjZEUFF2c0VZOGZXU2lzeGRzaitvckNZS0Urck5JQ2dpUE1rOHBWQ25TcFl5N1hVa1lHdU9vV1hnaFJhTnU5ZXlhUitBeVF2QmpcL1k2TEFmbGpNYWlpU2ZEMGt1ODZWVGVsRnlvZUIxbmxBdkkzV1JicWpCNDMrclBZYWpxZ0dLTnRYNGxVWFVkQmg2QUlXMEU5U2cyUUJMT1hJa1g2a2pSaUV1NFkxM2RBbWlESVIwQW5oblJXc29vTHQwUVZoTmxsRkJ3UkZvN01XZDVPcTJRVkdiTDZramRLYWdhR2UwPSIsIm1hYyI6IjMxYzZjZDc0YTUxNDNhNzBiN2VjZDNmNWMyYjQ5ZjQ0YmZkNGI1YTVjNGUzMzllODlmMGMyODFiOTQ3OWZmMzEifQ==";
         break;
       case 'exp2':
         initialModelUrl1 = "https://create.bloomypro.com/embed/eyJpdiI6IldQMk4rdExud3dUMGpWckhrRFAzN2c9PSIsInZhbHVlIjoiZk5TVTdkZHd3MmtkWnZWV3BaSWdxekw3aEF4U3BYS0VrXC9samdKdU5hbkdqVmMweThmMEpIaXRFWnBSR0ZSRDZqVmM2azNCRm1ldXIrRGtJUU9jdHFSa0ZRTDMwMnM5clwvUzV6aTgzV3VCWmRGWm50aEd2b3dsazc5dFY5cmlQYjNQY3RoTjJBcXk2RVVrTVVRNnlrZlJhUys3SGRmWWZ0QzFRR2hKRGdqeFVtVjdwMXJRREVENHB4MmdpWE1YYTNYcXVuamFsSDI5ZlhuQ3licXBcL1BvNFBweTlxeFBiTk5HOUxXK2ljUzl5d09XNGlKMzBISjNVQkFoS0liTHNmbENzY1EwZnlSZnM5UU1FazZ5WDVnVjBLMEFzUEdZaWRIK0M2NW42QkNmYmM9IiwibWFjIjoiNzU0YTFhYmY5MTBmMGVkYzQ0MjE1NDM2NGNjMzBiYTA5MjI0OGI2NzdjY2Q0OWMxOTM1MzhmNDc3MGIxOTllOCJ9";
-        initialModelUrl2 = "https://create.bloomypro.com/embed/eyJpdiI6IjV1SWVUSG13bW5mYmxrK0xwNEFYblE9PSIsInZhbHVlIjoiR2s2MVBHTG1NTUNZaEpnZ01TZytGUXNiYWkwNVRiK0s2b1FWK1BpcWZmbzNGTHcxVjd5djU4blNxaGQzMVhQRUlvb1UrN2oycUlSOHUxXC94VytpNzliRWpNVHoraTY2ZXBHcTB5U1U1N2tGV1BuT1ViRXhmRnZIMVFEZzhNdWlobStlWlFKSWp4T1pGNzNTUmNBMEE1UUxtUW45VkdxZVFKK0ZZZDZnU3M5QlNvbEhkWmZYOWs5eUNRSGc0bTBYR2dCdWlFbm0wWHQ2N0NobzF6SGticVFQeDNvT3Q0eU9nRjBidmtuSVZDNm50RTZkeFFJUE9YWk1ZTFhXV3lHVWtQUHJQWXRaK3RSelwvYVVsRWp5SFdnZSttdUhyYzI5RzN4YnhtcFFrUVNMMD0iLCJtYWMiOiJmOWM2MWIzNWRiZmViZjk1NTdjYjc2NmJlZjY5MTBjY2M2MDIzN2ZiNDQzMWMxNDQ1NTEzYmI1NWM0ZDlkNTIyIn0=";
-        initialModelUrl3 = "https://create.bloomypro.com/embed/eyJpdiI6Inp1Rjk1TFwvc0QxeUVydEl1Z3Rnc0ZRPT0iLCJ2YWx1ZSI6Im1kRE1QQlA2MzcwSnJCRnczVWZrVmhHRUVGaG9ScTRmZzZad2g1Sk81MFYrNDlUVEp2eE1WY2VSNXN6cmNCbzZoUTNrQWVGdkEwR05zWTlhOTQySVYwT2xPY05mUE1GM0tUMUJFM0RaVUkzU3dkY3RMRGxQVUxTZHh4NWY3RUNPOExjcEV5Y0lFTTRhOGZwamN6K3FJVGRUMFBUVHVWQkJwQjRTS3h1VEt2bmxSYlZiZDBZTE14VVlXTmhhVHZnWkRnK3NBSnpPKzY2T3AwSForQU5OWGttOXhqYWk2T1ZzRmJlS0Q2aHp0bTdGYUFRREJkSnRleG9CWFRBaXJiQVVIR0JBd2xFNU9UMU0xRTJXelN2OUdkVzliY0dLb2hkeWMrUVRwNW1xZlwvdz0iLCJtYWMiOiI2Mzk5YTMzOTY5ZjJhYzRkZjQzMDgzNDQxNDllZWU2ZGIxMTM5OTY1ODBmMDBiY2I2MmFmZDkwMmYyNDEzYTdhIn0=";
+        initialModelUrl2 = "https://create.bloomypro.com/embed/eyJpdiI6IkNPT21CQ1ZrRzgxUEwrV0I1XC9GNGhBPT0iLCJ2YWx1ZSI6InFwVWRrOFBZYkdkSmJMSDVaYkpnSlhMV1lHTDQrS05WSXNENHRUZ2YxeGFxWTF6NXpaQXBlM0ZzQkhoRmVmY0Y0a040WGxMdlhEazNxQU9rdUZvMnJYRDRBa0J0OVlcL2hvV0tFVThveTJXWm8ybkM1M2ozQ1BPS0o1emR1UFwvcDJcL2FrRHoxS09BWUdzXC9Kdk5aako0MVlUOXZrYnhkSkJoQ3l3VEhqZ3pHVGk2V1wvNk9Sa3RpbVVPQld6RlVaS1NVdjlMRkFReENkQlFscGhWRjJ4T0xCbnRcLzV6ZEZPSjIzZm0zQkFcLzhES1dNSkZlUzdXZHNmOEhRUmZSSWsra1krTWdmeGk4OGFIWFBjc2hYRGtCSTBFVHJkK3p4UFBIWFdCc2tsM09vOEZaND0iLCJtYWMiOiJiZmEzYzJmYzJjNGMyMjkwOWM4OTMyNTc2MTdhMjdjYzgzNDBmZDYwZDQyYWM1MjM4M2NiOTVhMTA4N2E0OTg4In0=";
+        initialModelUrl3 = "https://create.bloomypro.com/embed/eyJpdiI6InM0MlQxbVV1MWVzdlNQNUJJemlvNnc9PSIsInZhbHVlIjoiUlJEcURNUUxQVVV5ZkFETTBDcXo0cVdHYWhYZ1ZWczdzSHVSNHUwRnJBQmJJOFJCWkNGdUlcL0xKOGF5Ym1rU2gxcm8rUXFaZ3RWSDJOcXRZSzVudmxHY1RaaXorNTFkSzc3SnVYSm9YZ3NncWd5YW5qQ0RkTXMxVnczS1dwSVVDN2xPeVVGekx3TmpDK0NQcW9IQnFZYnFyaUt4SUhzNzJranlGVmhpR1FVQjZsVW5RMlZyOWpyYWJYTWg3TlIyNHU4UlwvU28rOTk4SDVYQ3UyZ1BTUlwvU1ZpXC9BYzBTcGhQdVd0RXpMWmFhSllsU0VNcU50KzFpbDd4bUlTZk9nejFtS2NKRG9CdmNha2RwWGd4YU44SXJsWFFqakZHR2ZxQmw0NUF3N0VDU1ZJPSIsIm1hYyI6ImQ3YmZmMzdkMGJhZDJjNTc5OWIzOWRmNDFjMWY2NGM3N2FmMzU5NDZjNTliODM0ZjcxODUzNmI2MmI2ZDk3YjMifQ==";
+        initialModelUrl4 = "https://create.bloomypro.com/embed/eyJpdiI6IjV1SWVUSG13bW5mYmxrK0xwNEFYblE9PSIsInZhbHVlIjoiR2s2MVBHTG1NTUNZaEpnZ01TZytGUXNiYWkwNVRiK0s2b1FWK1BpcWZmbzNGTHcxVjd5djU4blNxaGQzMVhQRUlvb1UrN2oycUlSOHUxXC94VytpNzliRWpNVHoraTY2ZXBHcTB5U1U1N2tGV1BuT1ViRXhmRnZIMVFEZzhNdWlobStlWlFKSWp4T1pGNzNTUmNBMEE1UUxtUW45VkdxZVFKK0ZZZDZnU3M5QlNvbEhkWmZYOWs5eUNRSGc0bTBYR2dCdWlFbm0wWHQ2N0NobzF6SGticVFQeDNvT3Q0eU9nRjBidmtuSVZDNm50RTZkeFFJUE9YWk1ZTFhXV3lHVWtQUHJQWXRaK3RSelwvYVVsRWp5SFdnZSttdUhyYzI5RzN4YnhtcFFrUVNMMD0iLCJtYWMiOiJmOWM2MWIzNWRiZmViZjk1NTdjYjc2NmJlZjY5MTBjY2M2MDIzN2ZiNDQzMWMxNDQ1NTEzYmI1NWM0ZDlkNTIyIn0=";
+        initialModelUrl5 = "https://create.bloomypro.com/embed/eyJpdiI6Inp1Rjk1TFwvc0QxeUVydEl1Z3Rnc0ZRPT0iLCJ2YWx1ZSI6Im1kRE1QQlA2MzcwSnJCRnczVWZrVmhHRUVGaG9ScTRmZzZad2g1Sk81MFYrNDlUVEp2eE1WY2VSNXN6cmNCbzZoUTNrQWVGdkEwR05zWTlhOTQySVYwT2xPY05mUE1GM0tUMUJFM0RaVUkzU3dkY3RMRGxQVUxTZHh4NWY3RUNPOExjcEV5Y0lFTTRhOGZwamN6K3FJVGRUMFBUVHVWQkJwQjRTS3h1VEt2bmxSYlZiZDBZTE14VVlXTmhhVHZnWkRnK3NBSnpPKzY2T3AwSForQU5OWGttOXhqYWk2T1ZzRmJlS0Q2aHp0bTdGYUFRREJkSnRleG9CWFRBaXJiQVVIR0JBd2xFNU9UMU0xRTJXelN2OUdkVzliY0dLb2hkeWMrUVRwNW1xZlwvdz0iLCJtYWMiOiI2Mzk5YTMzOTY5ZjJhYzRkZjQzMDgzNDQxNDllZWU2ZGIxMTM5OTY1ODBmMDBiY2I2MmFmZDkwMmYyNDEzYTdhIn0=";
         break;
       default:
         initialModelUrl1 = "";
         initialModelUrl2 = "";
         initialModelUrl3 = "";
+        initialModelUrl4 = "";
+        initialModelUrl5 = "";
     }
 
     this._allData = [
@@ -149,37 +155,39 @@ export default class LinearSearchPage extends Component {
         tag: ["______", "______", "______", "______"],
         tag_de: ["______", "______", "______", "______"],
       },
-      // {x: 70, y: 65, z: RADIUS_SMALL2,
-      //   id: '1112',
-      //   focused: false, saved: false, displayed: false,
-      //   imageId: 1112,
-      //   image: image_path + "1112"  + image_type,
-      //   modelUrl: initialModelUrl2,
-      //   tag: ["______", "______", "______", "space"],
-      // },
-      // {x: 90, y: 65, z: RADIUS_SMALL2,
-      //   id: '1113',
-      //   focused: false, saved: false, displayed: false,
-      //   imageId: 1113,
-      //   image: image_path + "1113"  + image_type,
-      //   modelUrl: initialModelUrl3,
-      //   tag: ["______", "______", "______", "space"],
-      // },
       {x: 70, y: 65, z: RADIUS_SMALL2,
+        id: '2111',
+        focused: false, saved: false, displayed: false,
+        imageId: 2111,
+        image: image_path + "2111"  + image_type,
+        modelUrl: initialModelUrl2,
+        tag: ["color_ ", "______", "______", "______"],
+        tag_de: ["Farbe_", "______", "______", "______"],
+      },
+      {x: 90, y: 65, z: RADIUS_SMALL2,
+        id: '1131',
+        focused: false, saved: false, displayed: false,
+        imageId: 1131,
+        image: image_path + "1131"  + image_type,
+        modelUrl: initialModelUrl3,
+        tag: ["______", "______", "form__", "______"],
+        tag_de: ["______", "______", "Form_ ", "______"],
+      },
+      {x: 110, y: 65, z: RADIUS_SMALL2,
         id: '1212',
         focused: false, saved: false, displayed: false,
         imageId: 1212,
         image: image_path + "1212"  + image_type,
-        modelUrl: initialModelUrl2,
+        modelUrl: initialModelUrl4,
         tag: ["______", "texture", "______", "space"],
         tag_de: ["______", "Textur ", "______", "Abstand"],
       },
-      {x: 90, y: 65, z: RADIUS_SMALL2,
+      {x: 130, y: 65, z: RADIUS_SMALL2,
         id: '3211',
         focused: false, saved: false, displayed: false,
         imageId: 3211,
         image: image_path + "3211"  + image_type,
-        modelUrl: initialModelUrl3,
+        modelUrl: initialModelUrl5,
         tag:    ["color_ ", "texture", "______", "______"],
         tag_de: ["Farbe_", "Textur ", "______", "______"],
       },
@@ -242,7 +250,7 @@ export default class LinearSearchPage extends Component {
   }
 
   loadDB() {
-    for (var i=3; i<81; i++)  this._xPos.push(50 + 20*i);
+    for (var i=5; i<81; i++)  this._xPos.push(50 + 20*i);
     this._xPos = this.shuffle(this._xPos);
 
     var idx = 0;
@@ -252,6 +260,8 @@ export default class LinearSearchPage extends Component {
           for (var i4=1; i4<4; i4++) {
             // if (i1==1 && i2==1 && i3==1)  continue;
             if (i1==1 && i2==1 && i3==1 && i4==1)  continue;
+            if (i1==2 && i2==1 && i3==1 && i4==1)  continue;
+            if (i1==1 && i2==1 && i3==3 && i4==1)  continue;
             if (i1==1 && i2==2 && i3==1 && i4==2)  continue;
             if (i1==3 && i2==2 && i3==1 && i4==1)  continue;
             var id = i1.toString()+i2.toString()+i3.toString()+i4.toString();
@@ -439,7 +449,7 @@ export default class LinearSearchPage extends Component {
   }
 
   shiftPane(d) {
-    var newDomainX = [d.x-50, d.x+50];
+    var newDomainX = [d.x-10, d.x+90];
     var newDomainY = [0, 100];
     this.setAppState({
       data: this.getData({x:newDomainX, y:newDomainY}),

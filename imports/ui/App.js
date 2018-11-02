@@ -127,7 +127,7 @@ class App extends Component {
     return (
       <div>
         <header>
-          <h1>BloomyExplorer: Bouquet design exploration</h1>
+          <h1>BloomGraph: Bouquet design exploration</h1>
         </header>
         <div>
           {this.renderPage()}

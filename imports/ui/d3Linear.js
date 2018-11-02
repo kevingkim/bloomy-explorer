@@ -35,7 +35,7 @@ d3Linear.update = function(el, state, dispatcher) {
   var scales = this._scales(el, state.domain);
   var prevScales = this._scales(el, state.prevDomain);
 
-  this._drawDummyNodes(el, scales, state.dummyData, prevScales, dispatcher);
+  // this._drawDummyNodes(el, scales, state.dummyData, prevScales, dispatcher);
   this._drawHistory(el, scales, state.history, state.histShiftCounter, prevScales, dispatcher);
   this._drawNodes(el, scales, state.data, prevScales, dispatcher);
 
